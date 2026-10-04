@@ -14,6 +14,8 @@ import { MetricCards } from "@/components/MetricCards";
 import { TrafficChart } from "@/components/TrafficChart";
 import { ModelComparison } from "@/components/ModelComparison";
 import { RouteInfo } from "@/components/RouteInfo";
+import { AviationStatsTab } from "@/components/AviationStatsTab";
+import { BusinessImpactTab } from "@/components/BusinessImpactTab";
 import {
   Plane,
   Search,
@@ -21,12 +23,15 @@ import {
   ArrowRightLeft,
   AlertCircle,
   CalendarRange,
+  Rocket,
+  PieChart,
+  Lightbulb,
 } from "lucide-react";
 
 const MODEL_NAMES: Record<string, string> = {
   xgboost: "XGBoost",
   random_forest: "Random Forest",
-  mlp: "MLP (réseau dense)",
+  mlp: "MLP (reseau dense)",
 };
 
 const HORIZON_LABELS: Record<number, string> = {
@@ -35,8 +40,36 @@ const HORIZON_LABELS: Record<number, string> = {
   3: "3 mois (M+3)",
 };
 
+type TabType = "prediction" | "stats" | "impact";
+
+interface TabButtonProps {
+  id: TabType;
+  label: string;
+  icon: React.ReactNode;
+  activeTab: TabType;
+  onClick: (tab: TabType) => void;
+}
+
+function TabButton({ id, label, icon, activeTab, onClick }: TabButtonProps) {
+  const isActive = activeTab === id;
+  return (
+    <button
+      onClick={() => onClick(id)}
+      className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all duration-200 ${
+        isActive
+          ? "bg-sky-500 text-white shadow-lg shadow-sky-500/30"
+          : "bg-white dark:bg-navy-800/50 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-navy-700/50 border border-slate-200 dark:border-slate-700/50"
+      }`}
+    >
+      {icon}
+      <span className="hidden sm:inline">{label}</span>
+    </button>
+  );
+}
+
 export default function Home() {
   const [dark, setDark] = useState(true);
+  const [activeTab, setActiveTab] = useState<TabType>("prediction");
   const [health, setHealth] = useState<HealthData | null>(null);
   const [routes, setRoutes] = useState<Route[]>([]);
   const [origin, setOrigin] = useState("");
@@ -130,7 +163,7 @@ export default function Home() {
           <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
           <h2 className="text-xl font-bold text-white mb-2">API inaccessible</h2>
           <p className="text-slate-400">
-            Impossible de joindre l&apos;API FastAPI. Vérifiez que le service tourne.
+            Impossible de joindre l&apos;API FastAPI. Verifiez que le service tourne.
           </p>
         </div>
       </div>
@@ -165,184 +198,251 @@ export default function Home() {
         {/* Main */}
         <main className="flex-1 ml-72 p-8 min-h-screen">
           {/* Header */}
-          <div className="mb-8">
+          <div className="mb-6">
             <p className="text-sky-500 dark:text-sky-400 text-sm font-semibold uppercase tracking-wider mb-1">
-              Analyse prédictive du trafic passagers
+              Analyse predictive du trafic passagers
             </p>
             <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-2">
-              Prévision du trafic aérien
+              Prevision du trafic aerien
             </h1>
             <p className="text-slate-500 dark:text-slate-400">
-              Des données d&apos;aujourd&apos;hui pour une meilleure mobilité demain.
+              Des donnees d&apos;aujourd&apos;hui pour une meilleure mobilite demain.
             </p>
           </div>
 
-          {/* Route Selection */}
-          <div className="bg-white dark:bg-navy-800/50 dark:glass border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 mb-6">
-            <div className="flex items-center gap-2 mb-5">
-              <Search className="w-5 h-5 text-sky-500" />
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
-                Sélection de la liaison
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
-              <div>
-                <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
-                  <Plane className="w-4 h-4 inline mr-1" />
-                  Aéroport de départ
-                </label>
-                <select
-                  value={origin}
-                  onChange={(e) => setOrigin(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-navy-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
-                >
-                  {origins.map((o) => (
-                    <option key={o} value={o}>
-                      {o} — {getCityName(o, "origin")}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
-                  <ArrowRightLeft className="w-4 h-4 inline mr-1" />
-                  Aéroport d&apos;arrivée
-                </label>
-                <select
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-navy-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
-                >
-                  {destinations.map((d) => (
-                    <option key={d} value={d}>
-                      {d} — {getCityName(d, "destination")}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
-                  <BarChart3 className="w-4 h-4 inline mr-1" />
-                  Modèle de prévision
-                </label>
-                <select
-                  value={model}
-                  onChange={(e) => setModel(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-navy-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
-                >
-                  {modelesDispo.map((m) => (
-                    <option key={m} value={m}>
-                      {MODEL_NAMES[m]}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
-                  <CalendarRange className="w-4 h-4 inline mr-1" />
-                  Horizon de prévision
-                </label>
-                <select
-                  value={horizon}
-                  onChange={(e) => setHorizon(Number(e.target.value))}
-                  className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-navy-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
-                >
-                  {Array.from({ length: maxHorizon }, (_, i) => i + 1).map((h) => (
-                    <option key={h} value={h}>
-                      {HORIZON_LABELS[h] || `${h} mois (M+${h})`}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <button
-              onClick={handlePredict}
-              disabled={loading}
-              className="w-full py-3.5 rounded-xl bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold text-base transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20"
-            >
-              {loading ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  Estimation en cours...
-                </>
-              ) : (
-                <>
-                  <BarChart3 className="w-5 h-5" />
-                  Estimer le trafic
-                </>
-              )}
-            </button>
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            <TabButton
+              id="prediction"
+              label="Inference & Prevision MLP"
+              icon={<Rocket className="w-4 h-4" />}
+              activeTab={activeTab}
+              onClick={setActiveTab}
+            />
+            <TabButton
+              id="stats"
+              label="Statistiques Reseau BTS"
+              icon={<PieChart className="w-4 h-4" />}
+              activeTab={activeTab}
+              onClick={setActiveTab}
+            />
+            <TabButton
+              id="impact"
+              label="Valeur Metier & Operations"
+              icon={<Lightbulb className="w-4 h-4" />}
+              activeTab={activeTab}
+              onClick={setActiveTab}
+            />
           </div>
 
-          {/* Error */}
-          {error && (
-            <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-6 flex items-center gap-3">
-              <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
-              <p className="text-red-400 text-sm">{error}</p>
-            </div>
-          )}
-
-          {/* Results */}
-          {prediction && (
-            <div className="animate-fade-in space-y-6">
-              {/* Metrics */}
-              <MetricCards prediction={prediction} />
-
-              {/* Chart + Route Info */}
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                <div className="lg:col-span-3">
-                  <TrafficChart
-                    prediction={prediction}
-                    modelName={MODEL_NAMES[model]}
-                  />
-                </div>
-                <div>
-                  <RouteInfo
-                    prediction={prediction}
-                    modelName={MODEL_NAMES[model]}
-                  />
+          {/* Tab Content */}
+          {activeTab === "prediction" && (
+            <div className="space-y-6">
+              {/* Model Champion Card */}
+              <div className="bg-gradient-to-r from-emerald-500/10 to-sky-500/10 dark:from-emerald-500/20 dark:to-sky-500/20 border border-emerald-500/20 dark:border-emerald-500/30 rounded-2xl p-4">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-emerald-500/20 rounded-lg">
+                      <BarChart3 className="w-5 h-5 text-emerald-500" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                        Modele Champion
+                      </p>
+                      <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
+                        MLP (Multi-Layer Perceptron)
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-4">
+                    <div className="text-center px-4 py-2 bg-white/50 dark:bg-navy-800/50 rounded-xl">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">R2 Score</p>
+                      <p className="text-lg font-bold text-sky-600 dark:text-sky-400">0.9886</p>
+                    </div>
+                    <div className="text-center px-4 py-2 bg-white/50 dark:bg-navy-800/50 rounded-xl">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Latence</p>
+                      <p className="text-lg font-bold text-violet-600 dark:text-violet-400">38.7 ms</p>
+                    </div>
+                    <div className="text-center px-4 py-2 bg-white/50 dark:bg-navy-800/50 rounded-xl">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Taille</p>
+                      <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">983 KB</p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Model Comparison */}
-              {Object.keys(comparisons).length > 1 && (
-                <ModelComparison
-                  comparisons={comparisons}
-                  selectedModel={model}
-                  modelNames={MODEL_NAMES}
-                  horizon={horizon}
-                />
+              {/* Route Selection */}
+              <div className="bg-white dark:bg-navy-800/50 dark:glass border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6">
+                <div className="flex items-center gap-2 mb-5">
+                  <Search className="w-5 h-5 text-sky-500" />
+                  <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+                    Selection de la liaison
+                  </h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
+                      <Plane className="w-4 h-4 inline mr-1" />
+                      Aeroport de depart
+                    </label>
+                    <select
+                      value={origin}
+                      onChange={(e) => setOrigin(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-navy-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
+                    >
+                      {origins.map((o) => (
+                        <option key={o} value={o}>
+                          {o} — {getCityName(o, "origin")}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
+                      <ArrowRightLeft className="w-4 h-4 inline mr-1" />
+                      Aeroport d&apos;arrivee
+                    </label>
+                    <select
+                      value={destination}
+                      onChange={(e) => setDestination(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-navy-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
+                    >
+                      {destinations.map((d) => (
+                        <option key={d} value={d}>
+                          {d} — {getCityName(d, "destination")}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
+                      <BarChart3 className="w-4 h-4 inline mr-1" />
+                      Modele de prevision
+                    </label>
+                    <select
+                      value={model}
+                      onChange={(e) => setModel(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-navy-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
+                    >
+                      {modelesDispo.map((m) => (
+                        <option key={m} value={m}>
+                          {MODEL_NAMES[m]}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
+                      <CalendarRange className="w-4 h-4 inline mr-1" />
+                      Horizon de prevision
+                    </label>
+                    <select
+                      value={horizon}
+                      onChange={(e) => setHorizon(Number(e.target.value))}
+                      className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-navy-700 border border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition"
+                    >
+                      {Array.from({ length: maxHorizon }, (_, i) => i + 1).map((h) => (
+                        <option key={h} value={h}>
+                          {HORIZON_LABELS[h] || `${h} mois (M+${h})`}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handlePredict}
+                  disabled={loading}
+                  className="w-full py-3.5 rounded-xl bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold text-base transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-sky-500/20"
+                >
+                  {loading ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Estimation en cours...
+                    </>
+                  ) : (
+                    <>
+                      <BarChart3 className="w-5 h-5" />
+                      Estimer le trafic
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Error */}
+              {error && (
+                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-center gap-3">
+                  <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
+                  <p className="text-red-400 text-sm">{error}</p>
+                </div>
               )}
+
+              {/* Results */}
+              {prediction && (
+                <div className="animate-fade-in space-y-6">
+                  {/* Metrics */}
+                  <MetricCards prediction={prediction} />
+
+                  {/* Chart + Route Info */}
+                  <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    <div className="lg:col-span-3">
+                      <TrafficChart
+                        prediction={prediction}
+                        modelName={MODEL_NAMES[model]}
+                      />
+                    </div>
+                    <div>
+                      <RouteInfo
+                        prediction={prediction}
+                        modelName={MODEL_NAMES[model]}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Model Comparison */}
+                  {Object.keys(comparisons).length > 1 && (
+                    <ModelComparison
+                      comparisons={comparisons}
+                      selectedModel={model}
+                      modelNames={MODEL_NAMES}
+                      horizon={horizon}
+                    />
+                  )}
+                </div>
+              )}
+
+              {/* Info */}
+              <div className="bg-sky-500/5 dark:bg-sky-500/10 border border-sky-500/15 dark:border-sky-500/20 rounded-xl p-5">
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                  <strong className="text-sky-600 dark:text-sky-400">
+                    A propos
+                  </strong>{" "}
+                  — Seuls les modeles <strong>tabulaires</strong> (XGBoost, Random
+                  Forest, MLP) sont disponibles ici : ils partagent le meme vecteur
+                  de features precalcule. Les architectures sequentielles (LSTM,
+                  GRU, SimpleRNN) necessitent la reconstruction d&apos;une sequence
+                  de 6 mois et ne sont pas exposees — leurs resultats figurent au
+                  Chapitre 4 du memoire.
+                  L&apos;horizon de prevision (1 a 3 mois) utilise une approche
+                  iterative : la prediction de M+1 nourrit les features de M+2,
+                  puis celle de M+2 nourrit M+3.
+                </p>
+              </div>
             </div>
           )}
 
-          {/* Info */}
-          <div className="mt-8 bg-sky-500/5 dark:bg-sky-500/10 border border-sky-500/15 dark:border-sky-500/20 rounded-xl p-5">
-            <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-              <strong className="text-sky-600 dark:text-sky-400">
-                ℹ️ À propos
-              </strong>{" "}
-              — Seuls les modèles <strong>tabulaires</strong> (XGBoost, Random
-              Forest, MLP) sont disponibles ici : ils partagent le même vecteur
-              de features précalculé. Les architectures séquentielles (LSTM,
-              GRU, SimpleRNN) nécessitent la reconstruction d&apos;une séquence
-              de 6 mois et ne sont pas exposées — leurs résultats figurent au
-              Chapitre 4 du mémoire.
-              L&apos;horizon de prévision (1 à 3 mois) utilise une approche
-              itérative : la prédiction de M+1 nourrit les features de M+2,
-              puis celle de M+2 nourrit M+3.
-            </p>
-          </div>
+          {activeTab === "stats" && <AviationStatsTab />}
+
+          {activeTab === "impact" && <BusinessImpactTab />}
 
           {/* Footer */}
           <footer className="mt-10 pt-6 border-t border-slate-200 dark:border-slate-700/50 text-center text-sm text-slate-400 dark:text-slate-500">
             <p className="font-semibold text-slate-600 dark:text-slate-300">
-              Prévision du trafic aérien
+              Prevision du trafic aerien
             </p>
             <p>M2 IA & Smart Tech — UIDT</p>
             <p className="mt-1">
