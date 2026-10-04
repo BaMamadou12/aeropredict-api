@@ -15,3 +15,9 @@ Thumbs.db
 
 # Large model files (exceed GitHub 100MB limit)
 app/model/rf_model.joblib
+
+# Node modules
+node_modules/
+dashboard/node_modules/
+.next/
+dashboard/.next/
