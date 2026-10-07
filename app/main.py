@@ -44,12 +44,81 @@ app.add_middleware(
 with open(os.path.join(MODEL_DIR, "modeles_disponibles.json")) as f:
     MODELES_DISPONIBLES: list[str] = json.load(f)
 
+with open(os.path.join(MODEL_DIR, "airport_coordinates.json")) as f:
+    AIRPORT_COORDS: dict = json.load(f)
+
 snapshot = pd.read_parquet(os.path.join(MODEL_DIR, "route_snapshot.parquet"))
 snapshot = snapshot.set_index(["origin_airport", "destination_airport"], drop=False)
 
 ModeleType = Literal["xgboost", "random_forest", "mlp"]
 
 MAX_HORIZON = 3
+
+# Calcul des statistiques agrégées par aéroport (au démarrage)
+def _compute_airport_stats() -> dict:
+    """Agrège le trafic passagers par aéroport (origine + destination)."""
+    stats = {}
+    df = snapshot.reset_index(drop=True)
+
+    # Trafic sortant (comme origine)
+    origin_traffic = df.groupby("origin_airport").agg({
+        "derniers_passagers_connus": "sum",
+        "origin_city": "first"
+    }).rename(columns={"derniers_passagers_connus": "outbound", "origin_city": "city"})
+
+    # Trafic entrant (comme destination)
+    dest_traffic = df.groupby("destination_airport").agg({
+        "derniers_passagers_connus": "sum",
+        "destination_city": "first"
+    }).rename(columns={"derniers_passagers_connus": "inbound", "destination_city": "city"})
+
+    # Fusion
+    all_airports = set(origin_traffic.index) | set(dest_traffic.index)
+    for code in all_airports:
+        outbound = int(origin_traffic.loc[code, "outbound"]) if code in origin_traffic.index else 0
+        inbound = int(dest_traffic.loc[code, "inbound"]) if code in dest_traffic.index else 0
+        city = origin_traffic.loc[code, "city"] if code in origin_traffic.index else dest_traffic.loc[code, "city"]
+
+        coords = AIRPORT_COORDS.get(code, {})
+        stats[code] = {
+            "code": code,
+            "city": city,
+            "lat": coords.get("lat"),
+            "lon": coords.get("lon"),
+            "name": coords.get("name", city),
+            "outbound_passengers": outbound,
+            "inbound_passengers": inbound,
+            "total_passengers": outbound + inbound,
+            "routes_count": len(snapshot[snapshot["origin_airport"] == code]) + len(snapshot[snapshot["destination_airport"] == code])
+        }
+    return stats
+
+AIRPORT_STATS = _compute_airport_stats()
+
+def _compute_top_routes(limit: int = 50) -> list[dict]:
+    """Retourne les routes les plus fréquentées par volume de passagers."""
+    df = snapshot.reset_index(drop=True).copy()
+    df = df.sort_values("derniers_passagers_connus", ascending=False).head(limit)
+
+    routes = []
+    for _, row in df.iterrows():
+        origin = row["origin_airport"]
+        dest = row["destination_airport"]
+        routes.append({
+            "origin": origin,
+            "destination": dest,
+            "origin_city": row["origin_city"],
+            "destination_city": row["destination_city"],
+            "passengers": int(row["derniers_passagers_connus"]),
+            "distance_miles": float(row["distance_miles"]),
+            "origin_lat": AIRPORT_COORDS.get(origin, {}).get("lat"),
+            "origin_lon": AIRPORT_COORDS.get(origin, {}).get("lon"),
+            "dest_lat": AIRPORT_COORDS.get(dest, {}).get("lat"),
+            "dest_lon": AIRPORT_COORDS.get(dest, {}).get("lon"),
+        })
+    return routes
+
+TOP_ROUTES_CACHE = _compute_top_routes(100)
 
 
 # ----------------------------------------------------------------------
@@ -190,3 +259,100 @@ def predict(payload: PredictionRequest):
 def predict_batch(payload: BatchPredictionRequest):
     """Prévision accélérée sur un lot de liaisons (200 maximum par requête)."""
     return [_predire_une_route(r.origin, r.destination, r.model, r.horizon) for r in payload.routes]
+
+
+# ----------------------------------------------------------------------
+# Endpoints Cartographie (données réelles agrégées)
+# ----------------------------------------------------------------------
+@app.get("/airports", tags=["Cartographie"])
+def list_airports(min_passengers: int = 0, limit: int = 50):
+    """
+    Liste les aéroports avec leurs coordonnées GPS et statistiques de trafic.
+
+    - min_passengers: filtre les aéroports avec au moins ce volume de passagers
+    - limit: nombre maximum d'aéroports retournés (triés par trafic décroissant)
+
+    Source des coordonnées: FAA (Federal Aviation Administration)
+    Source du trafic: BTS (Bureau of Transportation Statistics) via le snapshot
+    """
+    airports = [
+        a for a in AIRPORT_STATS.values()
+        if a["total_passengers"] >= min_passengers and a["lat"] is not None
+    ]
+    airports.sort(key=lambda x: x["total_passengers"], reverse=True)
+    return airports[:limit]
+
+
+@app.get("/airports/{code}", tags=["Cartographie"])
+def get_airport(code: str):
+    """Détail d'un aéroport spécifique avec ses statistiques."""
+    code = code.upper().strip()
+    if code not in AIRPORT_STATS:
+        raise HTTPException(status_code=404, detail=f"Aéroport {code} non trouvé")
+    return AIRPORT_STATS[code]
+
+
+@app.get("/routes/top", tags=["Cartographie"])
+def top_routes(limit: int = 20):
+    """
+    Top des liaisons aériennes par volume de passagers.
+
+    Retourne les routes les plus fréquentées avec leurs coordonnées GPS
+    pour affichage cartographique.
+
+    Source: BTS (Bureau of Transportation Statistics)
+    """
+    return TOP_ROUTES_CACHE[:limit]
+
+
+@app.get("/routes/by-airport/{code}", tags=["Cartographie"])
+def routes_by_airport(code: str, limit: int = 20):
+    """
+    Liaisons d'un aéroport spécifique (départs et arrivées).
+
+    Utile pour visualiser le réseau d'un hub particulier.
+    """
+    code = code.upper().strip()
+    routes = [
+        r for r in TOP_ROUTES_CACHE
+        if r["origin"] == code or r["destination"] == code
+    ]
+    routes.sort(key=lambda x: x["passengers"], reverse=True)
+    return routes[:limit]
+
+
+@app.get("/stats/network", tags=["Cartographie"])
+def network_stats():
+    """
+    Statistiques globales du réseau aérien pour les KPIs du dashboard.
+
+    Toutes les valeurs sont calculées à partir des données réelles BTS.
+    """
+    total_routes = len(snapshot)
+    total_airports = len(AIRPORT_STATS)
+    airports_with_coords = len([a for a in AIRPORT_STATS.values() if a["lat"] is not None])
+    total_passengers = sum(a["total_passengers"] for a in AIRPORT_STATS.values()) // 2  # Évite double comptage
+    avg_distance = snapshot["distance_miles"].mean()
+
+    top_hub = max(AIRPORT_STATS.values(), key=lambda x: x["total_passengers"])
+    top_route = TOP_ROUTES_CACHE[0] if TOP_ROUTES_CACHE else None
+
+    return {
+        "total_routes": total_routes,
+        "total_airports": total_airports,
+        "airports_with_coordinates": airports_with_coords,
+        "total_passengers_monthly": total_passengers,
+        "average_distance_miles": round(avg_distance, 1),
+        "top_hub": {
+            "code": top_hub["code"],
+            "city": top_hub["city"],
+            "passengers": top_hub["total_passengers"]
+        },
+        "top_route": {
+            "origin": top_route["origin"],
+            "destination": top_route["destination"],
+            "passengers": top_route["passengers"]
+        } if top_route else None,
+        "data_source": "Bureau of Transportation Statistics (BTS)",
+        "coordinates_source": "Federal Aviation Administration (FAA)"
+    }
