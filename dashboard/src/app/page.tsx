@@ -16,6 +16,7 @@ import { ModelComparison } from "@/components/ModelComparison";
 import { RouteInfo } from "@/components/RouteInfo";
 import { AviationStatsTab } from "@/components/AviationStatsTab";
 import { BusinessImpactTab } from "@/components/BusinessImpactTab";
+import { USARoutesMap } from "@/components/USARoutesMap";
 import {
   Plane,
   Search,
@@ -26,6 +27,7 @@ import {
   Rocket,
   PieChart,
   Lightbulb,
+  Map,
 } from "lucide-react";
 
 const MODEL_NAMES: Record<string, string> = {
@@ -40,7 +42,7 @@ const HORIZON_LABELS: Record<number, string> = {
   3: "3 mois (M+3)",
 };
 
-type TabType = "prediction" | "stats" | "impact";
+type TabType = "prediction" | "stats" | "map" | "impact";
 
 interface TabButtonProps {
   id: TabType;
@@ -223,6 +225,13 @@ export default function Home() {
               id="stats"
               label="Statistiques Reseau BTS"
               icon={<PieChart className="w-4 h-4" />}
+              activeTab={activeTab}
+              onClick={setActiveTab}
+            />
+            <TabButton
+              id="map"
+              label="Carte des Routes US"
+              icon={<Map className="w-4 h-4" />}
               activeTab={activeTab}
               onClick={setActiveTab}
             />
@@ -436,6 +445,8 @@ export default function Home() {
           )}
 
           {activeTab === "stats" && <AviationStatsTab />}
+
+          {activeTab === "map" && <USARoutesMap />}
 
           {activeTab === "impact" && <BusinessImpactTab />}
 
