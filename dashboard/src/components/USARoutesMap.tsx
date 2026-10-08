@@ -1,16 +1,13 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, memo } from "react";
 import {
-  ScatterChart,
-  Scatter,
-  XAxis,
-  YAxis,
-  ZAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
-} from "recharts";
+  ComposableMap,
+  Geographies,
+  Geography,
+  Marker,
+  Line,
+} from "react-simple-maps";
 import { Map, Plane, ArrowRight, TrendingUp, Users, Route, Navigation, Database, AlertCircle, Loader2 } from "lucide-react";
 import {
   fetchAirports,
@@ -22,20 +19,7 @@ import {
   type NetworkStats,
 } from "@/lib/api";
 
-const US_BOUNDS = {
-  minLon: -130,
-  maxLon: -65,
-  minLat: 22,
-  maxLat: 50,
-};
-
-function lonToX(lon: number): number {
-  return ((lon - US_BOUNDS.minLon) / (US_BOUNDS.maxLon - US_BOUNDS.minLon)) * 100;
-}
-
-function latToY(lat: number): number {
-  return 100 - ((lat - US_BOUNDS.minLat) / (US_BOUNDS.maxLat - US_BOUNDS.minLat)) * 100;
-}
+const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
 interface KPICardProps {
   icon: React.ReactNode;
@@ -107,139 +91,142 @@ function RouteCard({ route, rank }: RouteCardProps) {
   );
 }
 
-interface CustomTooltipProps {
-  active?: boolean;
-  payload?: any[];
+interface AirportTooltipProps {
+  airport: AirportData | null;
+  position: { x: number; y: number } | null;
 }
 
-function AirportTooltip({ active, payload }: CustomTooltipProps) {
-  if (!active || !payload?.length) return null;
-  const data = payload[0].payload;
+function AirportTooltipBox({ airport, position }: AirportTooltipProps) {
+  if (!airport || !position) return null;
+
   return (
-    <div className="bg-white dark:bg-navy-800 border border-slate-200 dark:border-slate-600 rounded-xl p-4 shadow-xl">
+    <div
+      className="absolute z-50 bg-white dark:bg-navy-800 border border-slate-200 dark:border-slate-600 rounded-xl p-4 shadow-xl pointer-events-none"
+      style={{
+        left: position.x + 10,
+        top: position.y - 10,
+        transform: "translateY(-100%)",
+      }}
+    >
       <div className="flex items-center gap-2 mb-2">
         <Plane className="w-4 h-4 text-sky-500" />
-        <span className="font-bold text-slate-900 dark:text-white">{data.code}</span>
+        <span className="font-bold text-slate-900 dark:text-white">{airport.code}</span>
       </div>
-      <p className="text-sm text-slate-600 dark:text-slate-300">{data.city}</p>
-      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{data.name}</p>
+      <p className="text-sm text-slate-600 dark:text-slate-300">{airport.city}</p>
+      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{airport.name}</p>
       <div className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-600">
         <p className="text-sm font-semibold text-sky-500">
-          {data.total_passengers.toLocaleString()} pass./mois
+          {airport.total_passengers.toLocaleString()} pass./mois
         </p>
-        <p className="text-xs text-slate-400">
-          {data.routes_count} liaisons
-        </p>
+        <p className="text-xs text-slate-400">{airport.routes_count} liaisons</p>
       </div>
     </div>
   );
 }
 
-function USMapBackground() {
-  return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      viewBox="0 0 100 100"
-      preserveAspectRatio="none"
-    >
-      <defs>
-        <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#0EA5E9" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.05" />
-        </linearGradient>
-      </defs>
-      {/* Contour simplifie des Etats-Unis continentaux */}
-      <path
-        d="
-          M 7,28 L 8,25 L 10,23 L 12,22 L 14,23 L 15,21 L 14,18 L 15,15 L 18,14 L 20,15
-          L 22,14 L 24,15 L 26,14 L 28,15 L 30,14 L 32,15 L 34,14 L 36,15 L 38,13 L 40,14
-          L 42,13 L 44,14 L 46,13 L 48,14 L 50,12 L 52,13 L 54,12 L 56,13 L 58,11 L 60,12
-          L 62,11 L 64,12 L 66,11 L 68,13 L 70,12 L 72,14 L 74,13 L 76,15 L 78,14 L 80,16
-          L 82,15 L 84,17 L 86,19 L 88,21 L 89,24 L 90,27 L 89,30 L 88,33 L 89,36 L 88,39
-          L 87,42 L 86,45 L 85,48 L 84,51 L 83,54 L 82,57 L 80,59 L 78,61 L 76,62 L 74,64
-          L 72,65 L 70,67 L 68,68 L 66,70 L 64,71 L 62,72 L 60,73 L 58,74 L 56,75 L 54,74
-          L 52,75 L 50,74 L 48,75 L 46,74 L 44,75 L 42,73 L 40,74 L 38,72 L 36,73 L 34,71
-          L 32,72 L 30,70 L 28,71 L 26,69 L 24,70 L 22,68 L 20,69 L 18,67 L 16,68 L 14,66
-          L 12,67 L 10,65 L 8,64 L 7,61 L 6,58 L 5,55 L 6,52 L 5,49 L 6,46 L 5,43 L 6,40
-          L 5,37 L 6,34 L 5,31 L 7,28
-          Z
-        "
-        fill="url(#mapGradient)"
-        stroke="currentColor"
-        strokeWidth="0.3"
-        strokeOpacity="0.2"
-        className="text-sky-500 dark:text-sky-400"
-      />
-      {/* Floride */}
-      <path
-        d="M 76,62 L 78,65 L 80,68 L 81,72 L 80,76 L 78,78 L 75,77 L 74,74 L 75,70 L 74,67 L 74,64 L 76,62"
-        fill="url(#mapGradient)"
-        stroke="currentColor"
-        strokeWidth="0.3"
-        strokeOpacity="0.2"
-        className="text-sky-500 dark:text-sky-400"
-      />
-      {/* Texas */}
-      <path
-        d="M 30,70 L 32,72 L 34,75 L 33,78 L 30,82 L 27,85 L 24,84 L 22,81 L 20,78 L 22,75 L 24,72 L 26,70 L 28,71 L 30,70"
-        fill="url(#mapGradient)"
-        stroke="currentColor"
-        strokeWidth="0.3"
-        strokeOpacity="0.2"
-        className="text-sky-500 dark:text-sky-400"
-      />
-      {/* Grands Lacs (trous) */}
-      <ellipse cx="68" cy="25" rx="3" ry="2" fill="#1e293b" fillOpacity="0.3" className="dark:fill-slate-900" />
-      <ellipse cx="72" cy="28" rx="2" ry="1.5" fill="#1e293b" fillOpacity="0.3" className="dark:fill-slate-900" />
-      <ellipse cx="65" cy="28" rx="2.5" ry="1.5" fill="#1e293b" fillOpacity="0.3" className="dark:fill-slate-900" />
-    </svg>
-  );
-}
+const MapChart = memo(function MapChart({
+  airports,
+  routes,
+  selectedHub,
+  onSelectHub,
+  onHoverAirport,
+}: {
+  airports: AirportData[];
+  routes: TopRoute[];
+  selectedHub: string | null;
+  onSelectHub: (code: string | null) => void;
+  onHoverAirport: (airport: AirportData | null, event: React.MouseEvent | null) => void;
+}) {
+  const maxPassengers = useMemo(() => {
+    return Math.max(...airports.map((a) => a.total_passengers), 1);
+  }, [airports]);
 
-function RouteLines({ routes }: { routes: TopRoute[] }) {
+  const maxRoutePassengers = useMemo(() => {
+    return routes[0]?.passengers || 1;
+  }, [routes]);
+
   return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      viewBox="0 0 100 100"
-      preserveAspectRatio="none"
+    <ComposableMap
+      projection="geoAlbersUsa"
+      projectionConfig={{
+        scale: 1000,
+      }}
+      style={{ width: "100%", height: "100%" }}
     >
-      <defs>
-        <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#0EA5E9" stopOpacity="0.6" />
-          <stop offset="50%" stopColor="#8B5CF6" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#0EA5E9" stopOpacity="0.6" />
-        </linearGradient>
-      </defs>
+      {/* Fond de carte des Etats US */}
+      <Geographies geography={GEO_URL}>
+        {({ geographies }) =>
+          geographies.map((geo) => (
+            <Geography
+              key={geo.rsmKey}
+              geography={geo}
+              fill="#E2E8F0"
+              stroke="#CBD5E1"
+              strokeWidth={0.5}
+              className="dark:fill-slate-700 dark:stroke-slate-600 outline-none hover:fill-slate-300 dark:hover:fill-slate-600 transition-colors"
+            />
+          ))
+        }
+      </Geographies>
+
+      {/* Lignes des routes aeriennes */}
       {routes.map((route, idx) => {
         if (!route.origin_lat || !route.origin_lon || !route.dest_lat || !route.dest_lon) return null;
 
-        const x1 = lonToX(route.origin_lon);
-        const y1 = latToY(route.origin_lat);
-        const x2 = lonToX(route.dest_lon);
-        const y2 = latToY(route.dest_lat);
-
-        const midX = (x1 + x2) / 2;
-        const midY = (y1 + y2) / 2 - Math.abs(x2 - x1) * 0.08;
-
-        const maxPassengers = routes[0]?.passengers || 1;
-        const opacity = 0.3 + (route.passengers / maxPassengers) * 0.5;
-        const strokeWidth = 0.15 + (route.passengers / maxPassengers) * 0.25;
+        const opacity = 0.3 + (route.passengers / maxRoutePassengers) * 0.5;
+        const strokeWidth = 1 + (route.passengers / maxRoutePassengers) * 2;
 
         return (
-          <path
-            key={`${route.origin}-${route.destination}-${idx}`}
-            d={`M ${x1} ${y1} Q ${midX} ${midY} ${x2} ${y2}`}
-            fill="none"
-            stroke="url(#routeGradient)"
+          <Line
+            key={`route-${route.origin}-${route.destination}-${idx}`}
+            from={[route.origin_lon, route.origin_lat]}
+            to={[route.dest_lon, route.dest_lat]}
+            stroke="#8B5CF6"
             strokeWidth={strokeWidth}
             strokeOpacity={opacity}
             strokeLinecap="round"
           />
         );
       })}
-    </svg>
+
+      {/* Marqueurs des aeroports */}
+      {airports
+        .filter((a) => a.lat !== null && a.lon !== null)
+        .map((airport) => {
+          const size = 4 + (airport.total_passengers / maxPassengers) * 12;
+          const isSelected = selectedHub === airport.code;
+
+          return (
+            <Marker
+              key={airport.code}
+              coordinates={[airport.lon!, airport.lat!]}
+              onClick={() => onSelectHub(isSelected ? null : airport.code)}
+              onMouseEnter={(e) => onHoverAirport(airport, e)}
+              onMouseLeave={() => onHoverAirport(null, null)}
+              style={{ cursor: "pointer" }}
+            >
+              <circle
+                r={size}
+                fill={isSelected ? "#F59E0B" : "#0EA5E9"}
+                stroke={isSelected ? "#D97706" : "#0284C7"}
+                strokeWidth={isSelected ? 3 : 2}
+                className="transition-all duration-200"
+              />
+              {size > 8 && (
+                <text
+                  textAnchor="middle"
+                  y={size + 12}
+                  className="text-[10px] font-bold fill-slate-700 dark:fill-slate-300"
+                >
+                  {airport.code}
+                </text>
+              )}
+            </Marker>
+          );
+        })}
+    </ComposableMap>
   );
-}
+});
 
 export function USARoutesMap() {
   const [airports, setAirports] = useState<AirportData[]>([]);
@@ -247,6 +234,8 @@ export function USARoutesMap() {
   const [filteredRoutes, setFilteredRoutes] = useState<TopRoute[]>([]);
   const [networkStats, setNetworkStats] = useState<NetworkStats | null>(null);
   const [selectedHub, setSelectedHub] = useState<string | null>(null);
+  const [hoveredAirport, setHoveredAirport] = useState<AirportData | null>(null);
+  const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -289,20 +278,24 @@ export function USARoutesMap() {
     filterRoutes();
   }, [selectedHub, topRoutes]);
 
-  const chartData = useMemo(() => {
-    return airports
-      .filter((a) => a.lat !== null && a.lon !== null)
-      .map((airport) => ({
-        ...airport,
-        x: lonToX(airport.lon!),
-        y: latToY(airport.lat!),
-        z: airport.total_passengers,
-      }));
-  }, [airports]);
-
   const displayedRoutes = useMemo(() => {
     return topRoutes.slice(0, 5);
   }, [topRoutes]);
+
+  const handleHoverAirport = (airport: AirportData | null, event: React.MouseEvent | null) => {
+    setHoveredAirport(airport);
+    if (event && airport) {
+      const rect = (event.currentTarget as Element).closest(".map-container")?.getBoundingClientRect();
+      if (rect) {
+        setTooltipPos({
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top,
+        });
+      }
+    } else {
+      setTooltipPos(null);
+    }
+  };
 
   if (loading) {
     return (
@@ -337,7 +330,7 @@ export function USARoutesMap() {
             </div>
             <div>
               <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                Donnees Reelles BTS / Coordonnees FAA
+                Carte TopoJSON US Census Bureau / Donnees BTS
               </p>
               <p className="text-lg font-bold text-sky-600 dark:text-sky-400">
                 Reseau Aerien Domestique US
@@ -367,7 +360,7 @@ export function USARoutesMap() {
         </div>
       </div>
 
-      {/* KPI Cards - Donnees reelles */}
+      {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <KPICard
           icon={<Users className="w-5 h-5" />}
@@ -411,7 +404,7 @@ export function USARoutesMap() {
             <div className="flex items-center gap-2">
               <Plane className="w-5 h-5 text-sky-500" />
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                Carte des Liaisons (Donnees Reelles)
+                Carte des Liaisons (react-simple-maps)
               </h3>
             </div>
             {selectedHub && (
@@ -424,50 +417,15 @@ export function USARoutesMap() {
             )}
           </div>
 
-          <div className="relative aspect-[16/10] bg-gradient-to-br from-slate-100 to-slate-200 dark:from-navy-900 dark:to-navy-800 rounded-xl overflow-hidden">
-            <USMapBackground />
-            <RouteLines routes={filteredRoutes} />
-
-            <ResponsiveContainer width="100%" height="100%">
-              <ScatterChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
-                <XAxis type="number" dataKey="x" domain={[0, 100]} hide />
-                <YAxis type="number" dataKey="y" domain={[0, 100]} hide />
-                <ZAxis type="number" dataKey="z" range={[60, 400]} />
-                <Tooltip content={<AirportTooltip />} cursor={{ strokeDasharray: "3 3" }} />
-                <Scatter
-                  data={chartData}
-                  onClick={(data: any) => {
-                    if (data?.code) {
-                      setSelectedHub(data.code === selectedHub ? null : data.code);
-                    }
-                  }}
-                >
-                  {chartData.map((entry) => (
-                    <Cell
-                      key={entry.code}
-                      fill={selectedHub === entry.code ? "#F59E0B" : "#0EA5E9"}
-                      stroke={selectedHub === entry.code ? "#D97706" : "#0284C7"}
-                      strokeWidth={selectedHub === entry.code ? 3 : 2}
-                      style={{ cursor: "pointer" }}
-                    />
-                  ))}
-                </Scatter>
-              </ScatterChart>
-            </ResponsiveContainer>
-
-            {/* Airport Labels */}
-            {chartData.slice(0, 15).map((airport) => (
-              <div
-                key={`label-${airport.code}`}
-                className="absolute text-[9px] font-bold text-slate-700 dark:text-slate-300 pointer-events-none transform -translate-x-1/2"
-                style={{
-                  left: `${airport.x}%`,
-                  top: `calc(${airport.y}% + 12px)`,
-                }}
-              >
-                {airport.code}
-              </div>
-            ))}
+          <div className="map-container relative aspect-[16/10] bg-gradient-to-br from-slate-50 to-slate-100 dark:from-navy-900 dark:to-navy-800 rounded-xl overflow-hidden">
+            <MapChart
+              airports={airports}
+              routes={filteredRoutes}
+              selectedHub={selectedHub}
+              onSelectHub={setSelectedHub}
+              onHoverAirport={handleHoverAirport}
+            />
+            <AirportTooltipBox airport={hoveredAirport} position={tooltipPos} />
           </div>
 
           {/* Legend and Source */}
@@ -482,12 +440,12 @@ export function USARoutesMap() {
                 <span className="text-xs text-slate-600 dark:text-slate-400">Selectionne</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-8 h-0.5 bg-gradient-to-r from-sky-500 via-violet-500 to-sky-500 rounded" />
+                <div className="w-8 h-0.5 bg-violet-500 rounded" />
                 <span className="text-xs text-slate-600 dark:text-slate-400">Route aerienne</span>
               </div>
             </div>
             <p className="text-xs text-slate-400">
-              Source: {networkStats?.data_source || "BTS"}
+              Carte: US Census Bureau (TopoJSON)
             </p>
           </div>
         </div>
@@ -509,9 +467,9 @@ export function USARoutesMap() {
 
           <div className="mt-4 p-3 bg-slate-100 dark:bg-navy-700/50 rounded-xl">
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              <strong className="text-slate-700 dark:text-slate-300">Donnees reelles:</strong> Ces
-              statistiques proviennent du Bureau of Transportation Statistics (BTS). Les coordonnees
-              GPS sont issues de la FAA.
+              <strong className="text-slate-700 dark:text-slate-300">Sources:</strong> Trafic
+              passagers du Bureau of Transportation Statistics (BTS). Coordonnees GPS de la FAA.
+              Fond cartographique du US Census Bureau.
             </p>
           </div>
 
@@ -534,7 +492,10 @@ export function USARoutesMap() {
       {/* Data Attribution */}
       <div className="text-center text-sm text-slate-500 dark:text-slate-400 space-y-1">
         <p>
-          <strong>Source des donnees:</strong> Bureau of Transportation Statistics (BTS) —{" "}
+          <strong>Fond cartographique:</strong> US Census Bureau (TopoJSON via us-atlas)
+        </p>
+        <p>
+          <strong>Donnees trafic:</strong> Bureau of Transportation Statistics (BTS) —{" "}
           <a href="https://www.transtats.bts.gov" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">
             transtats.bts.gov
           </a>
