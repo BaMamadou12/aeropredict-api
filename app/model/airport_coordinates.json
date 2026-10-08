@@ -1,101 +1,2906 @@
 {
-  "ATL": {"lat": 33.6407, "lon": -84.4277, "name": "Hartsfield-Jackson Atlanta"},
-  "LAX": {"lat": 33.9425, "lon": -118.4081, "name": "Los Angeles International"},
-  "ORD": {"lat": 41.9742, "lon": -87.9073, "name": "Chicago O'Hare"},
-  "DFW": {"lat": 32.8998, "lon": -97.0403, "name": "Dallas/Fort Worth"},
-  "DEN": {"lat": 39.8561, "lon": -104.6737, "name": "Denver International"},
-  "JFK": {"lat": 40.6413, "lon": -73.7781, "name": "John F. Kennedy"},
-  "SFO": {"lat": 37.6213, "lon": -122.3790, "name": "San Francisco International"},
-  "SEA": {"lat": 47.4502, "lon": -122.3088, "name": "Seattle-Tacoma"},
-  "LAS": {"lat": 36.0840, "lon": -115.1537, "name": "Harry Reid International"},
-  "MCO": {"lat": 28.4312, "lon": -81.3081, "name": "Orlando International"},
-  "MIA": {"lat": 25.7959, "lon": -80.2870, "name": "Miami International"},
-  "PHX": {"lat": 33.4373, "lon": -112.0078, "name": "Phoenix Sky Harbor"},
-  "IAH": {"lat": 29.9902, "lon": -95.3368, "name": "George Bush Intercontinental"},
-  "BOS": {"lat": 42.3656, "lon": -71.0096, "name": "Boston Logan"},
-  "MSP": {"lat": 44.8848, "lon": -93.2223, "name": "Minneapolis-Saint Paul"},
-  "DTW": {"lat": 42.2124, "lon": -83.3534, "name": "Detroit Metropolitan"},
-  "EWR": {"lat": 40.6895, "lon": -74.1745, "name": "Newark Liberty"},
-  "CLT": {"lat": 35.2140, "lon": -80.9431, "name": "Charlotte Douglas"},
-  "LGA": {"lat": 40.7769, "lon": -73.8740, "name": "LaGuardia"},
-  "PHL": {"lat": 39.8729, "lon": -75.2437, "name": "Philadelphia International"},
-  "DCA": {"lat": 38.8512, "lon": -77.0402, "name": "Ronald Reagan Washington"},
-  "IAD": {"lat": 38.9531, "lon": -77.4565, "name": "Washington Dulles"},
-  "BWI": {"lat": 39.1774, "lon": -76.6684, "name": "Baltimore/Washington"},
-  "SAN": {"lat": 32.7338, "lon": -117.1933, "name": "San Diego International"},
-  "TPA": {"lat": 27.9756, "lon": -82.5333, "name": "Tampa International"},
-  "PDX": {"lat": 45.5898, "lon": -122.5951, "name": "Portland International"},
-  "SLC": {"lat": 40.7899, "lon": -111.9791, "name": "Salt Lake City"},
-  "STL": {"lat": 38.7487, "lon": -90.3700, "name": "St. Louis Lambert"},
-  "HNL": {"lat": 21.3187, "lon": -157.9225, "name": "Daniel K. Inouye"},
-  "AUS": {"lat": 30.1975, "lon": -97.6664, "name": "Austin-Bergstrom"},
-  "BNA": {"lat": 36.1263, "lon": -86.6774, "name": "Nashville International"},
-  "RDU": {"lat": 35.8801, "lon": -78.7880, "name": "Raleigh-Durham"},
-  "MCI": {"lat": 39.2976, "lon": -94.7139, "name": "Kansas City International"},
-  "SMF": {"lat": 38.6954, "lon": -121.5908, "name": "Sacramento International"},
-  "SJC": {"lat": 37.3639, "lon": -121.9289, "name": "San Jose International"},
-  "OAK": {"lat": 37.7213, "lon": -122.2208, "name": "Oakland International"},
-  "FLL": {"lat": 26.0742, "lon": -80.1506, "name": "Fort Lauderdale-Hollywood"},
-  "MSY": {"lat": 29.9934, "lon": -90.2580, "name": "Louis Armstrong New Orleans"},
-  "CLE": {"lat": 41.4058, "lon": -81.8539, "name": "Cleveland Hopkins"},
-  "PIT": {"lat": 40.4915, "lon": -80.2329, "name": "Pittsburgh International"},
-  "IND": {"lat": 39.7173, "lon": -86.2944, "name": "Indianapolis International"},
-  "CVG": {"lat": 39.0533, "lon": -84.6630, "name": "Cincinnati/Northern Kentucky"},
-  "CMH": {"lat": 39.9980, "lon": -82.8919, "name": "John Glenn Columbus"},
-  "MKE": {"lat": 42.9472, "lon": -87.8966, "name": "Milwaukee Mitchell"},
-  "JAX": {"lat": 30.4941, "lon": -81.6879, "name": "Jacksonville International"},
-  "OMA": {"lat": 41.3032, "lon": -95.8941, "name": "Eppley Airfield"},
-  "ABQ": {"lat": 35.0402, "lon": -106.6090, "name": "Albuquerque International"},
-  "ANC": {"lat": 61.1743, "lon": -149.9962, "name": "Ted Stevens Anchorage"},
-  "OGG": {"lat": 20.8986, "lon": -156.4305, "name": "Kahului Airport"},
-  "SNA": {"lat": 33.6762, "lon": -117.8674, "name": "John Wayne Airport"},
-  "RSW": {"lat": 26.5362, "lon": -81.7552, "name": "Southwest Florida"},
-  "BUR": {"lat": 34.2005, "lon": -118.3585, "name": "Hollywood Burbank"},
-  "ONT": {"lat": 34.0560, "lon": -117.6012, "name": "Ontario International"},
-  "RNO": {"lat": 39.4991, "lon": -119.7681, "name": "Reno-Tahoe International"},
-  "TUS": {"lat": 32.1161, "lon": -110.9410, "name": "Tucson International"},
-  "ELP": {"lat": 31.8072, "lon": -106.3776, "name": "El Paso International"},
-  "SAT": {"lat": 29.5337, "lon": -98.4698, "name": "San Antonio International"},
-  "PBI": {"lat": 26.6832, "lon": -80.0956, "name": "Palm Beach International"},
-  "BDL": {"lat": 41.9389, "lon": -72.6832, "name": "Bradley International"},
-  "SJU": {"lat": 18.4394, "lon": -66.0018, "name": "Luis Munoz Marin"},
-  "ORF": {"lat": 36.8946, "lon": -76.2012, "name": "Norfolk International"},
-  "RIC": {"lat": 37.5052, "lon": -77.3197, "name": "Richmond International"},
-  "BUF": {"lat": 42.9405, "lon": -78.7322, "name": "Buffalo Niagara"},
-  "ALB": {"lat": 42.7483, "lon": -73.8017, "name": "Albany International"},
-  "ROC": {"lat": 43.1189, "lon": -77.6724, "name": "Greater Rochester"},
-  "SYR": {"lat": 43.1112, "lon": -76.1063, "name": "Syracuse Hancock"},
-  "PVD": {"lat": 41.7267, "lon": -71.4374, "name": "T.F. Green Airport"},
-  "MHT": {"lat": 42.9326, "lon": -71.4357, "name": "Manchester-Boston Regional"},
-  "PWM": {"lat": 43.6462, "lon": -70.3093, "name": "Portland International Jetport"},
-  "BTV": {"lat": 44.4720, "lon": -73.1533, "name": "Burlington International"},
-  "DSM": {"lat": 41.5340, "lon": -93.6631, "name": "Des Moines International"},
-  "OKC": {"lat": 35.3931, "lon": -97.6007, "name": "Will Rogers World"},
-  "TUL": {"lat": 36.1984, "lon": -95.8881, "name": "Tulsa International"},
-  "LIT": {"lat": 34.7294, "lon": -92.2243, "name": "Bill and Hillary Clinton"},
-  "MEM": {"lat": 35.0424, "lon": -89.9767, "name": "Memphis International"},
-  "BHM": {"lat": 33.5629, "lon": -86.7535, "name": "Birmingham-Shuttlesworth"},
-  "GRR": {"lat": 42.8808, "lon": -85.5228, "name": "Gerald R. Ford"},
-  "DAY": {"lat": 39.9024, "lon": -84.2194, "name": "Dayton International"},
-  "GSO": {"lat": 36.0978, "lon": -79.9373, "name": "Piedmont Triad"},
-  "GSP": {"lat": 34.8957, "lon": -82.2189, "name": "Greenville-Spartanburg"},
-  "CHS": {"lat": 32.8986, "lon": -80.0405, "name": "Charleston International"},
-  "SAV": {"lat": 32.1276, "lon": -81.2021, "name": "Savannah/Hilton Head"},
-  "MYR": {"lat": 33.6797, "lon": -78.9283, "name": "Myrtle Beach International"},
-  "PNS": {"lat": 30.4734, "lon": -87.1866, "name": "Pensacola International"},
-  "HSV": {"lat": 34.6372, "lon": -86.7751, "name": "Huntsville International"},
-  "XNA": {"lat": 36.2819, "lon": -94.3068, "name": "Northwest Arkansas Regional"},
-  "ICT": {"lat": 37.6499, "lon": -97.4331, "name": "Wichita Dwight D. Eisenhower"},
-  "COS": {"lat": 38.8058, "lon": -104.7008, "name": "Colorado Springs Airport"},
-  "BOI": {"lat": 43.5644, "lon": -116.2228, "name": "Boise Airport"},
-  "GEG": {"lat": 47.6199, "lon": -117.5338, "name": "Spokane International"},
-  "LGB": {"lat": 33.8177, "lon": -118.1516, "name": "Long Beach Airport"},
-  "PSP": {"lat": 33.8303, "lon": -116.5067, "name": "Palm Springs International"},
-  "FAT": {"lat": 36.7762, "lon": -119.7181, "name": "Fresno Yosemite"},
-  "SBA": {"lat": 34.4262, "lon": -119.8401, "name": "Santa Barbara Airport"},
-  "MRY": {"lat": 36.5870, "lon": -121.8430, "name": "Monterey Regional"},
-  "SBP": {"lat": 35.2368, "lon": -120.6424, "name": "San Luis Obispo Regional"},
-  "KOA": {"lat": 19.7388, "lon": -156.0456, "name": "Ellison Onizuka Kona"},
-  "LIH": {"lat": 21.9760, "lon": -159.3390, "name": "Lihue Airport"},
-  "ITO": {"lat": 19.7214, "lon": -155.0485, "name": "Hilo International"}
+  "ABE": {
+    "lat": 40.6521,
+    "lon": -75.4408,
+    "city": "Allentown, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ABI": {
+    "lat": 32.4113,
+    "lon": -99.6819,
+    "city": "Abilene, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ABQ": {
+    "lat": 35.0402,
+    "lon": -106.609,
+    "city": "Albuquerque, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ABR": {
+    "lat": 45.4491,
+    "lon": -98.4218,
+    "city": "Aberdeen, SD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ABY": {
+    "lat": 31.5355,
+    "lon": -84.1945,
+    "city": "Albany, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ACT": {
+    "lat": 31.6113,
+    "lon": -97.2305,
+    "city": "Waco, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ACV": {
+    "lat": 40.9781,
+    "lon": -124.109,
+    "city": "Eureka, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ACY": {
+    "lat": 39.4576,
+    "lon": -74.5772,
+    "city": "Atlantic City, NJ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ADM": {
+    "lat": 34.303,
+    "lon": -97.0196,
+    "city": "Ardmore, OK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ADQ": {
+    "lat": 57.75,
+    "lon": -152.494,
+    "city": "Kodiak, AK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ADS": {
+    "lat": 32.9686,
+    "lon": -96.8364,
+    "city": "Dallas, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AEX": {
+    "lat": 31.3274,
+    "lon": -92.5498,
+    "city": "Alexandria, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AFW": {
+    "lat": 32.9876,
+    "lon": -97.3188,
+    "city": "Dallas, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AGC": {
+    "lat": 40.3544,
+    "lon": -79.9302,
+    "city": "Pittsburgh, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AGS": {
+    "lat": 33.3699,
+    "lon": -81.9645,
+    "city": "Augusta, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AHN": {
+    "lat": 33.9486,
+    "lon": -83.3263,
+    "city": "Athens, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ALB": {
+    "lat": 42.7483,
+    "lon": -73.8017,
+    "city": "Albany, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ALM": {
+    "lat": 32.8399,
+    "lon": -105.991,
+    "city": "Alamogordo, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ALO": {
+    "lat": 42.5571,
+    "lon": -92.4003,
+    "city": "Waterloo, IA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ALW": {
+    "lat": 46.0949,
+    "lon": -118.288,
+    "city": "Walla Walla, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AMA": {
+    "lat": 35.2194,
+    "lon": -101.706,
+    "city": "Amarillo, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ANB": {
+    "lat": 33.5882,
+    "lon": -85.8581,
+    "city": "Anniston, AL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ANC": {
+    "lat": 61.1744,
+    "lon": -149.996,
+    "city": "Anchorage, AK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AND": {
+    "lat": 34.4946,
+    "lon": -82.7094,
+    "city": "Anderson, SC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AOO": {
+    "lat": 40.2964,
+    "lon": -78.32,
+    "city": "Altoona, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "APC": {
+    "lat": 38.2132,
+    "lon": -122.281,
+    "city": "Napa, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "APF": {
+    "lat": 26.1526,
+    "lon": -81.7753,
+    "city": "Naples, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "APN": {
+    "lat": 45.0781,
+    "lon": -83.5603,
+    "city": "Alpena, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ARA": {
+    "lat": 30.0378,
+    "lon": -91.8839,
+    "city": "New Iberia, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ART": {
+    "lat": 43.9919,
+    "lon": -76.0217,
+    "city": "Watertown, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AST": {
+    "lat": 46.158,
+    "lon": -123.879,
+    "city": "Astoria, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ATL": {
+    "lat": 33.6367,
+    "lon": -84.4281,
+    "city": "Atlanta, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ATW": {
+    "lat": 44.2581,
+    "lon": -88.5191,
+    "city": "Appleton, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ATY": {
+    "lat": 44.914,
+    "lon": -97.1547,
+    "city": "Watertown, SD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AUG": {
+    "lat": 44.3206,
+    "lon": -69.7973,
+    "city": "Augusta, ME",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AUO": {
+    "lat": 32.6151,
+    "lon": -85.434,
+    "city": "Auburn, AL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AUS": {
+    "lat": 30.1945,
+    "lon": -97.6699,
+    "city": "Austin, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AVL": {
+    "lat": 35.4362,
+    "lon": -82.5418,
+    "city": "Asheville, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AVP": {
+    "lat": 41.3385,
+    "lon": -75.7234,
+    "city": "Scranton, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AXN": {
+    "lat": 45.8663,
+    "lon": -95.3947,
+    "city": "Alexandria, MN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AZA": {
+    "lat": 33.3078,
+    "lon": -111.655,
+    "city": "Phoenix, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "AZO": {
+    "lat": 42.2349,
+    "lon": -85.5521,
+    "city": "Kalamazoo, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BAD": {
+    "lat": 32.5018,
+    "lon": -93.6627,
+    "city": "Shreveport, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BDL": {
+    "lat": 41.9389,
+    "lon": -72.6832,
+    "city": "Hartford, CT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BDR": {
+    "lat": 41.1635,
+    "lon": -73.1262,
+    "city": "Bridgeport, CT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BFD": {
+    "lat": 41.8031,
+    "lon": -78.6401,
+    "city": "Bradford, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BFF": {
+    "lat": 41.874,
+    "lon": -103.596,
+    "city": "Scottsbluff, NE",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BFI": {
+    "lat": 47.53,
+    "lon": -122.302,
+    "city": "Seattle, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BFL": {
+    "lat": 35.4336,
+    "lon": -119.057,
+    "city": "Bakersfield, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BFM": {
+    "lat": 30.6268,
+    "lon": -88.0681,
+    "city": "Mobile, AL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BGM": {
+    "lat": 42.2087,
+    "lon": -75.9798,
+    "city": "Binghamton, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BGR": {
+    "lat": 44.8074,
+    "lon": -68.8281,
+    "city": "Bangor, ME",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BHM": {
+    "lat": 33.5629,
+    "lon": -86.7535,
+    "city": "Birmingham, AL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BIF": {
+    "lat": 31.8495,
+    "lon": -106.38,
+    "city": "El Paso, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BIH": {
+    "lat": 37.3731,
+    "lon": -118.364,
+    "city": "Bishop, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BIL": {
+    "lat": 45.8077,
+    "lon": -108.543,
+    "city": "Billings, MT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BIS": {
+    "lat": 46.7727,
+    "lon": -100.746,
+    "city": "Bismarck, ND",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BJI": {
+    "lat": 47.5094,
+    "lon": -94.9337,
+    "city": "Bemidji, MN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BKL": {
+    "lat": 41.5175,
+    "lon": -81.6833,
+    "city": "Cleveland, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BKW": {
+    "lat": 37.7873,
+    "lon": -81.1242,
+    "city": "Beckley, WV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BLI": {
+    "lat": 48.7928,
+    "lon": -122.538,
+    "city": "Bellingham, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BMG": {
+    "lat": 39.146,
+    "lon": -86.6167,
+    "city": "Bloomington, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BMI": {
+    "lat": 40.4771,
+    "lon": -88.9159,
+    "city": "Bloomington, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BNA": {
+    "lat": 36.1245,
+    "lon": -86.6782,
+    "city": "Nashville, TN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BOS": {
+    "lat": 42.3643,
+    "lon": -71.0052,
+    "city": "Boston, MA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BPT": {
+    "lat": 29.9508,
+    "lon": -94.0207,
+    "city": "Beaumont, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BQK": {
+    "lat": 31.2588,
+    "lon": -81.4665,
+    "city": "Brunswick, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BRD": {
+    "lat": 46.3983,
+    "lon": -94.1381,
+    "city": "Brainerd, MN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BRL": {
+    "lat": 40.7832,
+    "lon": -91.1255,
+    "city": "Burlington, IA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BRO": {
+    "lat": 25.9068,
+    "lon": -97.4259,
+    "city": "Brownsville, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BTL": {
+    "lat": 42.3073,
+    "lon": -85.2515,
+    "city": "Battle Creek, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BTM": {
+    "lat": 45.9548,
+    "lon": -112.497,
+    "city": "Butte, MT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BTR": {
+    "lat": 30.5332,
+    "lon": -91.1496,
+    "city": "Baton Rouge, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BTV": {
+    "lat": 44.4719,
+    "lon": -73.1533,
+    "city": "Burlington, VT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BUF": {
+    "lat": 42.9405,
+    "lon": -78.7322,
+    "city": "Buffalo, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BWG": {
+    "lat": 36.9645,
+    "lon": -86.4197,
+    "city": "Bowling Green, KY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BWI": {
+    "lat": 39.1754,
+    "lon": -76.6683,
+    "city": "Baltimore, MD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BYH": {
+    "lat": 35.9643,
+    "lon": -89.944,
+    "city": "Blytheville, AR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "BZN": {
+    "lat": 45.7775,
+    "lon": -111.153,
+    "city": "Bozeman, MT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CAE": {
+    "lat": 33.9388,
+    "lon": -81.1195,
+    "city": "Columbia, SC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CAK": {
+    "lat": 40.9161,
+    "lon": -81.4422,
+    "city": "Akron, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CBE": {
+    "lat": 39.6154,
+    "lon": -78.7609,
+    "city": "Cumberland, MD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CDC": {
+    "lat": 37.701,
+    "lon": -113.099,
+    "city": "Cedar City, UT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CEC": {
+    "lat": 41.7802,
+    "lon": -124.237,
+    "city": "Crescent City, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CGI": {
+    "lat": 37.2253,
+    "lon": -89.5708,
+    "city": "Cape Girardeau, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CHA": {
+    "lat": 35.0353,
+    "lon": -85.2038,
+    "city": "Chattanooga, TN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CHO": {
+    "lat": 38.1386,
+    "lon": -78.4529,
+    "city": "Charlottesville, VA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CHS": {
+    "lat": 32.8986,
+    "lon": -80.0405,
+    "city": "Charleston, SC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CIC": {
+    "lat": 39.7954,
+    "lon": -121.858,
+    "city": "Chico, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CID": {
+    "lat": 41.8847,
+    "lon": -91.7108,
+    "city": "Cedar Rapids, IA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CKB": {
+    "lat": 39.2966,
+    "lon": -80.2281,
+    "city": "Clarksburg, WV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CLE": {
+    "lat": 41.4117,
+    "lon": -81.8498,
+    "city": "Cleveland, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CLL": {
+    "lat": 30.5886,
+    "lon": -96.3638,
+    "city": "College Station, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CLM": {
+    "lat": 48.1202,
+    "lon": -123.5,
+    "city": "Port Angeles, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CLT": {
+    "lat": 35.214,
+    "lon": -80.9431,
+    "city": "Charlotte, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CLU": {
+    "lat": 39.2619,
+    "lon": -85.8963,
+    "city": "Columbus, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CMH": {
+    "lat": 39.998,
+    "lon": -82.8919,
+    "city": "Columbus, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CMI": {
+    "lat": 40.0392,
+    "lon": -88.2781,
+    "city": "Champaign, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CNM": {
+    "lat": 32.3375,
+    "lon": -104.263,
+    "city": "Carlsbad, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "COS": {
+    "lat": 38.8058,
+    "lon": -104.701,
+    "city": "Colorado Springs, CO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "COU": {
+    "lat": 38.8181,
+    "lon": -92.2196,
+    "city": "Columbia, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CPR": {
+    "lat": 42.908,
+    "lon": -106.464,
+    "city": "Casper, WY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CRP": {
+    "lat": 27.7704,
+    "lon": -97.5012,
+    "city": "Corpus Christi, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CRW": {
+    "lat": 38.3731,
+    "lon": -81.5932,
+    "city": "Charleston, WV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CSG": {
+    "lat": 32.5163,
+    "lon": -84.9389,
+    "city": "Columbus, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CSV": {
+    "lat": 35.9513,
+    "lon": -85.085,
+    "city": "Crossville, TN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CVG": {
+    "lat": 39.0488,
+    "lon": -84.6678,
+    "city": "Cincinnati, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CVN": {
+    "lat": 34.4251,
+    "lon": -103.079,
+    "city": "Clovis, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CVO": {
+    "lat": 44.4972,
+    "lon": -123.29,
+    "city": "Albany, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CWA": {
+    "lat": 44.7776,
+    "lon": -89.6668,
+    "city": "Wausau, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "CYS": {
+    "lat": 41.1557,
+    "lon": -104.812,
+    "city": "Cheyenne, WY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DAL": {
+    "lat": 32.8471,
+    "lon": -96.8518,
+    "city": "Dallas, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DAY": {
+    "lat": 39.9024,
+    "lon": -84.2194,
+    "city": "Dayton, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DBQ": {
+    "lat": 42.402,
+    "lon": -90.7095,
+    "city": "Dubuque, IA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DCA": {
+    "lat": 38.8521,
+    "lon": -77.0377,
+    "city": "Washington, DC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DDC": {
+    "lat": 37.7634,
+    "lon": -99.9656,
+    "city": "Dodge City, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DEC": {
+    "lat": 39.8346,
+    "lon": -88.8657,
+    "city": "Decatur, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DET": {
+    "lat": 42.4092,
+    "lon": -83.0099,
+    "city": "Detroit, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DFW": {
+    "lat": 32.8968,
+    "lon": -97.038,
+    "city": "Dallas, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DHN": {
+    "lat": 31.3213,
+    "lon": -85.4496,
+    "city": "Dothan, AL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DIK": {
+    "lat": 46.7974,
+    "lon": -102.802,
+    "city": "Dickinson, ND",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DLH": {
+    "lat": 46.8421,
+    "lon": -92.1936,
+    "city": "Duluth, MN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DMA": {
+    "lat": 32.1665,
+    "lon": -110.883,
+    "city": "Tucson, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DOV": {
+    "lat": 39.1295,
+    "lon": -75.466,
+    "city": "Dover, DE",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DPA": {
+    "lat": 41.9078,
+    "lon": -88.2486,
+    "city": "Chicago, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DRO": {
+    "lat": 37.1515,
+    "lon": -107.754,
+    "city": "Durango, CO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DRT": {
+    "lat": 29.3742,
+    "lon": -100.927,
+    "city": "Del Rio, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DSM": {
+    "lat": 41.534,
+    "lon": -93.6631,
+    "city": "Des Moines, IA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DTW": {
+    "lat": 42.2124,
+    "lon": -83.3534,
+    "city": "Detroit, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DVT": {
+    "lat": 33.6883,
+    "lon": -112.083,
+    "city": "Phoenix, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DYS": {
+    "lat": 32.4208,
+    "lon": -99.8546,
+    "city": "Abilene, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EAT": {
+    "lat": 47.3989,
+    "lon": -120.207,
+    "city": "Wenatchee, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EAU": {
+    "lat": 44.8658,
+    "lon": -91.4843,
+    "city": "Eau Claire, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EDF": {
+    "lat": 61.251,
+    "lon": -149.807,
+    "city": "Anchorage, AK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EFD": {
+    "lat": 29.6073,
+    "lon": -95.1588,
+    "city": "Houston, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EIL": {
+    "lat": 64.6657,
+    "lon": -147.102,
+    "city": "Fairbanks, AK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EKA": {
+    "lat": 40.8034,
+    "lon": -124.113,
+    "city": "Eureka, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EKO": {
+    "lat": 40.8249,
+    "lon": -115.792,
+    "city": "Elko, NV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ELD": {
+    "lat": 33.221,
+    "lon": -92.8133,
+    "city": "El Dorado, AR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ELM": {
+    "lat": 42.1599,
+    "lon": -76.8916,
+    "city": "Elmira, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ELP": {
+    "lat": 31.8072,
+    "lon": -106.378,
+    "city": "El Paso, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ERI": {
+    "lat": 42.0831,
+    "lon": -80.1739,
+    "city": "Erie, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ESC": {
+    "lat": 45.7227,
+    "lon": -87.0937,
+    "city": "Escanaba, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EUG": {
+    "lat": 44.1246,
+    "lon": -123.212,
+    "city": "Eugene, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EVV": {
+    "lat": 38.037,
+    "lon": -87.5324,
+    "city": "Evansville, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EWN": {
+    "lat": 35.073,
+    "lon": -77.0429,
+    "city": "New Bern, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EWR": {
+    "lat": 40.6925,
+    "lon": -74.1687,
+    "city": "Newark, NJ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "EYW": {
+    "lat": 24.5561,
+    "lon": -81.7596,
+    "city": "Key West, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FAI": {
+    "lat": 64.8151,
+    "lon": -147.856,
+    "city": "Fairbanks, AK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FAR": {
+    "lat": 46.9207,
+    "lon": -96.8158,
+    "city": "Fargo, ND",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FAT": {
+    "lat": 36.7762,
+    "lon": -119.718,
+    "city": "Fresno, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FAY": {
+    "lat": 34.9912,
+    "lon": -78.8803,
+    "city": "Fayetteville, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FBK": {
+    "lat": 64.8375,
+    "lon": -147.614,
+    "city": "Fairbanks, AK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FCA": {
+    "lat": 48.3105,
+    "lon": -114.256,
+    "city": "Kalispell, MT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FDY": {
+    "lat": 41.0135,
+    "lon": -83.6687,
+    "city": "Findlay, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FFO": {
+    "lat": 39.8261,
+    "lon": -84.0483,
+    "city": "Dayton, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FFT": {
+    "lat": 38.1825,
+    "lon": -84.9047,
+    "city": "Frankfort, KY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FLG": {
+    "lat": 35.1385,
+    "lon": -111.671,
+    "city": "Flagstaff, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FLL": {
+    "lat": 26.0726,
+    "lon": -80.1527,
+    "city": "Fort Lauderdale, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FLO": {
+    "lat": 34.1854,
+    "lon": -79.7239,
+    "city": "Florence, SC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FMN": {
+    "lat": 36.7412,
+    "lon": -108.23,
+    "city": "Farmington, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FNT": {
+    "lat": 42.9654,
+    "lon": -83.7436,
+    "city": "Flint, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FOD": {
+    "lat": 42.5515,
+    "lon": -94.1926,
+    "city": "Fort Dodge, IA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FOE": {
+    "lat": 38.9509,
+    "lon": -95.6636,
+    "city": "Topeka, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FSD": {
+    "lat": 43.582,
+    "lon": -96.7419,
+    "city": "Sioux Falls, SD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FSM": {
+    "lat": 35.3366,
+    "lon": -94.3674,
+    "city": "Fort Smith, AR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FTW": {
+    "lat": 32.8198,
+    "lon": -97.3624,
+    "city": "Dallas, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FTY": {
+    "lat": 33.7791,
+    "lon": -84.5214,
+    "city": "Atlanta, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FWA": {
+    "lat": 40.9785,
+    "lon": -85.1951,
+    "city": "Fort Wayne, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FXE": {
+    "lat": 26.1973,
+    "lon": -80.1707,
+    "city": "Fort Lauderdale, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FYV": {
+    "lat": 36.0051,
+    "lon": -94.1701,
+    "city": "Fayetteville, AR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GCC": {
+    "lat": 44.3489,
+    "lon": -105.539,
+    "city": "Gillette, WY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GCK": {
+    "lat": 37.9275,
+    "lon": -100.724,
+    "city": "Garden City, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GEG": {
+    "lat": 47.6199,
+    "lon": -117.534,
+    "city": "Spokane, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GFK": {
+    "lat": 47.9493,
+    "lon": -97.1761,
+    "city": "Grand Forks, ND",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GGG": {
+    "lat": 32.384,
+    "lon": -94.7115,
+    "city": "Longview, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GJT": {
+    "lat": 39.1224,
+    "lon": -108.527,
+    "city": "Grand Junction, CO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GLH": {
+    "lat": 33.4829,
+    "lon": -90.9856,
+    "city": "Greenville, MS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GNV": {
+    "lat": 29.6901,
+    "lon": -82.2718,
+    "city": "Gainesville, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GPT": {
+    "lat": 30.4073,
+    "lon": -89.0701,
+    "city": "Gulfport, MS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GRB": {
+    "lat": 44.4851,
+    "lon": -88.1296,
+    "city": "Green Bay, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GRI": {
+    "lat": 40.9675,
+    "lon": -98.3096,
+    "city": "Grand Island, NE",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GRK": {
+    "lat": 31.0672,
+    "lon": -97.8289,
+    "city": "Killeen, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GRR": {
+    "lat": 42.8808,
+    "lon": -85.5228,
+    "city": "Grand Rapids, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GSB": {
+    "lat": 35.3394,
+    "lon": -77.9606,
+    "city": "Goldsboro, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GSO": {
+    "lat": 36.0978,
+    "lon": -79.9373,
+    "city": "Greensboro, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GSP": {
+    "lat": 34.8957,
+    "lon": -82.2189,
+    "city": "Greenville, SC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GTF": {
+    "lat": 47.482,
+    "lon": -111.371,
+    "city": "Great Falls, MT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GTR": {
+    "lat": 33.4503,
+    "lon": -88.5914,
+    "city": "Columbus, MS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GUP": {
+    "lat": 35.5111,
+    "lon": -108.789,
+    "city": "Gallup, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GUS": {
+    "lat": 40.6481,
+    "lon": -86.1521,
+    "city": "Peru, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "GYY": {
+    "lat": 41.6163,
+    "lon": -87.4128,
+    "city": "Gary, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HGR": {
+    "lat": 39.7079,
+    "lon": -77.7295,
+    "city": "Hagerstown, MD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HIF": {
+    "lat": 41.124,
+    "lon": -111.9731,
+    "city": "Ogden, UT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HII": {
+    "lat": 34.5711,
+    "lon": -114.358,
+    "city": "Lake Havasu City, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HKY": {
+    "lat": 35.7411,
+    "lon": -81.3895,
+    "city": "Hickory, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HLG": {
+    "lat": 40.175,
+    "lon": -80.6463,
+    "city": "Wheeling, WV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HLN": {
+    "lat": 46.6068,
+    "lon": -111.983,
+    "city": "Helena, MT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HMN": {
+    "lat": 32.8525,
+    "lon": -106.107,
+    "city": "Alamogordo, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HNL": {
+    "lat": 21.3187,
+    "lon": -157.922,
+    "city": "Honolulu, HI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HOB": {
+    "lat": 32.6875,
+    "lon": -103.217,
+    "city": "Hobbs, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HON": {
+    "lat": 44.3852,
+    "lon": -98.2285,
+    "city": "Huron, SD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HOT": {
+    "lat": 34.478,
+    "lon": -93.0962,
+    "city": "Hot Springs, AR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HOU": {
+    "lat": 29.6454,
+    "lon": -95.2789,
+    "city": "Houston, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HRO": {
+    "lat": 36.2615,
+    "lon": -93.1547,
+    "city": "Harrison, AR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HSH": {
+    "lat": 35.9728,
+    "lon": -115.134,
+    "city": "Las Vegas, NV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HSV": {
+    "lat": 34.6372,
+    "lon": -86.7751,
+    "city": "Huntsville, AL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HUF": {
+    "lat": 39.4515,
+    "lon": -87.3076,
+    "city": "Terre Haute, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HVN": {
+    "lat": 41.2637,
+    "lon": -72.8868,
+    "city": "New Haven, CT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HVR": {
+    "lat": 48.543,
+    "lon": -109.762,
+    "city": "Havre, MT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "HYS": {
+    "lat": 38.8422,
+    "lon": -99.2732,
+    "city": "Hays, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "IAB": {
+    "lat": 37.6219,
+    "lon": -97.2682,
+    "city": "Wichita, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "IAD": {
+    "lat": 38.9445,
+    "lon": -77.4558,
+    "city": "Washington, DC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "IAH": {
+    "lat": 29.9844,
+    "lon": -95.3414,
+    "city": "Houston, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ICT": {
+    "lat": 37.6499,
+    "lon": -97.4331,
+    "city": "Wichita, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "IDA": {
+    "lat": 43.5146,
+    "lon": -112.071,
+    "city": "Idaho Falls, ID",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ILG": {
+    "lat": 39.6787,
+    "lon": -75.6065,
+    "city": "Wilmington, DE",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ILM": {
+    "lat": 34.2706,
+    "lon": -77.9026,
+    "city": "Wilmington, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ILN": {
+    "lat": 39.4279,
+    "lon": -83.7921,
+    "city": "Wilmington, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "IMT": {
+    "lat": 45.8184,
+    "lon": -88.1145,
+    "city": "Iron Mountain, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "IND": {
+    "lat": 39.7173,
+    "lon": -86.2944,
+    "city": "Indianapolis, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "IPL": {
+    "lat": 32.8342,
+    "lon": -115.579,
+    "city": "El Centro, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "IPT": {
+    "lat": 41.2418,
+    "lon": -76.9211,
+    "city": "Williamsport, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "IRK": {
+    "lat": 40.0935,
+    "lon": -92.5449,
+    "city": "Kirksville, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ISM": {
+    "lat": 28.2898,
+    "lon": -81.4371,
+    "city": "Orlando, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ISN": {
+    "lat": 48.1779,
+    "lon": -103.642,
+    "city": "Williston, ND",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ISO": {
+    "lat": 35.3314,
+    "lon": -77.6088,
+    "city": "Kinston, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ITH": {
+    "lat": 42.491,
+    "lon": -76.4584,
+    "city": "Ithaca, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ITO": {
+    "lat": 19.7214,
+    "lon": -155.048,
+    "city": "Hilo, HI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JAC": {
+    "lat": 43.6073,
+    "lon": -110.738,
+    "city": "Jackson, WY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JAN": {
+    "lat": 32.3112,
+    "lon": -90.0759,
+    "city": "Jackson, MS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JAX": {
+    "lat": 30.4941,
+    "lon": -81.6879,
+    "city": "Jacksonville, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JBR": {
+    "lat": 35.8317,
+    "lon": -90.6464,
+    "city": "Jonesboro, AR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JEF": {
+    "lat": 38.5912,
+    "lon": -92.1561,
+    "city": "Jefferson City, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JFK": {
+    "lat": 40.6398,
+    "lon": -73.7789,
+    "city": "New York, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JHW": {
+    "lat": 42.1534,
+    "lon": -79.258,
+    "city": "Jamestown, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JLN": {
+    "lat": 37.1518,
+    "lon": -94.4983,
+    "city": "Joplin, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JMS": {
+    "lat": 46.9297,
+    "lon": -98.6782,
+    "city": "Jamestown, ND",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JNU": {
+    "lat": 58.355,
+    "lon": -134.576,
+    "city": "Juneau, AK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JST": {
+    "lat": 40.3161,
+    "lon": -78.8339,
+    "city": "Johnstown, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "JXN": {
+    "lat": 42.2598,
+    "lon": -84.4594,
+    "city": "Jackson, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "KTN": {
+    "lat": 55.3556,
+    "lon": -131.714,
+    "city": "Ketchikan, AK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LAF": {
+    "lat": 40.4123,
+    "lon": -86.9369,
+    "city": "Lafayette, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LAL": {
+    "lat": 27.9889,
+    "lon": -82.0186,
+    "city": "Lakeland, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LAM": {
+    "lat": 35.8798,
+    "lon": -106.269,
+    "city": "Los Alamos, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LAN": {
+    "lat": 42.7787,
+    "lon": -84.5874,
+    "city": "Lansing, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LAR": {
+    "lat": 41.3121,
+    "lon": -105.675,
+    "city": "Laramie, WY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LAS": {
+    "lat": 36.0801,
+    "lon": -115.152,
+    "city": "Las Vegas, NV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LAW": {
+    "lat": 34.5677,
+    "lon": -98.4166,
+    "city": "Lawton, OK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LAX": {
+    "lat": 33.9425,
+    "lon": -118.408,
+    "city": "Los Angeles, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LBB": {
+    "lat": 33.6636,
+    "lon": -101.823,
+    "city": "Lubbock, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LBF": {
+    "lat": 41.1262,
+    "lon": -100.684,
+    "city": "North Platte, NE",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LBL": {
+    "lat": 37.0442,
+    "lon": -100.96,
+    "city": "Liberal, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LCH": {
+    "lat": 30.1261,
+    "lon": -93.2233,
+    "city": "Lake Charles, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LCK": {
+    "lat": 39.8138,
+    "lon": -82.9278,
+    "city": "Columbus, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LEX": {
+    "lat": 38.0365,
+    "lon": -84.6059,
+    "city": "Lexington, KY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LFT": {
+    "lat": 30.2053,
+    "lon": -91.9876,
+    "city": "Lafayette, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LGA": {
+    "lat": 40.7772,
+    "lon": -73.8726,
+    "city": "New York, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LGD": {
+    "lat": 45.2902,
+    "lon": -118.007,
+    "city": "La Grande, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LGU": {
+    "lat": 41.7912,
+    "lon": -111.852,
+    "city": "Logan, UT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LIT": {
+    "lat": 34.7294,
+    "lon": -92.2243,
+    "city": "Little Rock, AR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LMT": {
+    "lat": 42.1561,
+    "lon": -121.733,
+    "city": "Klamath Falls, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LNK": {
+    "lat": 40.851,
+    "lon": -96.7592,
+    "city": "Lincoln, NE",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LNS": {
+    "lat": 40.1217,
+    "lon": -76.2961,
+    "city": "Lancaster, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LRD": {
+    "lat": 27.5438,
+    "lon": -99.4616,
+    "city": "Laredo, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LRU": {
+    "lat": 32.2894,
+    "lon": -106.922,
+    "city": "Las Cruces, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LSE": {
+    "lat": 43.879,
+    "lon": -91.2567,
+    "city": "La Crosse, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LSF": {
+    "lat": 32.3373,
+    "lon": -84.9913,
+    "city": "Columbus, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LSV": {
+    "lat": 36.2362,
+    "lon": -115.034,
+    "city": "Las Vegas, NV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LTS": {
+    "lat": 34.6671,
+    "lon": -99.2667,
+    "city": "Altus, OK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LUF": {
+    "lat": 33.535,
+    "lon": -112.383,
+    "city": "Phoenix, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LUK": {
+    "lat": 39.1033,
+    "lon": -84.4186,
+    "city": "Cincinnati, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LWC": {
+    "lat": 39.0112,
+    "lon": -95.2166,
+    "city": "Lawrence, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LWS": {
+    "lat": 46.3745,
+    "lon": -117.015,
+    "city": "Lewiston, ID",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "LYH": {
+    "lat": 37.3267,
+    "lon": -79.2004,
+    "city": "Lynchburg, VA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MAE": {
+    "lat": 36.9886,
+    "lon": -120.112,
+    "city": "Madera, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MAF": {
+    "lat": 31.9425,
+    "lon": -102.202,
+    "city": "Midland, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MBS": {
+    "lat": 43.5329,
+    "lon": -84.0796,
+    "city": "Saginaw, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MCC": {
+    "lat": 38.6676,
+    "lon": -121.401,
+    "city": "Sacramento, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MCE": {
+    "lat": 37.2847,
+    "lon": -120.514,
+    "city": "Merced, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MCF": {
+    "lat": 27.8493,
+    "lon": -82.5212,
+    "city": "Tampa, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MCI": {
+    "lat": 39.2976,
+    "lon": -94.7139,
+    "city": "Kansas City, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MCN": {
+    "lat": 32.6928,
+    "lon": -83.6492,
+    "city": "Macon, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MCO": {
+    "lat": 28.4294,
+    "lon": -81.309,
+    "city": "Orlando, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MCW": {
+    "lat": 43.1578,
+    "lon": -93.3313,
+    "city": "Mason City, IA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MDH": {
+    "lat": 37.7781,
+    "lon": -89.252,
+    "city": "Carbondale, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MDT": {
+    "lat": 40.1935,
+    "lon": -76.7634,
+    "city": "Harrisburg, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MDW": {
+    "lat": 41.786,
+    "lon": -87.7524,
+    "city": "Chicago, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MEI": {
+    "lat": 32.3326,
+    "lon": -88.7519,
+    "city": "Meridian, MS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MEM": {
+    "lat": 35.0424,
+    "lon": -89.9767,
+    "city": "Memphis, TN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MFD": {
+    "lat": 40.8214,
+    "lon": -82.5166,
+    "city": "Mansfield, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MFR": {
+    "lat": 42.3742,
+    "lon": -122.873,
+    "city": "Medford, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MGM": {
+    "lat": 32.3006,
+    "lon": -86.394,
+    "city": "Montgomery, AL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MGW": {
+    "lat": 39.6429,
+    "lon": -79.9163,
+    "city": "Morgantown, WV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MGY": {
+    "lat": 39.589,
+    "lon": -84.2249,
+    "city": "Dayton, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MHK": {
+    "lat": 39.141,
+    "lon": -96.6708,
+    "city": "Manhattan, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MHR": {
+    "lat": 38.5539,
+    "lon": -121.298,
+    "city": "Sacramento, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MHT": {
+    "lat": 42.9326,
+    "lon": -71.4357,
+    "city": "Manchester, NH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MIA": {
+    "lat": 25.7932,
+    "lon": -80.2906,
+    "city": "Miami, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MIB": {
+    "lat": 48.4156,
+    "lon": -101.358,
+    "city": "Minot, ND",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MIE": {
+    "lat": 40.2423,
+    "lon": -85.3959,
+    "city": "Muncie, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MKC": {
+    "lat": 39.1232,
+    "lon": -94.5928,
+    "city": "Kansas City, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MKE": {
+    "lat": 42.9472,
+    "lon": -87.8966,
+    "city": "Milwaukee, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MKG": {
+    "lat": 43.1695,
+    "lon": -86.2382,
+    "city": "Muskegon, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MKL": {
+    "lat": 35.5999,
+    "lon": -88.9156,
+    "city": "Jackson, TN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MLU": {
+    "lat": 32.5109,
+    "lon": -92.0377,
+    "city": "Monroe, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MOB": {
+    "lat": 30.6912,
+    "lon": -88.2428,
+    "city": "Mobile, AL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MOD": {
+    "lat": 37.6258,
+    "lon": -120.954,
+    "city": "Modesto, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MOT": {
+    "lat": 48.2594,
+    "lon": -101.28,
+    "city": "Minot, ND",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MQT": {
+    "lat": 46.3536,
+    "lon": -87.3954,
+    "city": "Marquette, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MRI": {
+    "lat": 61.2135,
+    "lon": -149.844,
+    "city": "Anchorage, AK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MSN": {
+    "lat": 43.1399,
+    "lon": -89.3375,
+    "city": "Madison, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MSO": {
+    "lat": 46.9163,
+    "lon": -114.091,
+    "city": "Missoula, MT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MSP": {
+    "lat": 44.882,
+    "lon": -93.2218,
+    "city": "Minneapolis, MN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MSY": {
+    "lat": 29.9934,
+    "lon": -90.258,
+    "city": "New Orleans, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MTJ": {
+    "lat": 38.5098,
+    "lon": -107.894,
+    "city": "Montrose, CO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MTN": {
+    "lat": 39.3257,
+    "lon": -76.4138,
+    "city": "Baltimore, MD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MUO": {
+    "lat": 43.0436,
+    "lon": -115.872,
+    "city": "Mountain Home, ID",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MWA": {
+    "lat": 37.755,
+    "lon": -89.0111,
+    "city": "Marion, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MWH": {
+    "lat": 47.2077,
+    "lon": -119.32,
+    "city": "Moses Lake, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MYR": {
+    "lat": 33.6797,
+    "lon": -78.9283,
+    "city": "Myrtle Beach, SC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "NBG": {
+    "lat": 29.8253,
+    "lon": -90.035,
+    "city": "New Orleans, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "NEW": {
+    "lat": 30.0424,
+    "lon": -90.0283,
+    "city": "New Orleans, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "NJK": {
+    "lat": 32.8292,
+    "lon": -115.672,
+    "city": "El Centro, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "NKX": {
+    "lat": 32.8684,
+    "lon": -117.143,
+    "city": "San Diego, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "NPA": {
+    "lat": 30.3527,
+    "lon": -87.3186,
+    "city": "Pensacola, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "NQA": {
+    "lat": 35.3567,
+    "lon": -89.8703,
+    "city": "Memphis, TN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "NQX": {
+    "lat": 24.5758,
+    "lon": -81.6889,
+    "city": "Key West, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "NZY": {
+    "lat": 32.6992,
+    "lon": -117.215,
+    "city": "San Diego, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OAJ": {
+    "lat": 34.8292,
+    "lon": -77.6121,
+    "city": "Jacksonville, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OAK": {
+    "lat": 37.7213,
+    "lon": -122.221,
+    "city": "Oakland, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OCF": {
+    "lat": 29.1726,
+    "lon": -82.2242,
+    "city": "Ocala, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OFF": {
+    "lat": 41.1183,
+    "lon": -95.9125,
+    "city": "Omaha, NE",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OFK": {
+    "lat": 41.9855,
+    "lon": -97.4351,
+    "city": "Norfolk, NE",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OGD": {
+    "lat": 41.1959,
+    "lon": -112.012,
+    "city": "Ogden, UT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OGG": {
+    "lat": 20.8986,
+    "lon": -156.43,
+    "city": "Kahului, HI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OGS": {
+    "lat": 44.6819,
+    "lon": -75.4655,
+    "city": "Ogdensburg, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OKC": {
+    "lat": 35.3931,
+    "lon": -97.6007,
+    "city": "Oklahoma City, OK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OKK": {
+    "lat": 40.5282,
+    "lon": -86.059,
+    "city": "Kokomo, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OLM": {
+    "lat": 46.9694,
+    "lon": -122.903,
+    "city": "Olympia, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OLS": {
+    "lat": 31.4177,
+    "lon": -110.848,
+    "city": "Nogales, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OMA": {
+    "lat": 41.3032,
+    "lon": -95.8941,
+    "city": "Omaha, NE",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OPF": {
+    "lat": 25.907,
+    "lon": -80.2784,
+    "city": "Miami, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ORD": {
+    "lat": 41.9786,
+    "lon": -87.9048,
+    "city": "Chicago, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ORH": {
+    "lat": 42.2673,
+    "lon": -71.8757,
+    "city": "Worcester, MA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ORL": {
+    "lat": 28.5455,
+    "lon": -81.3329,
+    "city": "Orlando, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OSH": {
+    "lat": 43.9844,
+    "lon": -88.557,
+    "city": "Oshkosh, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OWB": {
+    "lat": 37.7401,
+    "lon": -87.1668,
+    "city": "Owensboro, KY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "OXR": {
+    "lat": 34.2008,
+    "lon": -119.207,
+    "city": "Oxnard, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PAH": {
+    "lat": 37.0608,
+    "lon": -88.7738,
+    "city": "Paducah, KY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PAM": {
+    "lat": 30.0696,
+    "lon": -85.5754,
+    "city": "Panama City, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PBG": {
+    "lat": 44.6509,
+    "lon": -73.4681,
+    "city": "Plattsburgh, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PBI": {
+    "lat": 26.6832,
+    "lon": -80.0956,
+    "city": "West Palm Beach, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PDK": {
+    "lat": 33.8756,
+    "lon": -84.302,
+    "city": "Atlanta, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PDT": {
+    "lat": 45.6951,
+    "lon": -118.841,
+    "city": "Pendleton, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PDX": {
+    "lat": 45.5887,
+    "lon": -122.598,
+    "city": "Portland, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PFN": {
+    "lat": 30.2121,
+    "lon": -85.6828,
+    "city": "Panama City, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PGD": {
+    "lat": 26.9202,
+    "lon": -81.9905,
+    "city": "Punta Gorda, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PGV": {
+    "lat": 35.6352,
+    "lon": -77.3853,
+    "city": "Greenville, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PHL": {
+    "lat": 39.8719,
+    "lon": -75.2411,
+    "city": "Philadelphia, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PHX": {
+    "lat": 33.4343,
+    "lon": -112.012,
+    "city": "Phoenix, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PIA": {
+    "lat": 40.6642,
+    "lon": -89.6933,
+    "city": "Peoria, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PIB": {
+    "lat": 31.4671,
+    "lon": -89.3371,
+    "city": "Hattiesburg, MS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PIH": {
+    "lat": 42.9098,
+    "lon": -112.596,
+    "city": "Pocatello, ID",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PIR": {
+    "lat": 44.3827,
+    "lon": -100.286,
+    "city": "Pierre, SD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PIT": {
+    "lat": 40.4915,
+    "lon": -80.2329,
+    "city": "Pittsburgh, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PKB": {
+    "lat": 39.3451,
+    "lon": -81.4392,
+    "city": "Parkersburg, WV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PNE": {
+    "lat": 40.0819,
+    "lon": -75.0106,
+    "city": "Philadelphia, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PNS": {
+    "lat": 30.4734,
+    "lon": -87.1866,
+    "city": "Pensacola, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "POB": {
+    "lat": 35.1709,
+    "lon": -79.0145,
+    "city": "Fayetteville, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "POU": {
+    "lat": 41.6266,
+    "lon": -73.8842,
+    "city": "Poughkeepsie, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PRC": {
+    "lat": 34.6545,
+    "lon": -112.42,
+    "city": "Prescott, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PUB": {
+    "lat": 38.2891,
+    "lon": -104.497,
+    "city": "Pueblo, CO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PUC": {
+    "lat": 39.6139,
+    "lon": -110.751,
+    "city": "Price, UT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PUW": {
+    "lat": 46.7439,
+    "lon": -117.11,
+    "city": "Pullman, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PVD": {
+    "lat": 41.7326,
+    "lon": -71.4204,
+    "city": "Providence, RI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PVU": {
+    "lat": 40.2192,
+    "lon": -111.723,
+    "city": "Provo, UT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PWK": {
+    "lat": 42.1142,
+    "lon": -87.9015,
+    "city": "Chicago, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PWM": {
+    "lat": 43.6462,
+    "lon": -70.3093,
+    "city": "Portland, ME",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "PWT": {
+    "lat": 47.4902,
+    "lon": -122.765,
+    "city": "Bremerton, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RAP": {
+    "lat": 44.0453,
+    "lon": -103.057,
+    "city": "Rapid City, SD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RCA": {
+    "lat": 44.145,
+    "lon": -103.104,
+    "city": "Rapid City, SD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RDD": {
+    "lat": 40.509,
+    "lon": -122.293,
+    "city": "Redding, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RDG": {
+    "lat": 40.3785,
+    "lon": -75.9652,
+    "city": "Reading, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RDM": {
+    "lat": 44.2541,
+    "lon": -121.15,
+    "city": "Bend, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RDU": {
+    "lat": 35.8776,
+    "lon": -78.7875,
+    "city": "Raleigh, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RFD": {
+    "lat": 42.1954,
+    "lon": -89.0972,
+    "city": "Rockford, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RIC": {
+    "lat": 37.5052,
+    "lon": -77.3197,
+    "city": "Richmond, VA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RIV": {
+    "lat": 33.8807,
+    "lon": -117.259,
+    "city": "Riverside, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RIW": {
+    "lat": 43.0642,
+    "lon": -108.46,
+    "city": "Riverton, WY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RKD": {
+    "lat": 44.0601,
+    "lon": -69.0992,
+    "city": "Rockland, ME",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RKS": {
+    "lat": 41.5942,
+    "lon": -109.065,
+    "city": "Rock Springs, WY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RNO": {
+    "lat": 39.4991,
+    "lon": -119.768,
+    "city": "Reno, NV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ROA": {
+    "lat": 37.3255,
+    "lon": -79.9754,
+    "city": "Roanoke, VA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ROC": {
+    "lat": 43.1189,
+    "lon": -77.6724,
+    "city": "Rochester, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ROW": {
+    "lat": 33.3016,
+    "lon": -104.531,
+    "city": "Roswell, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RST": {
+    "lat": 43.9083,
+    "lon": -92.5,
+    "city": "Rochester, MN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RUT": {
+    "lat": 43.5294,
+    "lon": -72.9496,
+    "city": "Rutland, VT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RWI": {
+    "lat": 35.8563,
+    "lon": -77.8919,
+    "city": "Rocky Mount, NC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SAC": {
+    "lat": 38.5125,
+    "lon": -121.493,
+    "city": "Sacramento, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SAF": {
+    "lat": 35.6171,
+    "lon": -106.089,
+    "city": "Santa Fe, NM",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SAN": {
+    "lat": 32.7336,
+    "lon": -117.19,
+    "city": "San Diego, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SAT": {
+    "lat": 29.5337,
+    "lon": -98.4698,
+    "city": "San Antonio, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SAV": {
+    "lat": 32.1276,
+    "lon": -81.2021,
+    "city": "Savannah, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SBA": {
+    "lat": 34.4262,
+    "lon": -119.84,
+    "city": "Santa Barbara, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SBN": {
+    "lat": 41.7087,
+    "lon": -86.3173,
+    "city": "South Bend, IN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SBP": {
+    "lat": 35.2368,
+    "lon": -120.642,
+    "city": "San Luis Obispo, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SBY": {
+    "lat": 38.3405,
+    "lon": -75.5103,
+    "city": "Salisbury, MD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SCE": {
+    "lat": 40.8493,
+    "lon": -77.8487,
+    "city": "State College, PA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SCK": {
+    "lat": 37.8942,
+    "lon": -121.238,
+    "city": "Stockton, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SDM": {
+    "lat": 32.5723,
+    "lon": -116.98,
+    "city": "San Diego, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SEA": {
+    "lat": 47.449,
+    "lon": -122.309,
+    "city": "Seattle, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SEE": {
+    "lat": 32.8262,
+    "lon": -116.972,
+    "city": "San Diego, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SFB": {
+    "lat": 28.7776,
+    "lon": -81.2375,
+    "city": "Orlando, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SFF": {
+    "lat": 47.6828,
+    "lon": -117.323,
+    "city": "Spokane, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SFO": {
+    "lat": 37.619,
+    "lon": -122.375,
+    "city": "San Francisco, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SGF": {
+    "lat": 37.2457,
+    "lon": -93.3886,
+    "city": "Springfield, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SGU": {
+    "lat": 37.0364,
+    "lon": -113.5103,
+    "city": "St. George, UT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SHD": {
+    "lat": 38.2638,
+    "lon": -78.8964,
+    "city": "Staunton, VA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SHR": {
+    "lat": 44.7692,
+    "lon": -106.98,
+    "city": "Sheridan, WY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SHV": {
+    "lat": 32.4466,
+    "lon": -93.8256,
+    "city": "Shreveport, LA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SJC": {
+    "lat": 37.3626,
+    "lon": -121.929,
+    "city": "San Jose, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SJT": {
+    "lat": 31.3577,
+    "lon": -100.496,
+    "city": "San Angelo, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SKA": {
+    "lat": 47.6151,
+    "lon": -117.656,
+    "city": "Spokane, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SKF": {
+    "lat": 29.3842,
+    "lon": -98.5811,
+    "city": "San Antonio, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SKY": {
+    "lat": 41.4334,
+    "lon": -82.6523,
+    "city": "Sandusky, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SLC": {
+    "lat": 40.7884,
+    "lon": -111.978,
+    "city": "Salt Lake City, UT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SLE": {
+    "lat": 44.9095,
+    "lon": -123.003,
+    "city": "Salem, OR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SLN": {
+    "lat": 38.791,
+    "lon": -97.6522,
+    "city": "Salina, KS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SMF": {
+    "lat": 38.6954,
+    "lon": -121.591,
+    "city": "Sacramento, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SNA": {
+    "lat": 33.6757,
+    "lon": -117.868,
+    "city": "Santa Ana, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SOW": {
+    "lat": 34.2655,
+    "lon": -110.006,
+    "city": "Show Low, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SPI": {
+    "lat": 39.8441,
+    "lon": -89.6779,
+    "city": "Springfield, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SPS": {
+    "lat": 33.9888,
+    "lon": -98.4919,
+    "city": "Wichita Falls, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SSC": {
+    "lat": 33.9727,
+    "lon": -80.4706,
+    "city": "Sumter, SC",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "STC": {
+    "lat": 45.5466,
+    "lon": -94.0599,
+    "city": "St. Cloud, MN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "STJ": {
+    "lat": 39.7719,
+    "lon": -94.9097,
+    "city": "St. Joseph, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "STL": {
+    "lat": 38.7487,
+    "lon": -90.37,
+    "city": "St. Louis, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "STP": {
+    "lat": 44.9345,
+    "lon": -93.06,
+    "city": "Minneapolis, MN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "STS": {
+    "lat": 38.509,
+    "lon": -122.813,
+    "city": "Santa Rosa, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SUS": {
+    "lat": 38.6621,
+    "lon": -90.652,
+    "city": "St. Louis, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SUX": {
+    "lat": 42.4026,
+    "lon": -96.3844,
+    "city": "Sioux City, IA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SVN": {
+    "lat": 32.01,
+    "lon": -81.1457,
+    "city": "Savannah, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SYR": {
+    "lat": 43.1112,
+    "lon": -76.1063,
+    "city": "Syracuse, NY",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SZL": {
+    "lat": 38.7303,
+    "lon": -93.5479,
+    "city": "Warrensburg, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TBN": {
+    "lat": 37.7416,
+    "lon": -92.1407,
+    "city": "Fort Leonard Wood, MO",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TCL": {
+    "lat": 33.2206,
+    "lon": -87.6114,
+    "city": "Tuscaloosa, AL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TCM": {
+    "lat": 47.1377,
+    "lon": -122.476,
+    "city": "Tacoma, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TIK": {
+    "lat": 35.4147,
+    "lon": -97.3866,
+    "city": "Oklahoma City, OK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TIW": {
+    "lat": 47.2679,
+    "lon": -122.578,
+    "city": "Tacoma, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TLH": {
+    "lat": 30.3965,
+    "lon": -84.3503,
+    "city": "Tallahassee, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TMB": {
+    "lat": 25.6479,
+    "lon": -80.4328,
+    "city": "Miami, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TOL": {
+    "lat": 41.5868,
+    "lon": -83.8078,
+    "city": "Toledo, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TPA": {
+    "lat": 27.9755,
+    "lon": -82.5332,
+    "city": "Tampa, FL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TTN": {
+    "lat": 40.2767,
+    "lon": -74.8135,
+    "city": "Trenton, NJ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TUL": {
+    "lat": 36.1984,
+    "lon": -95.8881,
+    "city": "Tulsa, OK",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TUP": {
+    "lat": 34.2681,
+    "lon": -88.7699,
+    "city": "Tupelo, MS",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TUS": {
+    "lat": 32.1161,
+    "lon": -110.941,
+    "city": "Tucson, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TVC": {
+    "lat": 44.7414,
+    "lon": -85.5822,
+    "city": "Traverse City, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TWF": {
+    "lat": 42.4818,
+    "lon": -114.488,
+    "city": "Twin Falls, ID",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TYR": {
+    "lat": 32.3541,
+    "lon": -95.4024,
+    "city": "Tyler, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "TYS": {
+    "lat": 35.811,
+    "lon": -83.994,
+    "city": "Knoxville, TN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "UIN": {
+    "lat": 39.9427,
+    "lon": -91.1946,
+    "city": "Quincy, IL",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "UKI": {
+    "lat": 39.126,
+    "lon": -123.201,
+    "city": "Ukiah, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "UVA": {
+    "lat": 29.2113,
+    "lon": -99.7436,
+    "city": "Uvalde, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "VAD": {
+    "lat": 30.9678,
+    "lon": -83.193,
+    "city": "Valdosta, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "VCT": {
+    "lat": 28.8526,
+    "lon": -96.9185,
+    "city": "Victoria, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "VEL": {
+    "lat": 40.4409,
+    "lon": -109.51,
+    "city": "Vernal, UT",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "VGT": {
+    "lat": 36.2107,
+    "lon": -115.194,
+    "city": "Las Vegas, NV",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "VIS": {
+    "lat": 36.3187,
+    "lon": -119.393,
+    "city": "Visalia, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "VLD": {
+    "lat": 30.7825,
+    "lon": -83.2767,
+    "city": "Valdosta, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "WRB": {
+    "lat": 32.6401,
+    "lon": -83.5919,
+    "city": "Macon, GA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "XNA": {
+    "lat": 36.2819,
+    "lon": -94.3068,
+    "city": "Fayetteville, AR",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "YIP": {
+    "lat": 42.2379,
+    "lon": -83.5304,
+    "city": "Detroit, MI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "YKM": {
+    "lat": 46.5682,
+    "lon": -120.544,
+    "city": "Yakima, WA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "YNG": {
+    "lat": 41.2607,
+    "lon": -80.6791,
+    "city": "Youngstown, OH",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "YUM": {
+    "lat": 32.6566,
+    "lon": -114.606,
+    "city": "Yuma, AZ",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "DWH": {
+    "lat": 30.0618,
+    "lon": -95.5528,
+    "city": "Houston, TX",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "ESN": {
+    "lat": 38.8042,
+    "lon": -76.069,
+    "city": "Easton, MD",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "FCM": {
+    "lat": 44.8272,
+    "lon": -93.4571,
+    "city": "Minneapolis, MN",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "MWC": {
+    "lat": 43.1104,
+    "lon": -88.0344,
+    "city": "Milwaukee, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "RAC": {
+    "lat": 42.7606,
+    "lon": -87.8152,
+    "city": "Racine, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "SNS": {
+    "lat": 36.6628,
+    "lon": -121.606,
+    "city": "Salinas, CA",
+    "source": "Airports2.csv (donnees BTS)"
+  },
+  "STE": {
+    "lat": 44.5452,
+    "lon": -89.5303,
+    "city": "Wausau, WI",
+    "source": "Airports2.csv (donnees BTS)"
+  }
 }
