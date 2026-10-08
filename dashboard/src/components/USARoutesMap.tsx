@@ -135,6 +135,67 @@ function AirportTooltip({ active, payload }: CustomTooltipProps) {
   );
 }
 
+function USMapBackground() {
+  return (
+    <svg
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#0EA5E9" stopOpacity="0.08" />
+          <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.05" />
+        </linearGradient>
+      </defs>
+      {/* Contour simplifie des Etats-Unis continentaux */}
+      <path
+        d="
+          M 7,28 L 8,25 L 10,23 L 12,22 L 14,23 L 15,21 L 14,18 L 15,15 L 18,14 L 20,15
+          L 22,14 L 24,15 L 26,14 L 28,15 L 30,14 L 32,15 L 34,14 L 36,15 L 38,13 L 40,14
+          L 42,13 L 44,14 L 46,13 L 48,14 L 50,12 L 52,13 L 54,12 L 56,13 L 58,11 L 60,12
+          L 62,11 L 64,12 L 66,11 L 68,13 L 70,12 L 72,14 L 74,13 L 76,15 L 78,14 L 80,16
+          L 82,15 L 84,17 L 86,19 L 88,21 L 89,24 L 90,27 L 89,30 L 88,33 L 89,36 L 88,39
+          L 87,42 L 86,45 L 85,48 L 84,51 L 83,54 L 82,57 L 80,59 L 78,61 L 76,62 L 74,64
+          L 72,65 L 70,67 L 68,68 L 66,70 L 64,71 L 62,72 L 60,73 L 58,74 L 56,75 L 54,74
+          L 52,75 L 50,74 L 48,75 L 46,74 L 44,75 L 42,73 L 40,74 L 38,72 L 36,73 L 34,71
+          L 32,72 L 30,70 L 28,71 L 26,69 L 24,70 L 22,68 L 20,69 L 18,67 L 16,68 L 14,66
+          L 12,67 L 10,65 L 8,64 L 7,61 L 6,58 L 5,55 L 6,52 L 5,49 L 6,46 L 5,43 L 6,40
+          L 5,37 L 6,34 L 5,31 L 7,28
+          Z
+        "
+        fill="url(#mapGradient)"
+        stroke="currentColor"
+        strokeWidth="0.3"
+        strokeOpacity="0.2"
+        className="text-sky-500 dark:text-sky-400"
+      />
+      {/* Floride */}
+      <path
+        d="M 76,62 L 78,65 L 80,68 L 81,72 L 80,76 L 78,78 L 75,77 L 74,74 L 75,70 L 74,67 L 74,64 L 76,62"
+        fill="url(#mapGradient)"
+        stroke="currentColor"
+        strokeWidth="0.3"
+        strokeOpacity="0.2"
+        className="text-sky-500 dark:text-sky-400"
+      />
+      {/* Texas */}
+      <path
+        d="M 30,70 L 32,72 L 34,75 L 33,78 L 30,82 L 27,85 L 24,84 L 22,81 L 20,78 L 22,75 L 24,72 L 26,70 L 28,71 L 30,70"
+        fill="url(#mapGradient)"
+        stroke="currentColor"
+        strokeWidth="0.3"
+        strokeOpacity="0.2"
+        className="text-sky-500 dark:text-sky-400"
+      />
+      {/* Grands Lacs (trous) */}
+      <ellipse cx="68" cy="25" rx="3" ry="2" fill="#1e293b" fillOpacity="0.3" className="dark:fill-slate-900" />
+      <ellipse cx="72" cy="28" rx="2" ry="1.5" fill="#1e293b" fillOpacity="0.3" className="dark:fill-slate-900" />
+      <ellipse cx="65" cy="28" rx="2.5" ry="1.5" fill="#1e293b" fillOpacity="0.3" className="dark:fill-slate-900" />
+    </svg>
+  );
+}
+
 function RouteLines({ routes }: { routes: TopRoute[] }) {
   return (
     <svg
@@ -364,6 +425,7 @@ export function USARoutesMap() {
           </div>
 
           <div className="relative aspect-[16/10] bg-gradient-to-br from-slate-100 to-slate-200 dark:from-navy-900 dark:to-navy-800 rounded-xl overflow-hidden">
+            <USMapBackground />
             <RouteLines routes={filteredRoutes} />
 
             <ResponsiveContainer width="100%" height="100%">
