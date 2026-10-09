@@ -13,10 +13,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dashboard
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:8000
     ports:
       - "8501:8501"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8000
     depends_on:
       - api
     restart: unless-stopped

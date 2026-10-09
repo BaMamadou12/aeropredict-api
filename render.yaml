@@ -2,8 +2,24 @@ services:
   - type: web
     name: aeropredict-api
     runtime: docker
-    dockerfilePath: ./Dockerfile
+    plan: free
+    dockerfilePath: ./Dockerfile.api
     healthCheckPath: /health
     envVars:
       - key: PORT
         value: 8000
+
+  - type: web
+    name: aeropredict-dashboard
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.dashboard
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8501
+      # Render transmet les variables d'environnement comme arguments de build
+      # Docker. URL publique de l'API ci-dessus : à ajuster si Render attribue
+      # un autre sous-domaine.
+      - key: NEXT_PUBLIC_API_URL
+        value: https://aeropredict-api.onrender.com

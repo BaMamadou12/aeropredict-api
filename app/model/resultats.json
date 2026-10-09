@@ -1,0 +1,344 @@
+{
+  "donnees_brutes": {
+    "lignes": 3606803,
+    "passengers_moyenne": 2688.9104331453646,
+    "passengers_mediane": 1118.0,
+    "passengers_ecart_type": 4347.617047712412,
+    "passengers_max": 89597,
+    "passengers_skewness": 3.9428029831403193,
+    "aeroports_origine": 683,
+    "aeroports_destination": 708
+  },
+  "nettoyage": {
+    "lignes_brutes": 3606803,
+    "dropna": 12351,
+    "doublons_exacts": 41092,
+    "passengers_sup_seats": 279,
+    "flights0_passengers_pos": 56,
+    "seats0_flights_pos": 279728,
+    "total_supprime": 333506,
+    "pct_supprime": 9.246582083911985,
+    "lignes_apres_nettoyage": 3273297
+  },
+  "agregation": {
+    "lignes_avant": 3273297,
+    "observations_route_mois": 1042756,
+    "lignes_fusionnees": 2230541
+  },
+  "cardinalite": {
+    "Origin_airport": 463,
+    "Destination_airport": 468,
+    "Fly_date": 240,
+    "Passengers": 66799,
+    "Seats": 86294,
+    "Flights": 1828,
+    "Distance": 2627,
+    "Origin_city": 385,
+    "Destination_city": 387,
+    "Origin_population": 5994,
+    "Destination_population": 6003,
+    "Org_airport_lat": 463,
+    "Org_airport_long": 462,
+    "Dest_airport_lat": 468,
+    "Dest_airport_long": 467
+  },
+  "cible_agregee": {
+    "passengers_moyenne": 9297.13958394869,
+    "passengers_mediane": 4307.0,
+    "passengers_max": 219323,
+    "passengers_skewness": 3.4253046587571196
+  },
+  "correlations": {
+    "avec_passengers": {
+      "Passengers": 1.0,
+      "Seats": 0.9767631403714199,
+      "Flights": 0.8766539143220043,
+      "Distance": 0.10831127543470338,
+      "Origin_population": 0.21753646613600067,
+      "Destination_population": 0.2332751051894258,
+      "Org_airport_lat": -0.10274421854367673,
+      "Org_airport_long": -0.09362991042009408,
+      "Dest_airport_lat": -0.10104625533586432,
+      "Dest_airport_long": -0.0926345628235413,
+      "load_factor": 0.2110445885608922,
+      "traffic_potential": 0.43495555355540905,
+      "Month": 0.011796230637534946,
+      "DayOfWeek": -0.002691294861055695
+    },
+    "seats_flights": 0.9139393548848406
+  },
+  "adf": {
+    "passengers": {
+      "statistique": -2.023860325430219,
+      "p_value": 0.2762101522381586,
+      "valeur_critique_5pct": -2.874472927517147
+    },
+    "flights": {
+      "statistique": -1.7706933484175034,
+      "p_value": 0.395105604874017,
+      "valeur_critique_5pct": -2.8743581895178485
+    }
+  },
+  "backtest_multi_horizon": {
+    "n_observations": 146021,
+    "resultats": [
+      {
+        "Modele": "MLP",
+        "Horizon": "M+1",
+        "RMSE": 1350.2476990354019,
+        "MAE": 748.1391891207643,
+        "MAPE": 120.88676352369225,
+        "WAPE": 8.67111636691952,
+        "R2": 0.9897918715127041
+      },
+      {
+        "Modele": "MLP",
+        "Horizon": "M+2",
+        "RMSE": 1807.2107718468815,
+        "MAE": 1020.5871970689863,
+        "MAPE": 178.5790696738794,
+        "WAPE": 11.82885548179044,
+        "R2": 0.9817132364654515
+      },
+      {
+        "Modele": "MLP",
+        "Horizon": "M+3",
+        "RMSE": 2069.6755966154574,
+        "MAE": 1173.2003070234541,
+        "MAPE": 212.16165992158005,
+        "WAPE": 13.597678790041257,
+        "R2": 0.9760158796940073
+      },
+      {
+        "Modele": "XGBoost",
+        "Horizon": "M+1",
+        "RMSE": 1627.487908168298,
+        "MAE": 784.0127306750489,
+        "MAPE": 104.07687732407074,
+        "WAPE": 9.08689949636138,
+        "R2": 0.9851695346973924
+      },
+      {
+        "Modele": "XGBoost",
+        "Horizon": "M+2",
+        "RMSE": 2121.45736634071,
+        "MAE": 1081.8808982733674,
+        "MAPE": 148.57092360264807,
+        "WAPE": 12.539264485129776,
+        "R2": 0.9748007362053559
+      },
+      {
+        "Modele": "XGBoost",
+        "Horizon": "M+3",
+        "RMSE": 2404.849758487613,
+        "MAE": 1258.002061804404,
+        "MAPE": 182.63606630498867,
+        "WAPE": 14.58055188974984,
+        "R2": 0.9676186362983377
+      },
+      {
+        "Modele": "Persistance",
+        "Horizon": "M+1",
+        "RMSE": 1980.4367401986306,
+        "MAE": 949.2108352010989,
+        "MAPE": 36.155231771227214,
+        "WAPE": 11.001585972848963,
+        "R2": 0.9780395525272354
+      },
+      {
+        "Modele": "Persistance",
+        "Horizon": "M+2",
+        "RMSE": 2571.4167857666457,
+        "MAE": 1263.3580577088228,
+        "MAPE": 54.45408455456921,
+        "WAPE": 14.64262919357687,
+        "R2": 0.9629776326966752
+      },
+      {
+        "Modele": "Persistance",
+        "Horizon": "M+3",
+        "RMSE": 2945.144209390949,
+        "MAE": 1470.3977475163904,
+        "MAPE": 65.39088713514292,
+        "WAPE": 17.04226988744587,
+        "R2": 0.951433996602903
+      }
+    ]
+  },
+  "genere_le": "2026-10-09T14:23:28",
+  "split": {
+    "train": {
+      "observations": 729929,
+      "fin": "2005-05-01",
+      "routes": 22447
+    },
+    "val": {
+      "observations": 156413,
+      "debut": "2005-05-01",
+      "fin": "2007-09-01",
+      "routes": 17064
+    },
+    "test": {
+      "observations": 156414,
+      "debut": "2007-09-01",
+      "routes": 18020
+    }
+  },
+  "fenetres_sequences": {
+    "longueur": 6,
+    "train": 647053,
+    "val": 143018,
+    "test": 143397
+  },
+  "features": [
+    "Origin_airport",
+    "Destination_airport",
+    "Distance",
+    "Origin_city",
+    "Destination_city",
+    "Origin_population",
+    "Destination_population",
+    "Org_airport_lat",
+    "Org_airport_long",
+    "Dest_airport_lat",
+    "Dest_airport_long",
+    "traffic_potential",
+    "Month",
+    "DayOfWeek",
+    "Passengers_lag_1",
+    "Passengers_lag_2",
+    "Passengers_lag_3",
+    "Passengers_lag_12",
+    "Passengers_lag_24",
+    "Passengers_roll_mean_3",
+    "Passengers_roll_std_3",
+    "Month_sin",
+    "Month_cos",
+    "Day_sin",
+    "Day_cos",
+    "route_avg_passengers"
+  ],
+  "metriques_test": {
+    "Baseline (route_avg)": {
+      "RMSE": 5930.814256528366,
+      "MAE": 3432.655226740611,
+      "MAPE": 842.8991861446112,
+      "WAPE": 42.57823352379621,
+      "R2": 0.7945880141846071
+    },
+    "Persistance y(t-1)": {
+      "RMSE": 1914.7316297687696,
+      "MAE": 891.9906104763485,
+      "MAPE": 38.809178232164484,
+      "WAPE": 11.064141897512338,
+      "R2": 0.9785901828368028
+    },
+    "Saisonnier y(t-12)": {
+      "RMSE": 2237.081085432362,
+      "MAE": 1104.7742109158708,
+      "MAPE": 100.44352621118936,
+      "WAPE": 13.70348352406735,
+      "R2": 0.970774591708568
+    },
+    "Regression Lineaire": {
+      "RMSE": 2146.0940800773046,
+      "MAE": 1241.9125399137315,
+      "MAPE": 278.54007421659907,
+      "WAPE": 15.404530501243233,
+      "R2": 0.9731035694269269
+    },
+    "XGBoost": {
+      "RMSE": 1669.0151526480838,
+      "MAE": 835.4165579158702,
+      "MAPE": 231.51960240809387,
+      "WAPE": 10.362404303086112,
+      "R2": 0.9837326168973691
+    },
+    "MLP (tabulaire)": {
+      "RMSE": 1367.209018596773,
+      "MAE": 775.7739885367929,
+      "MAPE": 216.10602119123064,
+      "WAPE": 9.622605203194318,
+      "R2": 0.9890839136002954
+    },
+    "SimpleRNN": {
+      "RMSE": 2254.818640268778,
+      "MAE": 1115.711057935731,
+      "MAPE": 47.215069475445894,
+      "WAPE": 12.709632423463047,
+      "R2": 0.9718479694427052
+    },
+    "LSTM": {
+      "RMSE": 2111.655508050375,
+      "MAE": 1074.6294585212502,
+      "MAPE": 51.51767072473036,
+      "WAPE": 12.241651018947755,
+      "R2": 0.9753093438420396
+    },
+    "GRU": {
+      "RMSE": 2268.5046217890877,
+      "MAE": 1115.2016552744826,
+      "MAPE": 53.716982662307075,
+      "WAPE": 12.703829558524179,
+      "R2": 0.971505185817382
+    },
+    "Random Forest": {
+      "RMSE": 1449.548351052799,
+      "MAE": 773.0770060992947,
+      "MAPE": 187.5121854255432,
+      "WAPE": 9.589152164526519,
+      "R2": 0.9877294918591137
+    },
+    "SVR": {
+      "RMSE": 12740.614195830334,
+      "MAE": 6473.083093478511,
+      "MAPE": 1471.3045531879009,
+      "WAPE": 80.29132708290248,
+      "R2": 0.05206651393647066
+    }
+  },
+  "metriques_train": {
+    "Regression Lineaire": {
+      "RMSE": 2604.523765569035,
+      "MAE": 1332.9765815976675,
+      "MAPE": 134.822953089705,
+      "WAPE": 13.725920009750919,
+      "R2": 0.9670376292604278
+    },
+    "XGBoost": {
+      "RMSE": 1277.26923435941,
+      "MAE": 702.9700226280124,
+      "MAPE": 58.168502744833674,
+      "WAPE": 7.2386195174411725,
+      "R2": 0.9920726744547415
+    },
+    "MLP (tabulaire)": {
+      "RMSE": 1556.0845047900355,
+      "MAE": 786.2994091209183,
+      "MAPE": 65.203101233181,
+      "WAPE": 8.096678473054894,
+      "R2": 0.9882340188915724
+    },
+    "SimpleRNN": {
+      "RMSE": 2970.067065026355,
+      "MAE": 1249.5356848911701,
+      "MAPE": 39.855674490283924,
+      "WAPE": 11.75818050055693,
+      "R2": 0.9593819201125927
+    },
+    "LSTM": {
+      "RMSE": 2168.766441675016,
+      "MAE": 1084.2011048732936,
+      "MAPE": 34.457325642244726,
+      "WAPE": 10.202375525684777,
+      "R2": 0.9783422943590703
+    },
+    "GRU": {
+      "RMSE": 2622.3219835333493,
+      "MAE": 1215.716805749592,
+      "MAPE": 36.60585941038242,
+      "WAPE": 11.43994350254128,
+      "R2": 0.968336500718738
+    }
+  }
+}

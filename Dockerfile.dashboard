@@ -7,6 +7,10 @@ RUN npm install
 
 COPY dashboard/ .
 
+# NEXT_PUBLIC_* est figé dans le bundle au moment du build : il doit être
+# passé en argument de build, pas en variable d'environnement d'exécution.
+ARG NEXT_PUBLIC_API_URL=http://localhost:8000
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 

@@ -21,3 +21,8 @@ node_modules/
 dashboard/node_modules/
 .next/
 dashboard/.next/
+
+# Artefacts locaux
+app/model/best_mlp_model.keras
+dashboard/tsconfig.tsbuildinfo
+.claude/

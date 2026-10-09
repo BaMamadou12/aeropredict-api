@@ -5,6 +5,10 @@ import {
   fetchHealth,
   fetchRoutes,
   fetchPrediction,
+  fetchModelStats,
+  gainVsPersistance,
+  CHAMPION,
+  type ModelStats,
   type HealthData,
   type Route,
   type PredictionData,
@@ -31,9 +35,8 @@ import {
 } from "lucide-react";
 
 const MODEL_NAMES: Record<string, string> = {
+  mlp: "MLP (champion)",
   xgboost: "XGBoost",
-  random_forest: "Random Forest",
-  mlp: "MLP (reseau dense)",
 };
 
 const HORIZON_LABELS: Record<number, string> = {
@@ -77,6 +80,7 @@ export default function Home() {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [model, setModel] = useState("");
+  const [modelStats, setModelStats] = useState<ModelStats | null>(null);
   const [horizon, setHorizon] = useState(1);
   const [prediction, setPrediction] = useState<PredictionData | null>(null);
   const [comparisons, setComparisons] = useState<Record<string, number>>({});
@@ -101,6 +105,7 @@ export default function Home() {
         }
       })
       .catch(() => setApiError(true));
+    fetchModelStats().then(setModelStats).catch(() => setModelStats(null));
   }, []);
 
   const origins = Array.from(new Set(routes.map((r) => r.origin_airport))).sort();
@@ -265,16 +270,22 @@ export default function Home() {
                   </div>
                   <div className="flex flex-wrap gap-4">
                     <div className="text-center px-4 py-2 bg-white/50 dark:bg-navy-800/50 rounded-xl">
-                      <p className="text-xs text-slate-500 dark:text-slate-400">R2 Score</p>
-                      <p className="text-lg font-bold text-sky-600 dark:text-sky-400">0.9886</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">R2 (test)</p>
+                      <p className="text-lg font-bold text-sky-600 dark:text-sky-400">
+                        {modelStats ? modelStats.metriques_test[CHAMPION].R2.toFixed(4) : "..."}
+                      </p>
                     </div>
                     <div className="text-center px-4 py-2 bg-white/50 dark:bg-navy-800/50 rounded-xl">
-                      <p className="text-xs text-slate-500 dark:text-slate-400">Latence</p>
-                      <p className="text-lg font-bold text-violet-600 dark:text-violet-400">38.7 ms</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Erreur WAPE (test)</p>
+                      <p className="text-lg font-bold text-violet-600 dark:text-violet-400">
+                        {modelStats ? `${modelStats.metriques_test[CHAMPION].WAPE.toFixed(1)} %` : "..."}
+                      </p>
                     </div>
                     <div className="text-center px-4 py-2 bg-white/50 dark:bg-navy-800/50 rounded-xl">
-                      <p className="text-xs text-slate-500 dark:text-slate-400">Taille</p>
-                      <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">983 KB</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">vs persistance y(t-1)</p>
+                      <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
+                        {modelStats ? `-${gainVsPersistance(modelStats).toFixed(0)} % d'erreur` : "..."}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -430,8 +441,8 @@ export default function Home() {
                   <strong className="text-sky-600 dark:text-sky-400">
                     A propos
                   </strong>{" "}
-                  — Seuls les modeles <strong>tabulaires</strong> (XGBoost, Random
-                  Forest, MLP) sont disponibles ici : ils partagent le meme vecteur
+                  — Seuls les modeles <strong>tabulaires</strong> (MLP, modele champion,
+                  et XGBoost) sont disponibles ici : ils partagent le meme vecteur
                   de features precalcule. Les architectures sequentielles (LSTM,
                   GRU, SimpleRNN) necessitent la reconstruction d&apos;une sequence
                   de 6 mois et ne sont pas exposees — leurs resultats figurent au

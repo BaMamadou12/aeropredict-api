@@ -50,12 +50,16 @@ with open(os.path.join(MODEL_DIR, "airport_coordinates.json")) as f:
 snapshot = pd.read_parquet(os.path.join(MODEL_DIR, "route_snapshot.parquet"))
 snapshot = snapshot.set_index(["origin_airport", "destination_airport"], drop=False)
 
-ModeleType = Literal["xgboost", "random_forest", "mlp"]
+ModeleType = Literal["mlp", "xgboost"]
 
 MAX_HORIZON = 3
 
 with open(os.path.join(MODEL_DIR, "dataset_stats.json"), encoding="utf-8") as f:
     DATASET_STATS: dict = json.load(f)
+
+# Résultats d'évaluation produits par le notebook (version8, section 27c)
+with open(os.path.join(MODEL_DIR, "resultats.json"), encoding="utf-8") as f:
+    RESULTATS: dict = json.load(f)
 
 # Cartographie : un seul mois de référence (le dernier mois du dataset).
 # Les routes dont la dernière observation est antérieure (lignes fermées)
@@ -123,7 +127,7 @@ ROUTES_PAR_TRAFIC = [
 class PredictionRequest(BaseModel):
     origin: str = Field(..., min_length=3, max_length=3, description="Code IATA de l'aéroport de départ, ex. 'ATL'")
     destination: str = Field(..., min_length=3, max_length=3, description="Code IATA de l'aéroport d'arrivée, ex. 'ORD'")
-    model: ModeleType = Field("xgboost", description="Modèle tabulaire à utiliser pour la prévision")
+    model: ModeleType = Field("mlp", description="Modèle tabulaire à utiliser (champion de production : mlp)")
     horizon: int = Field(1, ge=1, le=3, description="Horizon de prévision : 1 (M+1), 2 (M+2) ou 3 (M+3) mois")
 
 
@@ -358,3 +362,17 @@ def dataset_stats():
     saisonnalité, top hubs. Générées par export_dataset_stats.py.
     """
     return DATASET_STATS
+
+
+@app.get("/stats/modele", tags=["Monitoring"])
+def model_stats():
+    """
+    Performances des modèles sur le jeu de test (2007-09 à 2009-12) et backtest
+    multi-horizon M+1/M+2/M+3, telles qu'exportées par le notebook (resultats.json).
+    """
+    return {
+        "genere_le": RESULTATS["genere_le"],
+        "metriques_test": RESULTATS["metriques_test"],
+        "backtest_multi_horizon": RESULTATS["backtest_multi_horizon"],
+        "split": RESULTATS["split"],
+    }

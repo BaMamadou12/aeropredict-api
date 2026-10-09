@@ -6,3 +6,13 @@ README.md
 notebook_export_cell.py
 dashboard/node_modules
 dashboard/.next
+.claude/
+*.csv
+benchmark.py
+export_dataset_stats.py
+
+# Random Forest exclu de la production (114 MB)
+app/model/rf_model.joblib
+
+# Doublon du MLP (mlp_model.keras est le fichier utilisé)
+app/model/best_mlp_model.keras

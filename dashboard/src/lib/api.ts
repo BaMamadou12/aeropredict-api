@@ -171,3 +171,40 @@ export async function fetchDatasetStats(): Promise<DatasetStats> {
   if (!res.ok) throw new Error("Impossible de charger les statistiques du dataset");
   return res.json();
 }
+
+export interface Metriques {
+  RMSE: number;
+  MAE: number;
+  MAPE: number;
+  WAPE: number;
+  R2: number;
+}
+
+export interface ModelStats {
+  genere_le: string;
+  metriques_test: Record<string, Metriques>;
+  backtest_multi_horizon: {
+    n_observations: number;
+    resultats: (Metriques & { Modele: string; Horizon: string })[];
+  };
+}
+
+export async function fetchModelStats(): Promise<ModelStats> {
+  const res = await fetch(`${API_URL}/stats/modele`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Impossible de charger les performances du modele");
+  return res.json();
+}
+
+export const CHAMPION = "MLP (tabulaire)";
+export const PERSISTANCE = "Persistance y(t-1)";
+
+/** Reduction d'erreur (WAPE) du champion par rapport a la persistance, en %. */
+export function gainVsPersistance(stats: ModelStats): number {
+  const m = stats.metriques_test;
+  return (1 - m[CHAMPION].WAPE / m[PERSISTANCE].WAPE) * 100;
+}
+
+/** WAPE du backtest pour un modele et un horizon ("M+1", "M+2", "M+3"). */
+export function wapeHorizon(stats: ModelStats, modele: string, horizon: string): number | undefined {
+  return stats.backtest_multi_horizon.resultats.find((r) => r.Modele === modele && r.Horizon === horizon)?.WAPE;
+}
