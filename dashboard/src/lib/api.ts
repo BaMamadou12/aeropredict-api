@@ -180,8 +180,16 @@ export interface Metriques {
   R2: number;
 }
 
+export interface SplitInfo {
+  observations: number;
+  debut?: string;
+  fin?: string;
+  routes: number;
+}
+
 export interface ModelStats {
   genere_le: string;
+  split: { train: SplitInfo; val: SplitInfo; test: SplitInfo };
   metriques_test: Record<string, Metriques>;
   backtest_multi_horizon: {
     n_observations: number;

@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun, Wifi, Route, Cpu, Container, BarChart3, CalendarRange } from "lucide-react";
+import { Moon, Sun, Route, CalendarRange, FlaskConical, ShieldCheck } from "lucide-react";
 import { wapeHorizon, type HealthData, type ModelStats } from "@/lib/api";
 
 const HORIZONS = ["M+1", "M+2", "M+3"];
@@ -177,24 +177,44 @@ export function Sidebar({ dark, onToggleTheme, health, modelNames, modelStats }:
         <div className="h-px bg-slate-200 dark:bg-slate-700/50" />
       </div>
 
-      {/* Architecture */}
-      <div className="px-6 py-4 mt-auto">
-        <h3 className="text-xs uppercase tracking-wider text-slate-400 font-medium mb-3">
-          Architecture technique
-        </h3>
-        <div className="space-y-2 text-xs text-slate-500 dark:text-slate-400">
-          <div className="flex items-center gap-2">
-            <BarChart3 className="w-3.5 h-3.5" /> Next.js (Frontend)
-          </div>
-          <div className="flex items-center gap-2">
-            <Wifi className="w-3.5 h-3.5" /> FastAPI (Backend)
-          </div>
-          <div className="flex items-center gap-2">
-            <Cpu className="w-3.5 h-3.5" /> MLP · XGBoost
-          </div>
-          <div className="flex items-center gap-2">
-            <Container className="w-3.5 h-3.5" /> Docker · Render
-          </div>
+      {/* Protocole d'evaluation */}
+      <div className="px-6 py-4">
+        <div className="flex items-center gap-2 mb-3">
+          <FlaskConical className="w-4 h-4 text-sky-400" />
+          <h3 className="text-xs uppercase tracking-wider text-slate-400 font-medium">
+            Protocole d&apos;évaluation
+          </h3>
+        </div>
+        <div className="bg-slate-50 dark:bg-navy-700/50 rounded-xl p-3 space-y-2 text-xs">
+          <p className="text-slate-500 dark:text-slate-400">
+            Données BTS 1990-2009, agrégées par route et par mois.
+          </p>
+          {modelStats ? (
+            [
+              { nom: "Entraînement", s: modelStats.split.train, periode: `jusqu'à ${modelStats.split.train.fin?.slice(0, 7)}` },
+              { nom: "Validation", s: modelStats.split.val, periode: `${modelStats.split.val.debut?.slice(0, 7)} à ${modelStats.split.val.fin?.slice(0, 7)}` },
+              { nom: "Test", s: modelStats.split.test, periode: `depuis ${modelStats.split.test.debut?.slice(0, 7)}` },
+            ].map(({ nom, s, periode }) => (
+              <div key={nom} className="flex items-baseline justify-between gap-2">
+                <span className="font-semibold text-slate-700 dark:text-slate-200">{nom}</span>
+                <span className="text-right text-slate-500 dark:text-slate-400">
+                  {s.observations.toLocaleString("fr-FR")} obs. · {periode}
+                </span>
+              </div>
+            ))
+          ) : (
+            <p className="text-slate-400">...</p>
+          )}
+          <p className="text-[11px] text-slate-400 leading-relaxed">
+            Découpage chronologique strict : le test n&apos;est jamais vu pendant l&apos;entraînement.
+          </p>
+        </div>
+        <div className="mt-3 flex items-start gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3">
+          <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+          <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+            <strong>Anti-fuite de données :</strong> sièges et vols du mois prédit sont exclus.
+            Le modèle n&apos;utilise que l&apos;historique des passagers et des variables connues à l&apos;avance.
+          </p>
         </div>
       </div>
     </aside>
