@@ -30,7 +30,7 @@ export function Sidebar({ dark, onToggleTheme, health, modelNames }: SidebarProp
         <p className="text-xs text-slate-400 dark:text-slate-500 mt-2 leading-relaxed">
           Mémoire M2 IA & Smart Tech
           <br />
-          Mamadou BA — UIDT
+          Mamadou BA, UIDT
           <br />
           Encadreur : Pr. Cheikh SARR
         </p>
@@ -119,7 +119,7 @@ export function Sidebar({ dark, onToggleTheme, health, modelNames }: SidebarProp
                       : "bg-slate-200 dark:bg-slate-700 text-slate-400"
                   }`}
                 >
-                  {available ? "Disponible" : "—"}
+                  {available ? "Disponible" : "Indisponible"}
                 </span>
               </div>
             );

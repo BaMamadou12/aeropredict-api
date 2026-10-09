@@ -26,9 +26,9 @@ const MAP_WIDTH = 975;
 const MAP_HEIGHT = 610;
 const NB_LABELS = 12;
 
-const MOIS_FR = ["janv.", "fevr.", "mars", "avr.", "mai", "juin", "juil.", "aout", "sept.", "oct.", "nov.", "dec."];
+const MOIS_FR = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
 
-/** "2009-12" -> "dec. 2009" */
+/** "2009-12" -> "déc. 2009" */
 function formatMois(ym?: string): string {
   if (!ym) return "";
   const [y, m] = ym.split("-");
@@ -289,7 +289,7 @@ export function USARoutesMap() {
         setNetworkStats(statsData);
         setError(null);
       } catch (e: any) {
-        setError(e.message || "Erreur de chargement des donnees");
+        setError(e.message || "Erreur de chargement des données");
       } finally {
         setLoading(false);
       }
@@ -337,7 +337,7 @@ export function USARoutesMap() {
       <div className="flex items-center justify-center h-96">
         <div className="flex items-center gap-3 text-sky-500">
           <Loader2 className="w-6 h-6 animate-spin" />
-          <span>Chargement des donnees BTS...</span>
+          <span>Chargement des données BTS...</span>
         </div>
       </div>
     );
@@ -349,7 +349,7 @@ export function USARoutesMap() {
         <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
         <h3 className="text-lg font-bold text-red-400 mb-2">Erreur de chargement</h3>
         <p className="text-slate-400">{error}</p>
-        <p className="text-sm text-slate-500 mt-2">Verifiez que l'API est accessible sur le port 8000</p>
+        <p className="text-sm text-slate-500 mt-2">Vérifiez que l'API est accessible sur le port 8000</p>
       </div>
     );
   }
@@ -368,13 +368,13 @@ export function USARoutesMap() {
                 Trafic BTS du mois de reference : {formatMois(networkStats?.reference_month)}
               </p>
               <p className="text-lg font-bold text-sky-600 dark:text-sky-400">
-                Reseau Aerien Domestique US
+                Réseau Aérien Domestique US
               </p>
             </div>
           </div>
           <div className="flex flex-wrap gap-4">
             <div className="text-center px-4 py-2 bg-white/50 dark:bg-navy-800/50 rounded-xl">
-              <p className="text-xs text-slate-500 dark:text-slate-400">Aeroports</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Aéroports</p>
               <p className="text-lg font-bold text-sky-600 dark:text-sky-400">
                 {networkStats?.airports_with_coordinates || 0}
               </p>
@@ -475,20 +475,20 @@ export function USARoutesMap() {
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-sky-500 border-2 border-sky-600" />
                 <span className="text-xs text-slate-600 dark:text-slate-400">
-                  Aeroport (taille = trafic, clic = filtrer)
+                  Aéroport (taille = trafic, clic = filtrer)
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-amber-500 border-2 border-amber-600" />
-                <span className="text-xs text-slate-600 dark:text-slate-400">Selectionne</span>
+                <span className="text-xs text-slate-600 dark:text-slate-400">Sélectionné</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-8 h-0.5 bg-violet-500 rounded" />
-                <span className="text-xs text-slate-600 dark:text-slate-400">Route aerienne</span>
+                <span className="text-xs text-slate-600 dark:text-slate-400">Route aérienne</span>
               </div>
             </div>
             <p className="text-xs text-slate-400">
-              {airports.length} principaux aeroports affiches
+              {airports.length} principaux aéroports affichés
             </p>
           </div>
         </div>
@@ -517,14 +517,14 @@ export function USARoutesMap() {
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               <strong className="text-slate-700 dark:text-slate-300">Sources:</strong> Trafic
               passagers du Bureau of Transportation Statistics (BTS), routes actives au dernier
-              mois du dataset. Coordonnees GPS issues du dataset. Fond cartographique du US Census Bureau.
+              mois du dataset. Coordonnées GPS issues du dataset. Fond cartographique du US Census Bureau.
             </p>
           </div>
 
           {networkStats?.top_route && (
             <div className="mt-4 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
               <p className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
-                Route la plus frequentee
+                Route la plus fréquentée
               </p>
               <p className="text-lg font-bold text-slate-900 dark:text-white">
                 {networkStats.top_route.origin} - {networkStats.top_route.destination}
@@ -544,13 +544,13 @@ export function USARoutesMap() {
           <strong>Fond cartographique:</strong> US Census Bureau (TopoJSON via us-atlas)
         </p>
         <p>
-          <strong>Donnees trafic:</strong> Bureau of Transportation Statistics (BTS) —{" "}
+          <strong>Données trafic :</strong> Bureau of Transportation Statistics (BTS),{" "}
           <a href="https://www.transtats.bts.gov" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">
             transtats.bts.gov
           </a>
         </p>
         <p>
-          <strong>Coordonnees GPS:</strong> dataset Airports2.csv (BTS)
+          <strong>Coordonnées GPS:</strong> dataset Airports2.csv (BTS)
         </p>
       </div>
     </div>

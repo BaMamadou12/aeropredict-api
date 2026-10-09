@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Prévision du trafic aérien",
-  description: "Mémoire M2 IA & Smart Tech — Mamadou BA, UIDT",
+  description: "Mémoire de Master 2 IA & Smart Tech (UIDT), Mamadou BA",
 };
 
 export default function RootLayout({

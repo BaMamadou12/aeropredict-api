@@ -31,19 +31,19 @@ interface Source {
 // Sources officielles des chiffres affiches dans les cartes (verifiees en octobre 2026)
 const SOURCES: Record<string, Source> = {
   tsaRecord: {
-    label: "TSA, communique du 11 juillet 2024",
+    label: "TSA, communiqué du 11 juillet 2024",
     url: "https://www.tsa.gov/news/press/releases/2024/07/11/tsa-discusses-summer-travel-and-security-technologies-use-hnl",
   },
   tsaStandard: {
-    label: "TSA, communique du 24 juin 2024 (standards d'attente)",
+    label: "TSA, communiqué du 24 juin 2024 (standards d'attente)",
     url: "https://www.tsa.gov/news/press/releases/2024/06/24/tsa-breaks-record-most-individuals-screened-single-day-readies",
   },
   nextor: {
-    label: "FAA / NEXTOR, Total Delay Impact Study (2010, donnees 2007)",
+    label: "FAA / NEXTOR, Total Delay Impact Study (2010, données 2007)",
     url: "https://rosap.ntl.bts.gov/view/dot/6234",
   },
   loadFactor: {
-    label: "BTS, load factor domestique mensuel (serie FRED LOADFACTORD11)",
+    label: "BTS, load factor domestique mensuel (série FRED LOADFACTORD11)",
     url: "https://fred.stlouisfed.org/series/LOADFACTORD11",
   },
   cats: {
@@ -133,10 +133,10 @@ export function BusinessImpactTab() {
     {
       icon: <Plane className="w-6 h-6 text-sky-500" />,
       iconBg: "bg-sky-500/20",
-      title: "Operations au Sol",
-      subtitle: "Planification du Personnel Aeroportuaire",
+      title: "Opérations au Sol",
+      subtitle: "Planification du Personnel Aéroportuaire",
       description:
-        "La TSA dimensionne ses equipes pour tenir des standards d'attente fixes, alors que les volumes atteignent des records. Prevoir le trafic d'une route a 1-3 mois permet d'anticiper les besoins en agents de surete, comptoirs d'enregistrement et portes d'embarquement.",
+        "La TSA dimensionne ses équipes pour tenir des standards d'attente fixes, alors que les volumes atteignent des records. Prévoir le trafic d'une route à 1-3 mois permet d'anticiper les besoins en agents de sûreté, comptoirs d'enregistrement et portes d'embarquement.",
       metrics: [
         { label: "Record TSA (7 juillet 2024)", value: "3 013 413 pax/jour", icon: <Users className="w-4 h-4" /> },
         { label: "Standard d'attente TSA", value: "≤ 30 min (≤ 10 PreCheck)", icon: <Clock className="w-4 h-4" /> },
@@ -147,13 +147,13 @@ export function BusinessImpactTab() {
     {
       icon: <Radio className="w-6 h-6 text-emerald-500" />,
       iconBg: "bg-emerald-500/20",
-      title: "Gestion du Trafic Aerien (ATM)",
-      subtitle: "Capacite et Retards",
+      title: "Gestion du Trafic Aérien (ATM)",
+      subtitle: "Capacité et Retards",
       description:
-        "L'etude de reference commandee par la FAA chiffre le cout annuel des retards aeriens aux Etats-Unis. Anticiper la demande aide a ajuster les programmes de vols et la capacite du systeme pour limiter la saturation et ses couts.",
+        "L'étude de référence commandée par la FAA chiffre le coût annuel des retards aériens aux États-Unis. Anticiper la demande aide à ajuster les programmes de vols et la capacité du système pour limiter la saturation et ses coûts.",
       metrics: [
-        { label: "Cout total des retards (2007)", value: "32,9 Md$/an", icon: <Clock className="w-4 h-4" /> },
-        { label: "Dont supporte par les passagers", value: "16,7 Md$", icon: <Users className="w-4 h-4" /> },
+        { label: "Coût total des retards (2007)", value: "32,9 Md$/an", icon: <Clock className="w-4 h-4" /> },
+        { label: "Dont supporté par les passagers", value: "16,7 Md$", icon: <Users className="w-4 h-4" /> },
       ],
       accentColor: "text-emerald-600 dark:text-emerald-400",
       sources: [SOURCES.nextor],
@@ -162,14 +162,14 @@ export function BusinessImpactTab() {
       icon: <TrendingUp className="w-6 h-6 text-violet-500" />,
       iconBg: "bg-violet-500/20",
       title: "Revenue Management",
-      subtitle: "Capacite et Saisonnalite",
+      subtitle: "Capacité et Saisonnalité",
       description:
-        "Avec des avions deja remplis a environ 80 %, la marge d'optimisation se joue sur l'affectation de la bonne capacite au bon mois. La forte saisonnalite observee dans le dataset montre pourquoi une prevision mois par mois est necessaire.",
+        "Avec des avions déjà remplis à environ 80 %, la marge d'optimisation se joue sur l'affectation de la bonne capacité au bon mois. La forte saisonnalité observée dans le dataset montre pourquoi une prévision mois par mois est nécessaire.",
       metrics: [
-        { label: "Load factor domestique 2009 (mensuel, CVS)", value: "78,0 % a 82,6 %", icon: <BarChart3 className="w-4 h-4" /> },
+        { label: "Load factor domestique 2009 (mensuel, CVS)", value: "78,0 % à 82,6 %", icon: <BarChart3 className="w-4 h-4" /> },
         {
-          label: `Ecart saisonnier ${dataset?.annee_reference ?? ""} (dataset)`,
-          value: pic && creux ? `${creux.passagers_millions} M -> ${pic.passagers_millions} M pax` : "...",
+          label: `Écart saisonnier ${dataset?.annee_reference ?? ""} (dataset)`,
+          value: pic && creux ? `${creux.passagers_millions} M → ${pic.passagers_millions} M pax` : "...",
           icon: <Target className="w-4 h-4" />,
         },
       ],
@@ -179,13 +179,13 @@ export function BusinessImpactTab() {
     {
       icon: <ShoppingBag className="w-6 h-6 text-amber-500" />,
       iconBg: "bg-amber-500/20",
-      title: "Revenus Non-Aeronautiques",
+      title: "Revenus Non-Aéronautiques",
       subtitle: "Commerces, Parkings et Services",
       description:
-        "Pres de la moitie des revenus des aeroports americains ne vient pas des compagnies aeriennes mais des passagers eux-memes, d'abord via les parkings. Prevoir le volume de passagers permet de dimensionner parkings, commerces et effectifs.",
+        "Près de la moitié des revenus des aéroports américains ne vient pas des compagnies aériennes mais des passagers eux-mêmes, d'abord via les parkings. Prévoir le volume de passagers permet de dimensionner parkings, commerces et effectifs.",
       metrics: [
-        { label: "Part non-aero, aeroports US (FY2023)", value: "46 % (13,2 Md$)", icon: <Wallet className="w-4 h-4" /> },
-        { label: "Parkings dans le non-aero (Am. du Nord)", value: "43 %", icon: <ShoppingBag className="w-4 h-4" /> },
+        { label: "Part non-aéro, aéroports US (FY2023)", value: "46 % (13,2 Md$)", icon: <Wallet className="w-4 h-4" /> },
+        { label: "Parkings dans le non-aéro (Am. du Nord)", value: "43 %", icon: <ShoppingBag className="w-4 h-4" /> },
       ],
       accentColor: "text-amber-600 dark:text-amber-400",
       sources: [SOURCES.cats],
@@ -197,14 +197,14 @@ export function BusinessImpactTab() {
       {/* Header */}
       <div className="bg-gradient-to-r from-violet-500/10 to-sky-500/10 dark:from-violet-500/20 dark:to-sky-500/20 border border-violet-500/20 dark:border-violet-500/30 rounded-2xl p-6">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-          Pourquoi la Prevision du Trafic est Strategique ?
+          Pourquoi la Prévision du Trafic est Stratégique ?
         </h2>
         <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-          Dans l&apos;industrie aeronautique, chaque passager compte. Une prevision precise du
-          trafic a 1, 2 ou 3 mois permet aux acteurs de la chaine de valeur — aeroports,
-          compagnies aeriennes, autorites de controle — de prendre des decisions operationnelles
-          et financieres eclairees. Les chiffres ci-dessous proviennent de sources officielles
-          (TSA, FAA, BTS, ACI) ; ils decrivent les enjeux du secteur, pas des gains mesures par ce modele.
+          Dans l&apos;industrie aéronautique, chaque passager compte. Une prévision précise du
+          trafic à 1, 2 ou 3 mois permet aux acteurs de la chaîne de valeur (aéroports,
+          compagnies aériennes, autorités de contrôle) de prendre des décisions opérationnelles
+          et financières éclairées. Les chiffres ci-dessous proviennent de sources officielles
+          (TSA, FAA, BTS, ACI) : ils décrivent les enjeux du secteur, et non des gains mesurés par ce modèle.
         </p>
       </div>
 
@@ -219,7 +219,7 @@ export function BusinessImpactTab() {
       <div className="bg-white dark:bg-navy-800/50 dark:glass border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6">
         <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
           <Target className="w-5 h-5 text-sky-500" />
-          En Resume : La Valeur de la Prevision MLP (test 2007-2009)
+          En Résumé : La Valeur de la Prévision MLP (test 2007-2009)
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center p-4 bg-sky-500/10 rounded-xl">
@@ -235,27 +235,27 @@ export function BusinessImpactTab() {
               {stats ? `-${gainVsPersistance(stats).toFixed(0)} %` : "..."}
             </p>
             <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              d&apos;erreur vs reconduction du mois precedent
+              d&apos;erreur vs reconduction du mois précédent
             </p>
           </div>
           <div className="text-center p-4 bg-violet-500/10 rounded-xl">
             <p className="text-3xl font-extrabold text-violet-600 dark:text-violet-400">3 mois</p>
             <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              Horizon de prevision{wapeM3 !== undefined && ` (WAPE M+3 : ${wapeM3.toFixed(1)} %)`}
+              Horizon de prévision{wapeM3 !== undefined && ` (WAPE M+3 : ${wapeM3.toFixed(1)} %)`}
             </p>
           </div>
         </div>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-4 text-center">
           Le MLP explique {champion ? `${(champion.R2 * 100).toFixed(2)} %` : "..."} de la variance du trafic
-          et reduit l&apos;erreur par rapport a la simple reconduction du mois precedent. Sa precision
-          relative reste faible sur les petites lignes regionales (MAPE elevee) : les volumes des grands
-          flux sont fiables, ceux des petites lignes sont a interpreter avec prudence.
+          et réduit l&apos;erreur par rapport à la simple reconduction du mois précédent. Sa précision
+          relative reste faible sur les petites lignes régionales (MAPE élevée) : les volumes des grands
+          flux sont fiables, ceux des petites lignes sont à interpréter avec prudence.
         </p>
       </div>
 
       {/* Citation */}
       <div className="text-center text-sm text-slate-500 dark:text-slate-400 italic">
-        &quot;La donnee d&apos;aujourd&apos;hui construit la decision de demain.&quot;
+        &quot;La donnée d&apos;aujourd&apos;hui construit la décision de demain.&quot;
       </div>
     </div>
   );

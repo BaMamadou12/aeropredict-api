@@ -170,7 +170,7 @@ export default function Home() {
           <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
           <h2 className="text-xl font-bold text-white mb-2">API inaccessible</h2>
           <p className="text-slate-400">
-            Impossible de joindre l&apos;API FastAPI. Verifiez que le service tourne.
+            Impossible de joindre l&apos;API FastAPI. Vérifiez que le service tourne.
           </p>
         </div>
       </div>
@@ -207,13 +207,13 @@ export default function Home() {
           {/* Header */}
           <div className="mb-6">
             <p className="text-sky-500 dark:text-sky-400 text-sm font-semibold uppercase tracking-wider mb-1">
-              Analyse predictive du trafic passagers
+              Analyse prédictive du trafic passagers
             </p>
             <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-2">
-              Prevision du trafic aerien
+              Prévision du trafic aérien
             </h1>
             <p className="text-slate-500 dark:text-slate-400">
-              Des donnees d&apos;aujourd&apos;hui pour une meilleure mobilite demain.
+              Des données d&apos;aujourd&apos;hui pour une meilleure mobilité demain.
             </p>
           </div>
 
@@ -221,14 +221,14 @@ export default function Home() {
           <div className="flex flex-wrap gap-3 mb-6">
             <TabButton
               id="prediction"
-              label="Inference & Prevision MLP"
+              label="Inférence & Prévision MLP"
               icon={<Rocket className="w-4 h-4" />}
               activeTab={activeTab}
               onClick={setActiveTab}
             />
             <TabButton
               id="stats"
-              label="Statistiques Reseau BTS"
+              label="Statistiques Réseau BTS"
               icon={<PieChart className="w-4 h-4" />}
               activeTab={activeTab}
               onClick={setActiveTab}
@@ -242,7 +242,7 @@ export default function Home() {
             />
             <TabButton
               id="impact"
-              label="Valeur Metier & Operations"
+              label="Valeur Métier & Opérations"
               icon={<Lightbulb className="w-4 h-4" />}
               activeTab={activeTab}
               onClick={setActiveTab}
@@ -261,7 +261,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                        Modele Champion
+                        Modèle Champion
                       </p>
                       <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
                         MLP (Multi-Layer Perceptron)
@@ -296,7 +296,7 @@ export default function Home() {
                 <div className="flex items-center gap-2 mb-5">
                   <Search className="w-5 h-5 text-sky-500" />
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
-                    Selection de la liaison
+                    Sélection de la liaison
                   </h2>
                 </div>
 
@@ -304,7 +304,7 @@ export default function Home() {
                   <div>
                     <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
                       <Plane className="w-4 h-4 inline mr-1" />
-                      Aeroport de depart
+                      Aéroport de départ
                     </label>
                     <select
                       value={origin}
@@ -313,7 +313,7 @@ export default function Home() {
                     >
                       {origins.map((o) => (
                         <option key={o} value={o}>
-                          {o} — {getCityName(o, "origin")}
+                          {o} ({getCityName(o, "origin")})
                         </option>
                       ))}
                     </select>
@@ -322,7 +322,7 @@ export default function Home() {
                   <div>
                     <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
                       <ArrowRightLeft className="w-4 h-4 inline mr-1" />
-                      Aeroport d&apos;arrivee
+                      Aéroport d&apos;arrivée
                     </label>
                     <select
                       value={destination}
@@ -331,7 +331,7 @@ export default function Home() {
                     >
                       {destinations.map((d) => (
                         <option key={d} value={d}>
-                          {d} — {getCityName(d, "destination")}
+                          {d} ({getCityName(d, "destination")})
                         </option>
                       ))}
                     </select>
@@ -340,7 +340,7 @@ export default function Home() {
                   <div>
                     <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
                       <BarChart3 className="w-4 h-4 inline mr-1" />
-                      Modele de prevision
+                      Modèle de prévision
                     </label>
                     <select
                       value={model}
@@ -358,7 +358,7 @@ export default function Home() {
                   <div>
                     <label className="block text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
                       <CalendarRange className="w-4 h-4 inline mr-1" />
-                      Horizon de prevision
+                      Horizon de prévision
                     </label>
                     <select
                       value={horizon}
@@ -439,16 +439,16 @@ export default function Home() {
               <div className="bg-sky-500/5 dark:bg-sky-500/10 border border-sky-500/15 dark:border-sky-500/20 rounded-xl p-5">
                 <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
                   <strong className="text-sky-600 dark:text-sky-400">
-                    A propos
+                    À propos
                   </strong>{" "}
-                  — Seuls les modeles <strong>tabulaires</strong> (MLP, modele champion,
-                  et XGBoost) sont disponibles ici : ils partagent le meme vecteur
-                  de features precalcule. Les architectures sequentielles (LSTM,
-                  GRU, SimpleRNN) necessitent la reconstruction d&apos;une sequence
-                  de 6 mois et ne sont pas exposees — leurs resultats figurent au
-                  Chapitre 4 du memoire.
-                  L&apos;horizon de prevision (1 a 3 mois) utilise une approche
-                  iterative : la prediction de M+1 nourrit les features de M+2,
+                  : seuls les modèles <strong>tabulaires</strong> (MLP, modèle champion,
+                  et XGBoost) sont disponibles ici, car ils partagent le même vecteur
+                  de features précalculé. Les architectures séquentielles (LSTM,
+                  GRU, SimpleRNN) nécessitent la reconstruction d&apos;une séquence
+                  de 6 mois et ne sont pas exposées. Leurs résultats figurent au
+                  Chapitre 4 du mémoire.
+                  L&apos;horizon de prévision (1 à 3 mois) utilise une approche
+                  itérative : la prédiction de M+1 nourrit les features de M+2,
                   puis celle de M+2 nourrit M+3.
                 </p>
               </div>
@@ -464,14 +464,14 @@ export default function Home() {
           {/* Footer */}
           <footer className="mt-10 pt-6 border-t border-slate-200 dark:border-slate-700/50 text-center text-sm text-slate-400 dark:text-slate-500">
             <p className="font-semibold text-slate-600 dark:text-slate-300">
-              Prevision du trafic aerien
+              Prévision du trafic aérien
             </p>
-            <p>M2 IA & Smart Tech — UIDT</p>
+            <p>Master 2 IA & Smart Tech, UIDT</p>
             <p className="mt-1">
               Comprendre aujourd&apos;hui · Anticiper demain
             </p>
             <p className="mt-2 text-xs">
-              Mamadou BA — Encadreur : Pr. Cheikh SARR ·{" "}
+              Mamadou BA, sous la direction du Pr. Cheikh SARR ·{" "}
               <a
                 href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/docs`}
                 target="_blank"

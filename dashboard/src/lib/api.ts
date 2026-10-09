@@ -191,7 +191,7 @@ export interface ModelStats {
 
 export async function fetchModelStats(): Promise<ModelStats> {
   const res = await fetch(`${API_URL}/stats/modele`, { cache: "no-store" });
-  if (!res.ok) throw new Error("Impossible de charger les performances du modele");
+  if (!res.ok) throw new Error("Impossible de charger les performances du modèle");
   return res.json();
 }
 

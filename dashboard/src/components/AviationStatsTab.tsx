@@ -125,7 +125,7 @@ export function AviationStatsTab() {
         />
         <StatCard
           icon={<MapPin className="w-5 h-5" />}
-          title="Aeroports Cartographies"
+          title="Aéroports Cartographiés"
           value={fmt(stats.snapshot.aeroports)}
           subtitle={`Sur ${fmt(stats.brut.aeroports)} dans le dataset brut`}
           gradient="gradient-cyan"
@@ -133,17 +133,17 @@ export function AviationStatsTab() {
         />
         <StatCard
           icon={<Route className="w-5 h-5" />}
-          title="Liaisons Prevues"
+          title="Liaisons Prévues"
           value={fmt(stats.snapshot.routes)}
-          subtitle={`Routes servies par l'API (${fmt(stats.notebook.routes_entrainement)} en entrainement)`}
+          subtitle={`Routes servies par l'API (${fmt(stats.notebook.routes_entrainement)} en entraînement)`}
           gradient="gradient-green"
           shadowColor="shadow-emerald-500/20"
         />
         <StatCard
           icon={<Database className="w-5 h-5" />}
-          title="Dataset Entrainement"
+          title="Dataset Entraînement"
           value={`${(stats.notebook.observations_route_mois / 1e6).toFixed(2)}M`}
-          subtitle="Observations route x mois (apres nettoyage)"
+          subtitle="Observations route x mois (après nettoyage)"
           gradient="bg-gradient-to-br from-violet-500 to-purple-600"
           shadowColor="shadow-violet-500/20"
         />
@@ -156,7 +156,7 @@ export function AviationStatsTab() {
           <div className="flex items-center gap-2 mb-6">
             <TrendingUp className="w-5 h-5 text-sky-500" />
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-              Saisonnalite Mensuelle du Trafic ({stats.annee_reference})
+              Saisonnalité Mensuelle du Trafic ({stats.annee_reference})
             </h3>
           </div>
           <ResponsiveContainer width="100%" height={280}>
@@ -260,27 +260,27 @@ export function AviationStatsTab() {
           </div>
           <div>
             <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-              Concentration du Trafic : Hubs vs Routes Regionales
+              Concentration du Trafic : Hubs vs Routes Régionales
             </h4>
             <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-              Le reseau aerien americain suit une distribution fortement asymetrique :
+              Le réseau aérien américain suit une distribution fortement asymétrique :
               <strong className="text-sky-600 dark:text-sky-400"> les 20 plus grands hubs</strong> concentrent{" "}
               <strong className="text-sky-600 dark:text-sky-400">{stats.part_top20_hubs_pct}% du trafic</strong>{" "}
               en {stats.annee_reference}, tandis que les{" "}
-              {stats.nb_aeroports_actifs_annee_reference - 20} autres aeroports actifs se partagent le reste. Cette structure en
-              &quot;hub-and-spoke&quot; cree des defis de prevision specifiques : les grands hubs
-              presentent une forte inertie saisonniere, tandis que les lignes regionales sont
-              plus volatiles et sensibles aux evenements locaux (meteo, evenements sportifs, conventions).
+              {stats.nb_aeroports_actifs_annee_reference - 20} autres aéroports actifs se partagent le reste. Cette structure en
+              &quot;hub-and-spoke&quot; crée des défis de prévision spécifiques : les grands hubs
+              présentent une forte inertie saisonnière, tandis que les lignes régionales sont
+              plus volatiles et sensibles aux événements locaux (météo, événements sportifs, conventions).
             </p>
             <div className="flex flex-wrap gap-3 mt-4">
               <span className="px-3 py-1 bg-sky-500/20 text-sky-600 dark:text-sky-400 rounded-full text-sm font-medium">
                 Hub-and-Spoke
               </span>
               <span className="px-3 py-1 bg-violet-500/20 text-violet-600 dark:text-violet-400 rounded-full text-sm font-medium">
-                Longue Traine
+                Longue Traîne
               </span>
               <span className="px-3 py-1 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-medium">
-                Saisonnalite
+                Saisonnalité
               </span>
             </div>
           </div>
@@ -290,8 +290,8 @@ export function AviationStatsTab() {
       {/* Source Citation */}
       <div className="text-center text-sm text-slate-500 dark:text-slate-400">
         <p>
-          Source : Bureau of Transportation Statistics (BTS), dataset Airports2.csv ({stats.periode_debut} a{" "}
-          {stats.periode_fin}) —
+          Source : Bureau of Transportation Statistics (BTS), dataset Airports2.csv ({stats.periode_debut} à{" "}
+          {stats.periode_fin}),
           <a
             href="https://www.transtats.bts.gov"
             target="_blank"
