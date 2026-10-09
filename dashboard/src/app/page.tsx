@@ -200,6 +200,7 @@ export default function Home() {
           onToggleTheme={() => setDark(!dark)}
           health={health}
           modelNames={MODEL_NAMES}
+          modelStats={modelStats}
         />
 
         {/* Main */}
@@ -441,15 +442,13 @@ export default function Home() {
                   <strong className="text-sky-600 dark:text-sky-400">
                     À propos
                   </strong>{" "}
-                  : seuls les modèles <strong>tabulaires</strong> (MLP, modèle champion,
-                  et XGBoost) sont disponibles ici, car ils partagent le même vecteur
-                  de features précalculé. Les architectures séquentielles (LSTM,
-                  GRU, SimpleRNN) nécessitent la reconstruction d&apos;une séquence
-                  de 6 mois et ne sont pas exposées. Leurs résultats figurent au
-                  Chapitre 4 du mémoire.
-                  L&apos;horizon de prévision (1 à 3 mois) utilise une approche
-                  itérative : la prédiction de M+1 nourrit les features de M+2,
-                  puis celle de M+2 nourrit M+3.
+                  : les prévisions sont calculées à l&apos;avance par le notebook de
+                  recherche pour les {health.routes_disponibles.toLocaleString("fr-FR")} routes
+                  actives au dernier mois du dataset (décembre 2009). L&apos;horizon de 1 à 3 mois
+                  utilise une approche itérative : la prédiction de M+1 nourrit les features
+                  de M+2, puis celle de M+2 nourrit M+3. Les volumes des grandes lignes sont
+                  fiables ; sur les petites lignes régionales, l&apos;erreur relative est plus
+                  élevée et les valeurs sont à interpréter avec prudence.
                 </p>
               </div>
             </div>
