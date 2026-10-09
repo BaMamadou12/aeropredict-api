@@ -1,0 +1,200 @@
+{
+  "source": "Bureau of Transportation Statistics (BTS) — Airports2.csv",
+  "periode_debut": "1990-01",
+  "periode_fin": "2009-12",
+  "annee_reference": 2009,
+  "brut": {
+    "lignes": 3606803,
+    "aeroports": 727,
+    "routes": 36719
+  },
+  "notebook": {
+    "observations_route_mois": 1042756,
+    "routes_entrainement": 22447
+  },
+  "snapshot": {
+    "routes": 7085,
+    "aeroports": 364
+  },
+  "passagers_annee_reference": 526301909,
+  "annee_pic": 2007,
+  "passagers_annee_pic": 579257485,
+  "trafic_annuel": [
+    {
+      "annee": 1990,
+      "passagers_millions": 370.4
+    },
+    {
+      "annee": 1991,
+      "passagers_millions": 366.7
+    },
+    {
+      "annee": 1992,
+      "passagers_millions": 383.3
+    },
+    {
+      "annee": 1993,
+      "passagers_millions": 391.1
+    },
+    {
+      "annee": 1994,
+      "passagers_millions": 426.1
+    },
+    {
+      "annee": 1995,
+      "passagers_millions": 441.7
+    },
+    {
+      "annee": 1996,
+      "passagers_millions": 467.9
+    },
+    {
+      "annee": 1997,
+      "passagers_millions": 481.9
+    },
+    {
+      "annee": 1998,
+      "passagers_millions": 491.9
+    },
+    {
+      "annee": 1999,
+      "passagers_millions": 511.3
+    },
+    {
+      "annee": 2000,
+      "passagers_millions": 534.0
+    },
+    {
+      "annee": 2001,
+      "passagers_millions": 497.0
+    },
+    {
+      "annee": 2002,
+      "passagers_millions": 486.0
+    },
+    {
+      "annee": 2003,
+      "passagers_millions": 509.0
+    },
+    {
+      "annee": 2004,
+      "passagers_millions": 546.5
+    },
+    {
+      "annee": 2005,
+      "passagers_millions": 568.2
+    },
+    {
+      "annee": 2006,
+      "passagers_millions": 564.7
+    },
+    {
+      "annee": 2007,
+      "passagers_millions": 579.3
+    },
+    {
+      "annee": 2008,
+      "passagers_millions": 555.0
+    },
+    {
+      "annee": 2009,
+      "passagers_millions": 526.3
+    }
+  ],
+  "saisonnalite": [
+    {
+      "mois": "Jan",
+      "label": "Janvier",
+      "passagers_millions": 37.7
+    },
+    {
+      "mois": "Fev",
+      "label": "Fevrier",
+      "passagers_millions": 36.7
+    },
+    {
+      "mois": "Mar",
+      "label": "Mars",
+      "passagers_millions": 45.0
+    },
+    {
+      "mois": "Avr",
+      "label": "Avril",
+      "passagers_millions": 44.5
+    },
+    {
+      "mois": "Mai",
+      "label": "Mai",
+      "passagers_millions": 45.2
+    },
+    {
+      "mois": "Jun",
+      "label": "Juin",
+      "passagers_millions": 47.8
+    },
+    {
+      "mois": "Jul",
+      "label": "Juillet",
+      "passagers_millions": 50.7
+    },
+    {
+      "mois": "Aou",
+      "label": "Aout",
+      "passagers_millions": 48.3
+    },
+    {
+      "mois": "Sep",
+      "label": "Septembre",
+      "passagers_millions": 41.3
+    },
+    {
+      "mois": "Oct",
+      "label": "Octobre",
+      "passagers_millions": 45.1
+    },
+    {
+      "mois": "Nov",
+      "label": "Novembre",
+      "passagers_millions": 41.7
+    },
+    {
+      "mois": "Dec",
+      "label": "Decembre",
+      "passagers_millions": 42.4
+    }
+  ],
+  "top_hubs": [
+    {
+      "hub": "ATL",
+      "ville": "Atlanta",
+      "passagers_millions": 68.9
+    },
+    {
+      "hub": "ORD",
+      "ville": "Chicago",
+      "passagers_millions": 49.0
+    },
+    {
+      "hub": "DFW",
+      "ville": "Dallas",
+      "passagers_millions": 45.2
+    },
+    {
+      "hub": "LAX",
+      "ville": "Los Angeles",
+      "passagers_millions": 38.2
+    },
+    {
+      "hub": "LAS",
+      "ville": "Las Vegas",
+      "passagers_millions": 33.6
+    },
+    {
+      "hub": "PHX",
+      "ville": "Phoenix",
+      "passagers_millions": 32.7
+    }
+  ],
+  "part_top20_hubs_pct": 57.1,
+  "nb_aeroports_actifs_annee_reference": 465
+}

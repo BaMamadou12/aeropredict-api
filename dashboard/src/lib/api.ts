@@ -68,7 +68,7 @@ export async function fetchPrediction(
 }
 
 // ======================================================================
-// Endpoints Cartographie (données réelles BTS/FAA)
+// Endpoints Cartographie (données réelles BTS)
 // ======================================================================
 
 export interface AirportData {
@@ -97,7 +97,9 @@ export interface TopRoute {
 }
 
 export interface NetworkStats {
+  reference_month: string;
   total_routes: number;
+  snapshot_routes: number;
   total_airports: number;
   airports_with_coordinates: number;
   total_passengers_monthly: number;
@@ -143,5 +145,29 @@ export async function fetchRoutesByAirport(code: string, limit: number = 20): Pr
 export async function fetchNetworkStats(): Promise<NetworkStats> {
   const res = await fetch(`${API_URL}/stats/network`, { cache: "no-store" });
   if (!res.ok) throw new Error("Impossible de charger les statistiques réseau");
+  return res.json();
+}
+
+export interface DatasetStats {
+  source: string;
+  periode_debut: string;
+  periode_fin: string;
+  annee_reference: number;
+  brut: { lignes: number; aeroports: number; routes: number };
+  notebook: { observations_route_mois: number; routes_entrainement: number };
+  snapshot: { routes: number; aeroports: number };
+  passagers_annee_reference: number;
+  annee_pic: number;
+  passagers_annee_pic: number;
+  trafic_annuel: { annee: number; passagers_millions: number }[];
+  saisonnalite: { mois: string; label: string; passagers_millions: number }[];
+  top_hubs: { hub: string; ville: string; passagers_millions: number }[];
+  part_top20_hubs_pct: number;
+  nb_aeroports_actifs_annee_reference: number;
+}
+
+export async function fetchDatasetStats(): Promise<DatasetStats> {
+  const res = await fetch(`${API_URL}/stats/dataset`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Impossible de charger les statistiques du dataset");
   return res.json();
 }

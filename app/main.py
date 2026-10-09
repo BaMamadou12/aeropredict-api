@@ -54,71 +54,67 @@ ModeleType = Literal["xgboost", "random_forest", "mlp"]
 
 MAX_HORIZON = 3
 
+with open(os.path.join(MODEL_DIR, "dataset_stats.json"), encoding="utf-8") as f:
+    DATASET_STATS: dict = json.load(f)
+
+# Cartographie : un seul mois de référence (le dernier mois du dataset).
+# Les routes dont la dernière observation est antérieure (lignes fermées)
+# sont exclues, pour ne pas additionner des mois différents.
+MOIS_REFERENCE: str = snapshot["dernier_mois_connu"].max()
+routes_actives = snapshot[snapshot["dernier_mois_connu"] == MOIS_REFERENCE].reset_index(drop=True)
+
+
+def _route_dict(row) -> dict:
+    origin, dest = row["origin_airport"], row["destination_airport"]
+    return {
+        "origin": origin,
+        "destination": dest,
+        "origin_city": row["origin_city"],
+        "destination_city": row["destination_city"],
+        "passengers": int(row["derniers_passagers_connus"]),
+        "distance_miles": float(row["distance_miles"]),
+        "origin_lat": AIRPORT_COORDS.get(origin, {}).get("lat"),
+        "origin_lon": AIRPORT_COORDS.get(origin, {}).get("lon"),
+        "dest_lat": AIRPORT_COORDS.get(dest, {}).get("lat"),
+        "dest_lon": AIRPORT_COORDS.get(dest, {}).get("lon"),
+    }
+
+
 # Calcul des statistiques agrégées par aéroport (au démarrage)
 def _compute_airport_stats() -> dict:
-    """Agrège le trafic passagers par aéroport (origine + destination)."""
+    """Trafic passagers par aéroport (départs + arrivées) au mois de référence."""
+    df = routes_actives
+    outbound = df.groupby("origin_airport")["derniers_passagers_connus"].sum()
+    inbound = df.groupby("destination_airport")["derniers_passagers_connus"].sum()
+    n_out = df["origin_airport"].value_counts()
+    n_in = df["destination_airport"].value_counts()
+    cities = dict(zip(df["destination_airport"], df["destination_city"]))
+    cities.update(dict(zip(df["origin_airport"], df["origin_city"])))
+
     stats = {}
-    df = snapshot.reset_index(drop=True)
-
-    # Trafic sortant (comme origine)
-    origin_traffic = df.groupby("origin_airport").agg({
-        "derniers_passagers_connus": "sum",
-        "origin_city": "first"
-    }).rename(columns={"derniers_passagers_connus": "outbound", "origin_city": "city"})
-
-    # Trafic entrant (comme destination)
-    dest_traffic = df.groupby("destination_airport").agg({
-        "derniers_passagers_connus": "sum",
-        "destination_city": "first"
-    }).rename(columns={"derniers_passagers_connus": "inbound", "destination_city": "city"})
-
-    # Fusion
-    all_airports = set(origin_traffic.index) | set(dest_traffic.index)
-    for code in all_airports:
-        outbound = int(origin_traffic.loc[code, "outbound"]) if code in origin_traffic.index else 0
-        inbound = int(dest_traffic.loc[code, "inbound"]) if code in dest_traffic.index else 0
-        city = origin_traffic.loc[code, "city"] if code in origin_traffic.index else dest_traffic.loc[code, "city"]
-
+    for code in set(outbound.index) | set(inbound.index):
+        out_p = int(outbound.get(code, 0))
+        in_p = int(inbound.get(code, 0))
         coords = AIRPORT_COORDS.get(code, {})
         stats[code] = {
             "code": code,
-            "city": city,
+            "city": cities[code],
             "lat": coords.get("lat"),
             "lon": coords.get("lon"),
-            "name": coords.get("name", city),
-            "outbound_passengers": outbound,
-            "inbound_passengers": inbound,
-            "total_passengers": outbound + inbound,
-            "routes_count": len(snapshot[snapshot["origin_airport"] == code]) + len(snapshot[snapshot["destination_airport"] == code])
+            "name": coords.get("name", cities[code]),
+            "outbound_passengers": out_p,
+            "inbound_passengers": in_p,
+            "total_passengers": out_p + in_p,
+            "routes_count": int(n_out.get(code, 0) + n_in.get(code, 0)),
         }
     return stats
 
 AIRPORT_STATS = _compute_airport_stats()
 
-def _compute_top_routes(limit: int = 50) -> list[dict]:
-    """Retourne les routes les plus fréquentées par volume de passagers."""
-    df = snapshot.reset_index(drop=True).copy()
-    df = df.sort_values("derniers_passagers_connus", ascending=False).head(limit)
-
-    routes = []
-    for _, row in df.iterrows():
-        origin = row["origin_airport"]
-        dest = row["destination_airport"]
-        routes.append({
-            "origin": origin,
-            "destination": dest,
-            "origin_city": row["origin_city"],
-            "destination_city": row["destination_city"],
-            "passengers": int(row["derniers_passagers_connus"]),
-            "distance_miles": float(row["distance_miles"]),
-            "origin_lat": AIRPORT_COORDS.get(origin, {}).get("lat"),
-            "origin_lon": AIRPORT_COORDS.get(origin, {}).get("lon"),
-            "dest_lat": AIRPORT_COORDS.get(dest, {}).get("lat"),
-            "dest_lon": AIRPORT_COORDS.get(dest, {}).get("lon"),
-        })
-    return routes
-
-TOP_ROUTES_CACHE = _compute_top_routes(100)
+ROUTES_PAR_TRAFIC = [
+    _route_dict(row)
+    for _, row in routes_actives.sort_values("derniers_passagers_connus", ascending=False).iterrows()
+]
 
 
 # ----------------------------------------------------------------------
@@ -272,7 +268,7 @@ def list_airports(min_passengers: int = 0, limit: int = 50):
     - min_passengers: filtre les aéroports avec au moins ce volume de passagers
     - limit: nombre maximum d'aéroports retournés (triés par trafic décroissant)
 
-    Source des coordonnées: FAA (Federal Aviation Administration)
+    Source des coordonnées: Airports2.csv (BTS)
     Source du trafic: BTS (Bureau of Transportation Statistics) via le snapshot
     """
     airports = [
@@ -302,7 +298,7 @@ def top_routes(limit: int = 20):
 
     Source: BTS (Bureau of Transportation Statistics)
     """
-    return TOP_ROUTES_CACHE[:limit]
+    return ROUTES_PAR_TRAFIC[:limit]
 
 
 @app.get("/routes/by-airport/{code}", tags=["Cartographie"])
@@ -313,11 +309,7 @@ def routes_by_airport(code: str, limit: int = 20):
     Utile pour visualiser le réseau d'un hub particulier.
     """
     code = code.upper().strip()
-    routes = [
-        r for r in TOP_ROUTES_CACHE
-        if r["origin"] == code or r["destination"] == code
-    ]
-    routes.sort(key=lambda x: x["passengers"], reverse=True)
+    routes = [r for r in ROUTES_PAR_TRAFIC if r["origin"] == code or r["destination"] == code]
     return routes[:limit]
 
 
@@ -328,17 +320,18 @@ def network_stats():
 
     Toutes les valeurs sont calculées à partir des données réelles BTS.
     """
-    total_routes = len(snapshot)
     total_airports = len(AIRPORT_STATS)
     airports_with_coords = len([a for a in AIRPORT_STATS.values() if a["lat"] is not None])
-    total_passengers = sum(a["total_passengers"] for a in AIRPORT_STATS.values()) // 2  # Évite double comptage
-    avg_distance = snapshot["distance_miles"].mean()
+    total_passengers = int(routes_actives["derniers_passagers_connus"].sum())
+    avg_distance = routes_actives["distance_miles"].mean()
 
     top_hub = max(AIRPORT_STATS.values(), key=lambda x: x["total_passengers"])
-    top_route = TOP_ROUTES_CACHE[0] if TOP_ROUTES_CACHE else None
+    top_route = ROUTES_PAR_TRAFIC[0] if ROUTES_PAR_TRAFIC else None
 
     return {
-        "total_routes": total_routes,
+        "reference_month": MOIS_REFERENCE,
+        "total_routes": len(routes_actives),
+        "snapshot_routes": len(snapshot),
         "total_airports": total_airports,
         "airports_with_coordinates": airports_with_coords,
         "total_passengers_monthly": total_passengers,
@@ -354,5 +347,14 @@ def network_stats():
             "passengers": top_route["passengers"]
         } if top_route else None,
         "data_source": "Bureau of Transportation Statistics (BTS)",
-        "coordinates_source": "Federal Aviation Administration (FAA)"
+        "coordinates_source": "Airports2.csv (BTS)"
     }
+
+
+@app.get("/stats/dataset", tags=["Cartographie"])
+def dataset_stats():
+    """
+    Statistiques descriptives du dataset BTS (1990-2009) : trafic annuel,
+    saisonnalité, top hubs. Générées par export_dataset_stats.py.
+    """
+    return DATASET_STATS

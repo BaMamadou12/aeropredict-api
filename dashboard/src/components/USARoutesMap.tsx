@@ -19,7 +19,23 @@ import {
   type NetworkStats,
 } from "@/lib/api";
 
-const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
+const GEO_URL = "https://cdn.jsdelivr.net/npm/us-atlas@3.0.1/states-10m.json";
+
+// Cadre de la carte au ratio 16:10 du conteneur (convention us-atlas : 975 x 610)
+const MAP_WIDTH = 975;
+const MAP_HEIGHT = 610;
+const NB_LABELS = 12;
+
+const MOIS_FR = ["janv.", "fevr.", "mars", "avr.", "mai", "juin", "juil.", "aout", "sept.", "oct.", "nov.", "dec."];
+
+/** "2009-12" -> "dec. 2009" */
+function formatMois(ym?: string): string {
+  if (!ym) return "";
+  const [y, m] = ym.split("-");
+  return `${MOIS_FR[Number(m) - 1]} ${y}`;
+}
+
+const fmt = (n: number) => n.toLocaleString("fr-FR");
 
 interface KPICardProps {
   icon: React.ReactNode;
@@ -46,9 +62,10 @@ function KPICard({ icon, title, value, subtitle, gradient, shadowColor }: KPICar
 interface RouteCardProps {
   route: TopRoute;
   rank: number;
+  mois: string;
 }
 
-function RouteCard({ route, rank }: RouteCardProps) {
+function RouteCard({ route, rank, mois }: RouteCardProps) {
   const bgColors = [
     "bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-amber-500/30",
     "bg-gradient-to-r from-slate-300/20 to-slate-400/20 border-slate-400/30",
@@ -84,8 +101,8 @@ function RouteCard({ route, rank }: RouteCardProps) {
         </p>
       </div>
       <div className="text-right">
-        <p className="text-sm font-bold text-sky-500">{route.passengers.toLocaleString()}</p>
-        <p className="text-xs text-slate-400">pass./mois</p>
+        <p className="text-sm font-bold text-sky-500">{fmt(route.passengers)}</p>
+        <p className="text-xs text-slate-400">pass. ({mois})</p>
       </div>
     </div>
   );
@@ -94,9 +111,10 @@ function RouteCard({ route, rank }: RouteCardProps) {
 interface AirportTooltipProps {
   airport: AirportData | null;
   position: { x: number; y: number } | null;
+  mois: string;
 }
 
-function AirportTooltipBox({ airport, position }: AirportTooltipProps) {
+function AirportTooltipBox({ airport, position, mois }: AirportTooltipProps) {
   if (!airport || !position) return null;
 
   return (
@@ -116,9 +134,12 @@ function AirportTooltipBox({ airport, position }: AirportTooltipProps) {
       <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{airport.name}</p>
       <div className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-600">
         <p className="text-sm font-semibold text-sky-500">
-          {airport.total_passengers.toLocaleString()} pass./mois
+          {fmt(airport.total_passengers)} pass. ({mois})
         </p>
-        <p className="text-xs text-slate-400">{airport.routes_count} liaisons</p>
+        <p className="text-xs text-slate-400">
+          {fmt(airport.outbound_passengers)} departs / {fmt(airport.inbound_passengers)} arrivees
+        </p>
+        <p className="text-xs text-slate-400">{airport.routes_count} liaisons actives</p>
       </div>
     </div>
   );
@@ -142,15 +163,24 @@ const MapChart = memo(function MapChart({
   }, [airports]);
 
   const maxRoutePassengers = useMemo(() => {
-    return routes[0]?.passengers || 1;
+    return Math.max(...routes.map((r) => r.passengers), 1);
   }, [routes]);
+
+  // Les plus gros cercles d'abord : les petits aeroports restent cliquables au-dessus
+  const markers = useMemo(() => {
+    const placed = airports.filter((a) => a.lat !== null && a.lon !== null);
+    const labelled = new Set(placed.slice(0, NB_LABELS).map((a) => a.code));
+    return [...placed]
+      .sort((a, b) => b.total_passengers - a.total_passengers)
+      .map((a) => ({ airport: a, showLabel: labelled.has(a.code) }));
+  }, [airports]);
 
   return (
     <ComposableMap
       projection="geoAlbersUsa"
-      projectionConfig={{
-        scale: 1000,
-      }}
+      width={MAP_WIDTH}
+      height={MAP_HEIGHT}
+      projectionConfig={{ scale: 1250 }}
       style={{ width: "100%", height: "100%" }}
     >
       {/* Fond de carte des Etats US */}
@@ -161,20 +191,20 @@ const MapChart = memo(function MapChart({
               key={geo.rsmKey}
               geography={geo}
               fill="#E2E8F0"
-              stroke="#CBD5E1"
-              strokeWidth={0.5}
-              className="dark:fill-slate-700 dark:stroke-slate-600 outline-none hover:fill-slate-300 dark:hover:fill-slate-600 transition-colors"
+              stroke="#FFFFFF"
+              strokeWidth={0.75}
+              className="dark:fill-slate-700 dark:stroke-slate-800"
+              style={{ outline: "none" }}
             />
           ))
         }
       </Geographies>
 
-      {/* Lignes des routes aeriennes */}
+      {/* Lignes des routes aeriennes (arcs de grand cercle) */}
       {routes.map((route, idx) => {
         if (!route.origin_lat || !route.origin_lon || !route.dest_lat || !route.dest_lon) return null;
 
-        const opacity = 0.3 + (route.passengers / maxRoutePassengers) * 0.5;
-        const strokeWidth = 1 + (route.passengers / maxRoutePassengers) * 2;
+        const ratio = route.passengers / maxRoutePassengers;
 
         return (
           <Line
@@ -182,48 +212,53 @@ const MapChart = memo(function MapChart({
             from={[route.origin_lon, route.origin_lat]}
             to={[route.dest_lon, route.dest_lat]}
             stroke="#8B5CF6"
-            strokeWidth={strokeWidth}
-            strokeOpacity={opacity}
+            strokeWidth={1 + ratio * 3}
+            strokeOpacity={0.35 + ratio * 0.45}
             strokeLinecap="round"
+            fill="none"
           />
         );
       })}
 
-      {/* Marqueurs des aeroports */}
-      {airports
-        .filter((a) => a.lat !== null && a.lon !== null)
-        .map((airport) => {
-          const size = 4 + (airport.total_passengers / maxPassengers) * 12;
-          const isSelected = selectedHub === airport.code;
+      {/* Marqueurs des aeroports : surface proportionnelle au trafic */}
+      {markers.map(({ airport, showLabel }) => {
+        const size = 3 + Math.sqrt(airport.total_passengers / maxPassengers) * 13;
+        const isSelected = selectedHub === airport.code;
 
-          return (
-            <Marker
-              key={airport.code}
-              coordinates={[airport.lon!, airport.lat!]}
-              onClick={() => onSelectHub(isSelected ? null : airport.code)}
-              onMouseEnter={(e) => onHoverAirport(airport, e)}
-              onMouseLeave={() => onHoverAirport(null, null)}
-              style={{ cursor: "pointer" }}
-            >
-              <circle
-                r={size}
-                fill={isSelected ? "#F59E0B" : "#0EA5E9"}
-                stroke={isSelected ? "#D97706" : "#0284C7"}
-                strokeWidth={isSelected ? 3 : 2}
-                className="transition-all duration-200"
-              />
-              {size > 8 && (
-                <text
-                  textAnchor="middle"
-                  y={size + 12}
-                  className="text-[10px] font-bold fill-slate-700 dark:fill-slate-300"
-                >
-                  {airport.code}
-                </text>
-              )}
-            </Marker>
-          );
-        })}
+        return (
+          <Marker
+            key={airport.code}
+            coordinates={[airport.lon!, airport.lat!]}
+            onClick={() => onSelectHub(isSelected ? null : airport.code)}
+            onMouseEnter={(e) => onHoverAirport(airport, e)}
+            onMouseLeave={() => onHoverAirport(null, null)}
+            style={{ cursor: "pointer" }}
+          >
+            <circle
+              r={size}
+              fill={isSelected ? "#F59E0B" : "#0EA5E9"}
+              fillOpacity={0.85}
+              stroke={isSelected ? "#B45309" : "#FFFFFF"}
+              strokeWidth={isSelected ? 2.5 : 1.25}
+              className="transition-all duration-200"
+            />
+            {(showLabel || isSelected) && (
+              <text
+                textAnchor="middle"
+                y={-size - 4}
+                fontSize={12}
+                fontWeight={700}
+                paintOrder="stroke"
+                stroke="#FFFFFF"
+                strokeWidth={3}
+                className="fill-slate-700 dark:fill-slate-200 dark:stroke-slate-900"
+              >
+                {airport.code}
+              </text>
+            )}
+          </Marker>
+        );
+      })}
     </ComposableMap>
   );
 });
@@ -244,7 +279,7 @@ export function USARoutesMap() {
       try {
         setLoading(true);
         const [airportsData, routesData, statsData] = await Promise.all([
-          fetchAirports(1000, 30),
+          fetchAirports(1000, 60),
           fetchTopRoutes(30),
           fetchNetworkStats(),
         ]);
@@ -330,7 +365,7 @@ export function USARoutesMap() {
             </div>
             <div>
               <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                Carte TopoJSON US Census Bureau / Donnees BTS
+                Trafic BTS du mois de reference : {formatMois(networkStats?.reference_month)}
               </p>
               <p className="text-lg font-bold text-sky-600 dark:text-sky-400">
                 Reseau Aerien Domestique US
@@ -345,13 +380,15 @@ export function USARoutesMap() {
               </p>
             </div>
             <div className="text-center px-4 py-2 bg-white/50 dark:bg-navy-800/50 rounded-xl">
-              <p className="text-xs text-slate-500 dark:text-slate-400">Routes</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Routes actives</p>
               <p className="text-lg font-bold text-violet-600 dark:text-violet-400">
                 {networkStats?.total_routes.toLocaleString() || 0}
               </p>
             </div>
             <div className="text-center px-4 py-2 bg-white/50 dark:bg-navy-800/50 rounded-xl">
-              <p className="text-xs text-slate-500 dark:text-slate-400">Pass./mois</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Pass. ({formatMois(networkStats?.reference_month)})
+              </p>
               <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
                 {networkStats ? (networkStats.total_passengers_monthly / 1000000).toFixed(1) + "M" : "..."}
               </p>
@@ -366,15 +403,15 @@ export function USARoutesMap() {
           icon={<Users className="w-5 h-5" />}
           title="Trafic Mensuel Total"
           value={networkStats ? `${(networkStats.total_passengers_monthly / 1000000).toFixed(1)}M` : "..."}
-          subtitle="Passagers (donnees BTS)"
+          subtitle={`Passagers en ${formatMois(networkStats?.reference_month)} (BTS)`}
           gradient="gradient-blue"
           shadowColor="shadow-sky-500/20"
         />
         <KPICard
           icon={<Database className="w-5 h-5" />}
-          title="Routes dans le Dataset"
-          value={networkStats?.total_routes.toLocaleString() || "..."}
-          subtitle="Liaisons origine-destination"
+          title="Routes Actives"
+          value={networkStats ? fmt(networkStats.total_routes) : "..."}
+          subtitle={networkStats ? `Sur ${fmt(networkStats.snapshot_routes)} routes du snapshot` : ""}
           gradient="gradient-cyan"
           shadowColor="shadow-cyan-500/20"
         />
@@ -404,7 +441,7 @@ export function USARoutesMap() {
             <div className="flex items-center gap-2">
               <Plane className="w-5 h-5 text-sky-500" />
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                Carte des Liaisons (react-simple-maps)
+                {selectedHub ? `Liaisons de ${selectedHub}` : "Top 15 des Liaisons"}
               </h3>
             </div>
             {selectedHub && (
@@ -425,7 +462,11 @@ export function USARoutesMap() {
               onSelectHub={setSelectedHub}
               onHoverAirport={handleHoverAirport}
             />
-            <AirportTooltipBox airport={hoveredAirport} position={tooltipPos} />
+            <AirportTooltipBox
+              airport={hoveredAirport}
+              position={tooltipPos}
+              mois={formatMois(networkStats?.reference_month)}
+            />
           </div>
 
           {/* Legend and Source */}
@@ -433,7 +474,9 @@ export function USARoutesMap() {
             <div className="flex flex-wrap items-center gap-6">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-sky-500 border-2 border-sky-600" />
-                <span className="text-xs text-slate-600 dark:text-slate-400">Aeroport</span>
+                <span className="text-xs text-slate-600 dark:text-slate-400">
+                  Aeroport (taille = trafic, clic = filtrer)
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-amber-500 border-2 border-amber-600" />
@@ -445,7 +488,7 @@ export function USARoutesMap() {
               </div>
             </div>
             <p className="text-xs text-slate-400">
-              Carte: US Census Bureau (TopoJSON)
+              {airports.length} principaux aeroports affiches
             </p>
           </div>
         </div>
@@ -461,15 +504,20 @@ export function USARoutesMap() {
 
           <div className="space-y-3">
             {displayedRoutes.map((route, idx) => (
-              <RouteCard key={`${route.origin}-${route.destination}`} route={route} rank={idx} />
+              <RouteCard
+                key={`${route.origin}-${route.destination}`}
+                route={route}
+                rank={idx}
+                mois={formatMois(networkStats?.reference_month)}
+              />
             ))}
           </div>
 
           <div className="mt-4 p-3 bg-slate-100 dark:bg-navy-700/50 rounded-xl">
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
               <strong className="text-slate-700 dark:text-slate-300">Sources:</strong> Trafic
-              passagers du Bureau of Transportation Statistics (BTS). Coordonnees GPS de la FAA.
-              Fond cartographique du US Census Bureau.
+              passagers du Bureau of Transportation Statistics (BTS), routes actives au dernier
+              mois du dataset. Coordonnees GPS issues du dataset. Fond cartographique du US Census Bureau.
             </p>
           </div>
 
@@ -482,7 +530,8 @@ export function USARoutesMap() {
                 {networkStats.top_route.origin} - {networkStats.top_route.destination}
               </p>
               <p className="text-sm text-slate-500">
-                {networkStats.top_route.passengers.toLocaleString()} passagers/mois
+                {fmt(networkStats.top_route.passengers)} passagers en{" "}
+                {formatMois(networkStats.reference_month)}
               </p>
             </div>
           )}
@@ -501,7 +550,7 @@ export function USARoutesMap() {
           </a>
         </p>
         <p>
-          <strong>Coordonnees GPS:</strong> Federal Aviation Administration (FAA)
+          <strong>Coordonnees GPS:</strong> dataset Airports2.csv (BTS)
         </p>
       </div>
     </div>
