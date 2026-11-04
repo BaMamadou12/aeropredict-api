@@ -145,19 +145,19 @@ export function Sidebar({ dark, onToggleTheme, health, modelNames, modelStats }:
             <thead>
               <tr className="text-slate-400">
                 <th className="text-left font-medium pb-1">Erreur (WAPE)</th>
-                <th className="text-right font-medium pb-1">MLP</th>
+                <th className="text-right font-medium pb-1">Random Forest</th>
                 <th className="text-right font-medium pb-1">Mois préc.</th>
               </tr>
             </thead>
             <tbody>
               {HORIZONS.map((h) => {
-                const mlp = modelStats ? wapeHorizon(modelStats, "MLP", h) : undefined;
+                const champion = modelStats ? wapeHorizon(modelStats, "Random Forest", h) : undefined;
                 const naif = modelStats ? wapeHorizon(modelStats, "Persistance", h) : undefined;
                 return (
                   <tr key={h}>
                     <td className="py-0.5 font-semibold text-slate-700 dark:text-slate-200">{h}</td>
                     <td className="py-0.5 text-right font-bold text-emerald-600 dark:text-emerald-400">
-                      {mlp !== undefined ? `${mlp.toFixed(1)} %` : "..."}
+                      {champion !== undefined ? `${champion.toFixed(1)} %` : "..."}
                     </td>
                     <td className="py-0.5 text-right text-slate-400">
                       {naif !== undefined ? `${naif.toFixed(1)} %` : "..."}

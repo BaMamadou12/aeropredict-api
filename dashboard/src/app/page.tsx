@@ -35,7 +35,7 @@ import {
 } from "lucide-react";
 
 const MODEL_NAMES: Record<string, string> = {
-  mlp: "MLP (champion)",
+  random_forest: "Random Forest (champion)",
   xgboost: "XGBoost",
 };
 
@@ -222,7 +222,7 @@ export default function Home() {
           <div className="flex flex-wrap gap-3 mb-6">
             <TabButton
               id="prediction"
-              label="Inférence & Prévision MLP"
+              label="Inférence & Prévision"
               icon={<Rocket className="w-4 h-4" />}
               activeTab={activeTab}
               onClick={setActiveTab}
@@ -265,7 +265,7 @@ export default function Home() {
                         Modèle Champion
                       </p>
                       <p className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
-                        MLP (Multi-Layer Perceptron)
+                        Random Forest (forêt aléatoire, cible log)
                       </p>
                     </div>
                   </div>

@@ -203,7 +203,7 @@ export async function fetchModelStats(): Promise<ModelStats> {
   return res.json();
 }
 
-export const CHAMPION = "MLP (tabulaire)";
+export const CHAMPION = "Random Forest";
 export const PERSISTANCE = "Persistance y(t-1)";
 
 /** Reduction d'erreur (WAPE) du champion par rapport a la persistance, en %. */

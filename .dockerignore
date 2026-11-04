@@ -3,7 +3,8 @@ __pycache__/
 .git/
 .gitignore
 README.md
-notebook_export_cell.py
+export_production_v9.py
+export_resultats_app.py
 dashboard/node_modules
 dashboard/.next
 .claude/
@@ -11,8 +12,6 @@ dashboard/.next
 benchmark.py
 export_dataset_stats.py
 
-# Random Forest exclu de la production (114 MB)
-app/model/rf_model.joblib
-
-# Doublon du MLP (mlp_model.keras est le fichier utilisé)
-app/model/best_mlp_model.keras
+# Les prévisions sont précalculées (route_snapshot.parquet) : aucun fichier de modèle n'est servi en production
+app/model/*.joblib
+app/model/*.keras

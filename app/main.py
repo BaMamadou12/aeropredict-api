@@ -9,9 +9,13 @@ que soit sa requête. Les prédictions sont précalculées au moment de
 l'export (voir notebook_export_cell.py) à partir du snapshot de
 features déjà pré-traité ; ce service ne fait qu'un lookup.
 
-Multi-horizon (v4) : le snapshot contient désormais les prédictions pour
-3 horizons (M+1, M+2, M+3). Le client choisit l'horizon via le champ
-`horizon` (1, 2 ou 3).
+Multi-horizon : le snapshot contient les prédictions pour 3 horizons
+(M+1, M+2, M+3), produites par prévision récursive depuis décembre 2009.
+Le client choisit l'horizon via le champ `horizon` (1, 2 ou 3).
+
+Modèles (protocole v9) : le Random Forest (cible log), retenu sur la
+validation, et XGBoost pour comparaison, réentraînés sur 1990-2009
+(voir export_production_v9.py).
 """
 import json
 import os
@@ -28,7 +32,7 @@ app = FastAPI(
     title="API de prévision du trafic aérien",
     description="Mémoire M2 IA & Smart Tech — Mamadou BA, UIDT. "
                  "Documentation interactive testable directement ci-dessous.",
-    version="3.0",
+    version="4.0",
 )
 
 app.add_middleware(
@@ -50,14 +54,14 @@ with open(os.path.join(MODEL_DIR, "airport_coordinates.json")) as f:
 snapshot = pd.read_parquet(os.path.join(MODEL_DIR, "route_snapshot.parquet"))
 snapshot = snapshot.set_index(["origin_airport", "destination_airport"], drop=False)
 
-ModeleType = Literal["mlp", "xgboost"]
+ModeleType = Literal["random_forest", "xgboost"]
 
 MAX_HORIZON = 3
 
 with open(os.path.join(MODEL_DIR, "dataset_stats.json"), encoding="utf-8") as f:
     DATASET_STATS: dict = json.load(f)
 
-# Résultats d'évaluation produits par le notebook (version8, section 27c)
+# Résultats d'évaluation produits par le notebook (version9d), au format attendu par le tableau de bord
 with open(os.path.join(MODEL_DIR, "resultats.json"), encoding="utf-8") as f:
     RESULTATS: dict = json.load(f)
 
@@ -127,7 +131,7 @@ ROUTES_PAR_TRAFIC = [
 class PredictionRequest(BaseModel):
     origin: str = Field(..., min_length=3, max_length=3, description="Code IATA de l'aéroport de départ, ex. 'ATL'")
     destination: str = Field(..., min_length=3, max_length=3, description="Code IATA de l'aéroport d'arrivée, ex. 'ORD'")
-    model: ModeleType = Field("mlp", description="Modèle tabulaire à utiliser (champion de production : mlp)")
+    model: ModeleType = Field("random_forest", description="Modèle à utiliser (champion de production : random_forest)")
     horizon: int = Field(1, ge=1, le=3, description="Horizon de prévision : 1 (M+1), 2 (M+2) ou 3 (M+3) mois")
 
 

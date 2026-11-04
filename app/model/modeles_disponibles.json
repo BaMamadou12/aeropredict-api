@@ -1,1 +1,1 @@
-["mlp", "xgboost"]
+["random_forest", "xgboost"]

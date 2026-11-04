@@ -128,7 +128,7 @@ export function BusinessImpactTab() {
   const creux = saison.length ? saison.reduce((a, b) => (b.passagers_millions < a.passagers_millions ? b : a)) : null;
 
   const champion = stats?.metriques_test[CHAMPION];
-  const wapeM3 = stats ? wapeHorizon(stats, "MLP", "M+3") : undefined;
+  const wapeM3 = stats ? wapeHorizon(stats, "Random Forest", "M+3") : undefined;
   const impactCards: ImpactCardProps[] = [
     {
       icon: <Plane className="w-6 h-6 text-sky-500" />,
@@ -219,7 +219,7 @@ export function BusinessImpactTab() {
       <div className="bg-white dark:bg-navy-800/50 dark:glass border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6">
         <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
           <Target className="w-5 h-5 text-sky-500" />
-          En Résumé : La Valeur de la Prévision MLP (test 2007-2009)
+          En Résumé : La Valeur de la Prévision du Random Forest (test 2007-2009)
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center p-4 bg-sky-500/10 rounded-xl">
@@ -246,10 +246,10 @@ export function BusinessImpactTab() {
           </div>
         </div>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-4 text-center">
-          Le MLP explique {champion ? `${(champion.R2 * 100).toFixed(2)} %` : "..."} de la variance du trafic
-          et réduit l&apos;erreur par rapport à la simple reconduction du mois précédent. Sa précision
-          relative reste faible sur les petites lignes régionales (MAPE élevée) : les volumes des grands
-          flux sont fiables, ceux des petites lignes sont à interpréter avec prudence.
+          Le Random Forest explique {champion ? `${(champion.R2 * 100).toFixed(2)} %` : "..."} de la variance du trafic
+          et réduit l&apos;erreur par rapport à la simple reconduction du mois précédent, à chacun des trois
+          horizons. Les erreurs relatives restent plus élevées sur les petites lignes régionales : les volumes
+          des grands flux sont fiables, ceux des petites lignes sont à interpréter avec prudence.
         </p>
       </div>
 
