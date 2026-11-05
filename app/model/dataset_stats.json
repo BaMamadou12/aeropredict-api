@@ -10,11 +10,11 @@
   },
   "notebook": {
     "observations_route_mois": 1042756,
-    "routes_entrainement": 22447
+    "routes_entrainement": 22431
   },
   "snapshot": {
-    "routes": 4486,
-    "aeroports": 322
+    "routes": 5142,
+    "aeroports": 358
   },
   "passagers_annee_reference": 526301909,
   "annee_pic": 2007,

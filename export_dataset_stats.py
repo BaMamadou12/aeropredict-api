@@ -4,7 +4,7 @@ affichées dans l'onglet « Statistiques BTS US » du dashboard.
 
 Toutes les valeurs sont calculées à partir du CSV brut (Airports2.csv), sauf
 les comptages issus du pipeline du notebook (nettoyage + agrégation route × mois),
-repris tels quels depuis les sorties du notebook version7.
+repris tels quels depuis les sorties du notebook version9d.
 
 Usage :
     python export_dataset_stats.py "C:/Users/DELL/Downloads/Airports2 (1).csv"
@@ -17,9 +17,9 @@ import pandas as pd
 
 MODEL_DIR = os.path.join(os.path.dirname(__file__), "app", "model")
 
-# Sorties du notebook version7 (sections 5b et 15)
+# Sorties du notebook version9d (resultats.json, split et agregation)
 NOTEBOOK_OBS_ROUTE_MOIS = 1_042_756
-NOTEBOOK_ROUTES_TRAIN = 22_447
+NOTEBOOK_ROUTES_TRAIN = 22_431
 
 MOIS = ["Jan", "Fev", "Mar", "Avr", "Mai", "Jun", "Jul", "Aou", "Sep", "Oct", "Nov", "Dec"]
 MOIS_LONG = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout",
